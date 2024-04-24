@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://bjnkdp4b2wves"]
+
+[sub_resource type="Theme" id="Theme_vup6s"]
+default_font_size = 12
+
+[node name="PlayScene" type="Node2D"]
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+offset_left = 331.0
+offset_top = 44.0
+offset_right = 1080.0
+offset_bottom = 355.0
+theme = SubResource("Theme_vup6s")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer"]
+custom_minimum_size = Vector2(0.1, 0)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 201
+text = "game 
+screen
+"
+fit_content = true
