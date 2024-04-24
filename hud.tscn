@@ -1,0 +1,93 @@
+[gd_scene load_steps=7 format=3 uid="uid://bfex3cxohqxja"]
+
+[ext_resource type="Script" path="res://Currency.gd" id="1_tlcpl"]
+[ext_resource type="Script" path="res://Upgrades.gd" id="2_cx5f8"]
+[ext_resource type="Script" path="res://Health Bar.gd" id="3_sqna3"]
+[ext_resource type="Script" path="res://HP.gd" id="4_t0i1t"]
+[ext_resource type="Script" path="res://Timer.gd" id="5_87tcy"]
+[ext_resource type="Script" path="res://Test_Player.gd" id="6_3ppv1"]
+
+[node name="HUD" type="CanvasLayer"]
+
+[node name="Currency" type="Label" parent="."]
+anchors_preset = -1
+anchor_left = 0.024
+anchor_top = 0.028
+anchor_right = 0.024
+anchor_bottom = 0.028
+offset_left = 0.351999
+offset_top = -0.144001
+offset_right = 88.352
+offset_bottom = 22.856
+text = "Currency: 0"
+script = ExtResource("1_tlcpl")
+
+[node name="Upgrades" type="Label" parent="."]
+anchors_preset = -1
+anchor_left = 0.023
+anchor_top = 0.088
+anchor_right = 0.023
+anchor_bottom = 0.088
+offset_left = 0.503998
+offset_top = -0.0240059
+offset_right = 148.504
+offset_bottom = 48.976
+text = "Upgrades:
+Movement Speed 1"
+script = ExtResource("2_cx5f8")
+
+[node name="Health_Bar" type="ProgressBar" parent="."]
+offset_left = 89.0
+offset_top = 606.0
+offset_right = 376.0
+offset_bottom = 633.0
+script = ExtResource("3_sqna3")
+
+[node name="HP" type="Label" parent="."]
+anchors_preset = -1
+anchor_left = 0.021
+anchor_top = 0.934
+anchor_right = 0.021
+anchor_bottom = 0.934
+offset_left = -0.192001
+offset_top = -0.231995
+offset_right = 23.808
+offset_bottom = 22.768
+text = "HP: 100"
+script = ExtResource("4_t0i1t")
+
+[node name="Timer" type="Label" parent="."]
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.02
+anchor_right = 0.5
+anchor_bottom = 0.02
+offset_left = 5.0
+offset_top = 0.039999
+offset_right = 45.0
+offset_bottom = 23.04
+text = "00"
+script = ExtResource("5_87tcy")
+
+[node name="Currency_Timer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[node name="Health_Timer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[node name="Upgrade_Timer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[node name="Test_Player" type="Node2D" parent="."]
+script = ExtResource("6_3ppv1")
+
+[connection signal="timeout" from="Currency_Timer" to="Test_Player" method="_on_currency_timer_timeout"]
+[connection signal="timeout" from="Health_Timer" to="Test_Player" method="_on_health_timer_timeout"]
+[connection signal="timeout" from="Upgrade_Timer" to="Test_Player" method="_on_upgrade_timer_timeout"]
+[connection signal="currency_increase" from="Test_Player" to="Currency" method="_on_test_player_currency_increase"]
+[connection signal="health_depleted" from="Test_Player" to="Health_Bar" method="_on_test_player_health_depleted"]
+[connection signal="health_depleted" from="Test_Player" to="HP" method="_on_test_player_health_depleted"]
+[connection signal="new_upgrade" from="Test_Player" to="Upgrades" method="_on_test_player_new_upgrade"]
