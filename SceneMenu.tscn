@@ -1,6 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://csqrfhaqpnonx"]
+[gd_scene load_steps=8 format=3 uid="uid://csqrfhaqpnonx"]
 
 [ext_resource type="Script" path="res://SceneMenu.gd" id="1_pbiuf"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_cl25r"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_s6fjh"]
 
@@ -41,16 +43,19 @@ scale = Vector2(2.185, 1)
 script = ExtResource("1_pbiuf")
 
 [node name="TextureRect" type="TextureRect" parent="."]
-offset_left = -5.03433
-offset_right = 599.966
-offset_bottom = 727.0
+material = SubResource("CanvasItemMaterial_cl25r")
+offset_left = -72.0
+offset_top = -120.0
+offset_right = 462.0
+offset_bottom = 852.0
 texture = SubResource("ViewportTexture_s6fjh")
 
 [node name="MarginContainer" type="MarginContainer" parent="TextureRect"]
-offset_left = 72.3112
-offset_top = 140.0
-offset_right = 466.311
-offset_bottom = 514.0
+layout_mode = 0
+offset_left = 109.071
+offset_top = 263.0
+offset_right = 503.071
+offset_bottom = 637.0
 theme = SubResource("Theme_g10ix")
 theme_override_constants/margin_left = 70
 theme_override_constants/margin_top = 75
