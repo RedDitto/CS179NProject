@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://ral76o0hrtc3"]
+[gd_scene load_steps=3 format=3 uid="uid://ral76o0hrtc3"]
 
 [ext_resource type="Script" path="res://menu.gd" id="1_j1noy"]
+[ext_resource type="FontFile" uid="uid://cor31q1nk837p" path="res://fonts/xolonium/xolonium-fonts-4.1/ttf/Xolonium-Bold.ttf" id="1_usejw"]
 
 [node name="Node2D" type="Node2D"]
 
@@ -15,15 +16,18 @@ offset_bottom = 124.0
 
 [node name="Button" type="Button" parent="TextureRect/VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("1_usejw")
 text = "Play"
 script = ExtResource("1_j1noy")
 
 [node name="Button3" type="Button" parent="TextureRect/VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("1_usejw")
 text = "Quit"
 
 [node name="Button2" type="Button" parent="TextureRect/VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("1_usejw")
 text = "Credits
 
 "
