@@ -452,10 +452,6 @@ wait_time = 0.5
 wait_time = 0.5
 
 [node name="Camera2D" type="Camera2D" parent="."]
-limit_left = 0
-limit_top = 0
-limit_right = 447
-limit_bottom = 191
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
 
@@ -470,6 +466,11 @@ shape = SubResource("CircleShape2D_i84gw")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy_Attack"]
 position = Vector2(0, -6)
 shape = SubResource("CircleShape2D_o0d5n")
+
+[node name="ProjectileDirection" type="Node2D" parent="."]
+position = Vector2(0, -6)
+
+[node name="Marker2D" type="Marker2D" parent="ProjectileDirection"]
 
 [connection signal="body_entered" from="player_hitbox" to="." method="_on_player_hitbox_body_entered"]
 [connection signal="body_exited" from="player_hitbox" to="." method="_on_player_hitbox_body_exited"]

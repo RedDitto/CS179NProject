@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+const PROJECTILE_PATH = preload('res://Scenes/Projectile.tscn')
+
 var enemy_in_attack_range = false
 var enemy_attack_cooldown = true
 var health = 1000
@@ -23,6 +25,13 @@ func _physics_process(delta):
 		health = 0
 		print("Y O U   D I E D")
 		self.queue_free()
+	
+	#projectile shooting
+	if Input.is_action_just_pressed("shoot_projectile"):
+		shoot()
+	$ProjectileDirection.look_at(get_global_mouse_position())
+	
+
 func player_movement(delta):
 	
 	if Input.is_action_pressed("ui_right"):
@@ -156,3 +165,10 @@ func _on_enemy_attack_body_entered(body):
 func _on_enemy_attack_body_exited(body):
 	if body.is_in_group("Enemy"):
 		body.state = body.SURROUND
+
+func shoot():
+	var projectile = PROJECTILE_PATH.instantiate()
+	
+	get_parent().add_child(projectile)
+	projectile.position = $ProjectileDirection/Marker2D.global_position
+	projectile.vel = get_global_mouse_position() - projectile.position

@@ -106,6 +106,7 @@ radius = 63.0
 size = Vector2(16, 11)
 
 [node name="Fridge" type="CharacterBody2D"]
+collision_layer = 9
 script = ExtResource("1_0x0k2")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
