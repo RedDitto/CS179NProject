@@ -11,9 +11,9 @@ config_version=5
 [application]
 
 config/name="Enemy Test"
-run/main_scene="res://Scenes/world.tscn"
+run/main_scene="res://Scenes/room_0.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
-config/icon="res://Scenes/icon.svg"
+config/icon="res://Art/icon.svg"
 
 [autoload]
 
@@ -21,7 +21,7 @@ Global="*res://scripts/Global.gd"
 
 [display]
 
-window/stretch/scale=4.0
+window/stretch/scale=1.03
 
 [input]
 

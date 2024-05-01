@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://8nccul0njthp" path="res://Scenes/player.tscn" id="4_w72nq"]
 [ext_resource type="PackedScene" uid="uid://f4ufc1fr6op8" path="res://Scenes/enemy.tscn" id="5_y0nbm"]
 [ext_resource type="PackedScene" uid="uid://d58vtcppf45o" path="res://Scenes/oscillating_fan.tscn" id="6_8epkj"]
-[ext_resource type="PackedScene" uid="uid://cwai0pk8uh5y1" path="res://scripts/fridge.tscn" id="7_gp1wj"]
+[ext_resource type="PackedScene" uid="uid://cwai0pk8uh5y1" path="res://Scenes/fridge.tscn" id="7_gp1wj"]
 [ext_resource type="PackedScene" uid="uid://bropqibhxc8jm" path="res://Scenes/Microwave.tscn" id="8_4ifni"]
 [ext_resource type="PackedScene" uid="uid://bkahenyrfviqk" path="res://Scenes/slime_(context_based_steering).tscn" id="9_4g7ku"]
 
