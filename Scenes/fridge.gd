@@ -17,7 +17,7 @@ func _physics_process(delta):
 		
 		$AnimatedSprite2D.play("walk")
 		
-		move_and_collide(Vector2(0,0))
+		#move_and_collide(Vector2(0,0))
 	else:
 		$AnimatedSprite2D.play("fridge_idle")
 

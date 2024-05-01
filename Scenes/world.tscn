@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cr6le22oolnas"]
+[gd_scene load_steps=14 format=3 uid="uid://cr6le22oolnas"]
 
 [ext_resource type="Texture2D" uid="uid://bmh3i617r5ish" path="res://Art/mystic_woods_free_2.1/sprites/tilesets/plains.png" id="1_lgajj"]
 [ext_resource type="Texture2D" uid="uid://bjc285ih80ky8" path="res://Art/mystic_woods_free_2.1/sprites/tilesets/grass.png" id="2_ynog1"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://d58vtcppf45o" path="res://Scenes/oscillating_fan.tscn" id="6_8epkj"]
 [ext_resource type="PackedScene" uid="uid://cwai0pk8uh5y1" path="res://scripts/fridge.tscn" id="7_gp1wj"]
 [ext_resource type="PackedScene" uid="uid://bropqibhxc8jm" path="res://Scenes/Microwave.tscn" id="8_4ifni"]
+[ext_resource type="PackedScene" uid="uid://bkahenyrfviqk" path="res://Scenes/slime_(context_based_steering).tscn" id="9_4g7ku"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_g4h81"]
 texture = ExtResource("1_lgajj")
@@ -130,7 +131,7 @@ texture = ExtResource("3_h5eiu")
 8:6/0/y_sort_origin = 17
 8:6/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 8:6/0/physics_layer_0/angular_velocity = 0.0
-8:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-10.25, 8.75, 8, 8, 9, 12.5, 7.25, 18.5, 3.5, 22.25, -2.5, 21.5, -7, 18.75, -10, 13.5)
+8:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-0.944941, 12.1267, 3.62227, 11.1818, 6.4571, 12.9142, 8.97694, 15.9065, 7.25, 18.5, 3.5, 22.25, -2.5, 21.5, -7, 18.75, -6.61459, 14.8041)
 10:7/size_in_atlas = Vector2i(2, 2)
 10:7/0 = 0
 10:7/0/y_sort_origin = 5
@@ -155,6 +156,7 @@ y_sort_enabled = true
 
 [node name="TileMap" type="TileMap" parent="."]
 y_sort_enabled = true
+position = Vector2(2, -10)
 tile_set = SubResource("TileSet_xqrdu")
 format = 2
 layer_0/name = "ground"
@@ -163,29 +165,24 @@ layer_1/name = "cliff"
 layer_1/tile_data = PackedInt32Array(7, 131072, 5, 8, 131072, 5, 9, 131072, 5, 10, 131072, 5, 11, 131072, 5, 12, 131072, 5, 13, 131072, 5, 14, 131072, 5, 15, 131072, 5, 16, 131072, 5, 17, 131072, 5, 18, 131072, 5, 19, 131072, 5, 6, 65536, 5, 65542, 65536, 6, 65544, 131072, 6, 65543, 131072, 6, 65545, 327680, 4, 131081, 65536, 6, 131082, 131072, 6, 131083, 131072, 6, 131084, 131072, 6, 131085, 131072, 6, 131086, 131072, 6, 131087, 131072, 6, 131088, 131072, 6, 131089, 131072, 6, 131090, 196608, 6, 65554, 262144, 4, 65555, 131072, 6, 65556, 196608, 6, 20, 196608, 5, 65553, 131072, 5, 65552, 131072, 5, 65551, 131072, 5, 65550, 131072, 5, 65549, 131072, 5, 65548, 131072, 5, 65547, 131072, 5, 65546, 131072, 5)
 layer_2/name = "ysort"
 layer_2/y_sort_enabled = true
-layer_2/tile_data = PackedInt32Array(11, 655362, 7, 524301, 655362, 7, 131079, 2, 5, 196627, 2, 5, 393223, 2, 0, 65541, 524290, 6, 589839, 524290, 6, 589848, 524290, 6, 655381, 524290, 6, 655377, 393218, 7, 655362, 393218, 7, 524289, 393218, 7, 655372, 393218, 7, 262152, 524290, 6, 720903, 327682, 0, 196619, 327682, 0, 196624, 327682, 0, 3, 2, 1, 13, 2, 1, 65552, 2, 1, 22, 2, 1, 655387, 2, 1)
+layer_2/tile_data = PackedInt32Array(11, 655362, 7, 524301, 655362, 7, 131079, 2, 5, 196627, 2, 5, 393223, 2, 0, 65541, 524290, 6, 655362, 393218, 7, 524289, 393218, 7, 655372, 393218, 7, 262152, 524290, 6, 720903, 327682, 0, 196619, 327682, 0, 196624, 327682, 0, 3, 2, 1, 13, 2, 1, 65552, 2, 1, 22, 2, 1, 655387, 2, 1, 589839, 524290, 6, 589845, 524290, 6, 458770, 524290, 6)
 
 [node name="Player" parent="." instance=ExtResource("4_w72nq")]
-position = Vector2(240, 104)
+position = Vector2(166, 118)
 
 [node name="Enemy" parent="." instance=ExtResource("5_y0nbm")]
-position = Vector2(69, 143)
+position = Vector2(40, -33)
 
 [node name="oscillating_fan" parent="." instance=ExtResource("6_8epkj")]
 y_sort_enabled = true
-position = Vector2(98, 165)
+position = Vector2(58, -75)
 
 [node name="Fridge" parent="." instance=ExtResource("7_gp1wj")]
-position = Vector2(64, 97)
+position = Vector2(-36, -4)
 
 [node name="Microwave" parent="." instance=ExtResource("8_4ifni")]
-position = Vector2(359, 96)
+position = Vector2(-27, -81)
 scale = Vector2(0.33, 0.33)
 
-[node name="Microwave2" parent="." instance=ExtResource("8_4ifni")]
-position = Vector2(346, 141)
-scale = Vector2(0.33, 0.33)
-
-[node name="Microwave3" parent="." instance=ExtResource("8_4ifni")]
-position = Vector2(293, 143)
-scale = Vector2(0.33, 0.33)
+[node name="Slime (context-based steering)" parent="." instance=ExtResource("9_4g7ku")]
+position = Vector2(261, 119)

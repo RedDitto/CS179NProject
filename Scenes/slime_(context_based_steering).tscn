@@ -40,18 +40,14 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_q4du0"]
-radius = 9.0
+radius = 6.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dvwdl"]
-radius = 55.0091
+radius = 187.385
 
 [node name="Slime (context-based steering)" type="CharacterBody2D"]
 position = Vector2(81, 48)
 script = ExtResource("1_6fmew")
-max_speed = null
-steer_force = null
-look_ahead = null
-num_rays = null
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_p5m0f")
@@ -66,7 +62,18 @@ shape = SubResource("CircleShape2D_q4du0")
 position = Vector2(0, 2)
 shape = SubResource("CircleShape2D_dvwdl")
 
-[node name="RayCast2D" type="RayCast2D" parent="."]
+[node name="Raycasts" type="Node2D" parent="."]
+
+[node name="RayCast2D" type="RayCast2D" parent="Raycasts"]
+target_position = Vector2(40, 0)
+
+[node name="RayCast2D2" type="RayCast2D" parent="Raycasts"]
+position = Vector2(0, 4)
+target_position = Vector2(40, 0)
+
+[node name="RayCast2D3" type="RayCast2D" parent="Raycasts"]
+position = Vector2(0, -4)
+target_position = Vector2(40, 0)
 
 [connection signal="body_entered" from="detection_area" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="detection_area" to="." method="_on_detection_area_body_exited"]
