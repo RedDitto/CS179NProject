@@ -1,15 +1,19 @@
 extends CharacterBody2D
 
+signal health_loss
+
+@export var _player_stat : Player_Stats
+
 const PROJECTILE_PATH = preload('res://Scenes/Projectile.tscn')
 
 var enemy_in_attack_range = false
 var enemy_attack_cooldown = true
-var health = 1000
 var player_alive = true
 
 var attack_in_progress = false
 
 const SPEED = 100
+var speed_boost = 0
 var current_direction = "none"
 
 
@@ -20,9 +24,9 @@ func _physics_process(delta):
 	player_movement(delta)
 	enemy_attack()
 	attack()
-	if health <= 0:
+	if _player_stat.health <= 0:
 		player_alive = false #where you would add go back to menu / respawn
-		health = 0
+		_player_stat.health = 0
 		print("Y O U   D I E D")
 		self.queue_free()
 	
@@ -37,23 +41,23 @@ func player_movement(delta):
 	if Input.is_action_pressed("ui_right"):
 		current_direction = "right"
 		play_anim(1)
-		velocity.x = SPEED
+		velocity.x = SPEED + speed_boost
 		velocity.y = 0
 	elif Input.is_action_pressed("ui_left"):
 		play_anim(1)
 		current_direction = "left"
-		velocity.x = -SPEED
+		velocity.x = -SPEED - speed_boost
 		velocity.y = 0 
 	elif Input.is_action_pressed("ui_down"):
 		current_direction = "down"
 		play_anim(1)
 		velocity.x = 0
-		velocity.y = SPEED
+		velocity.y = SPEED + speed_boost
 	elif Input.is_action_pressed("ui_up"):
 		current_direction = "up"
 		play_anim(1)
 		velocity.x = 0
-		velocity.y = -SPEED
+		velocity.y = -SPEED - speed_boost
 	else:
 		play_anim(0)
 		velocity.x = 0
@@ -107,11 +111,11 @@ func _on_player_hitbox_body_exited(body):
 		
 func enemy_attack():
 	if enemy_in_attack_range and enemy_attack_cooldown == true:
-		health = health - 20
+		_player_stat.health = _player_stat.health - 20
 		enemy_attack_cooldown = false
 		$attack_cooldown.start()
-		
-		print(health)
+		emit_signal("health_loss")
+		print(_player_stat.health)
 	
 
 func _on_attack_cooldown_timeout():
@@ -172,3 +176,11 @@ func shoot():
 	get_parent().add_child(projectile)
 	projectile.position = $ProjectileDirection/Marker2D.global_position
 	projectile.vel = get_global_mouse_position() - projectile.position
+
+
+func _on_hud_movement_upgrade():
+	speed_boost += 25
+
+
+func _on_hud_attack_upgrade():
+	pass # Replace with function body.

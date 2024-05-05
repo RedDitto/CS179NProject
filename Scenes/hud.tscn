@@ -1,0 +1,75 @@
+[gd_scene load_steps=9 format=3 uid="uid://bc7q7iwmec27j"]
+
+[ext_resource type="Script" path="res://scripts/hud.gd" id="1_jnqk4"]
+[ext_resource type="Resource" uid="uid://ch088lm0j46l" path="res://Player_Stats.tres" id="2_dnuhv"]
+[ext_resource type="Script" path="res://scripts/Currency.gd" id="3_n6808"]
+[ext_resource type="Script" path="res://scripts/Upgrades.gd" id="4_me064"]
+[ext_resource type="Script" path="res://scripts/HP.gd" id="5_trqi7"]
+[ext_resource type="Texture2D" uid="uid://ghxw7s5a3p5d" path="res://Art/health_bar_progress.png" id="6_361yr"]
+[ext_resource type="Script" path="res://scripts/Health_Bar.gd" id="6_l87da"]
+[ext_resource type="Texture2D" uid="uid://d1d2agyuvluuh" path="res://Art/health_bar_over.png" id="7_s5syh"]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_jnqk4")
+_player_stat = ExtResource("2_dnuhv")
+
+[node name="Currency" type="Label" parent="."]
+offset_left = 4.0
+offset_top = 2.0
+offset_right = 50.0
+offset_bottom = 14.0
+theme_override_font_sizes/font_size = 6
+text = "Currency: 0"
+script = ExtResource("3_n6808")
+
+[node name="Upgrades" type="Label" parent="."]
+offset_left = 4.0
+offset_top = 11.0
+offset_right = 44.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 6
+text = "Upgrades:"
+script = ExtResource("4_me064")
+
+[node name="HP" type="Label" parent="."]
+offset_left = 5.0
+offset_top = 146.0
+offset_right = 42.0
+offset_bottom = 160.0
+theme_override_font_sizes/font_size = 10
+text = "HP: 100"
+script = ExtResource("5_trqi7")
+
+[node name="Health Bar" type="TextureProgressBar" parent="."]
+offset_left = 44.0
+offset_top = 148.0
+offset_right = 134.0
+offset_bottom = 159.0
+value = 100.0
+nine_patch_stretch = true
+stretch_margin_left = 3
+stretch_margin_top = 3
+stretch_margin_right = 3
+stretch_margin_bottom = 3
+texture_under = ExtResource("6_361yr")
+texture_over = ExtResource("7_s5syh")
+texture_progress = ExtResource("6_361yr")
+tint_under = Color(0.164706, 0.164706, 0.164706, 0.945098)
+tint_over = Color(0.121569, 0.121569, 0.121569, 1)
+tint_progress = Color(0.666667, 0, 0, 1)
+script = ExtResource("6_l87da")
+
+[node name="Currency_Test" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[node name="Upgrade_Test" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[connection signal="health_change" from="." to="HP" method="_on_hud_health_change"]
+[connection signal="health_change" from="." to="Health Bar" method="_on_hud_health_change"]
+[connection signal="attack_upgrade" from="Upgrades" to="." method="_on_upgrades_attack_upgrade"]
+[connection signal="movement_upgrade" from="Upgrades" to="." method="_on_upgrades_movement_upgrade"]
+[connection signal="timeout" from="Currency_Test" to="Currency" method="_on_currency_test_timeout"]
+[connection signal="timeout" from="Upgrade_Test" to="Upgrades" method="_on_upgrade_test_timeout"]
