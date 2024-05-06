@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+signal health_loss
+
 var speed = 40
 var player_chase = false
 var player = null
@@ -11,7 +13,7 @@ var death_finished = false
 
 func _physics_process(delta):
 	
-	deal_with_damage();
+	#deal_with_damage();
 	
 	if alive:
 		if player_chase:
@@ -60,13 +62,14 @@ func _on_enemy_hitbox_body_exited(body):
 	if body.has_method("player"):
 		player_in_attack_zone = false
 
-func deal_with_damage():
+func deal_with_damage(damage):
 	if player_in_attack_zone and Global.player_current_attack == true:
 		if can_take_damage == true:
 			health = health - 20
 			$take_damage_cooldown.start()
 			can_take_damage = false
 			print("slime health = ", health)
+			emit_signal("health_loss", health)
 			if health <= 0:
 				alive = false
 				#self.queue_free()
@@ -78,3 +81,15 @@ func _on_take_damage_cooldown_timeout():
 
 func _on_death_cooldown_timeout():
 	self.queue_free()
+
+
+func _on_player_damage_enemy(damage):
+	if can_take_damage == true:
+		health = health - damage
+		$take_damage_cooldown.start()
+		can_take_damage = false
+		print("slime health = ", health)
+		emit_signal("health_loss", health)
+		if health <= 0:
+			alive = false
+			#self.queue_free()

@@ -51,6 +51,7 @@ position = Vector2(-223, 465)
 position = Vector2(-99, 246)
 
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_player_detector_body_entered"]
+[connection signal="damage_enemy" from="Player" to="Enemy" method="_on_player_damage_enemy"]
 [connection signal="health_loss" from="Player" to="HUD" method="_on_player_health_loss"]
 [connection signal="attack_upgrade" from="HUD" to="Player" method="_on_hud_attack_upgrade"]
 [connection signal="movement_upgrade" from="HUD" to="Player" method="_on_hud_movement_upgrade"]

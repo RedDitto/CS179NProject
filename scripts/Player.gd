@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 signal health_loss
+signal damage_enemy
 
 @export var _player_stat : Player_Stats
 
@@ -9,12 +10,18 @@ const PROJECTILE_PATH = preload('res://Scenes/Projectile.tscn')
 var enemy_in_attack_range = false
 var enemy_attack_cooldown = true
 var player_alive = true
+var melee_range = false
 
 var attack_in_progress = false
 
 const SPEED = 100
 var speed_boost = 0
 var current_direction = "none"
+var move_direction = "none"
+var player_mouse_direction = Vector2(0,0)
+var moving = false
+var idle = "none"
+var animation = "none"
 
 
 func _ready():
@@ -39,76 +46,88 @@ func _physics_process(delta):
 func player_movement(delta):
 	
 	if Input.is_action_pressed("ui_right"):
-		current_direction = "right"
-		play_anim(1)
+		moving = true
+		move_direction = "right"
+		play_anim()
 		velocity.x = SPEED + speed_boost
 		velocity.y = 0
 	elif Input.is_action_pressed("ui_left"):
-		play_anim(1)
-		current_direction = "left"
+		moving = true
+		move_direction = "left"
+		play_anim()
 		velocity.x = -SPEED - speed_boost
 		velocity.y = 0 
 	elif Input.is_action_pressed("ui_down"):
-		current_direction = "down"
-		play_anim(1)
+		moving = true
+		move_direction = "down"
+		play_anim()
 		velocity.x = 0
 		velocity.y = SPEED + speed_boost
 	elif Input.is_action_pressed("ui_up"):
-		current_direction = "up"
-		play_anim(1)
+		moving = true
+		move_direction = "up"
+		play_anim()
 		velocity.x = 0
 		velocity.y = -SPEED - speed_boost
 	else:
-		play_anim(0)
+		moving = false
+		play_anim()
 		velocity.x = 0
 		velocity.y = 0
 	
 	move_and_slide()
 	
-func play_anim(movement):
-	var dir = current_direction
+func play_anim(): 
 	var anim = $AnimatedSprite2D
+	var rev = false
 	
-	if dir == "right":
-		anim.flip_h = false
-		if movement == 1:
-			anim.play("side_walk")
-		elif movement == 0:
-			if attack_in_progress == false:
-				anim.play("side_idle")
-	if dir == "left":
-		anim.flip_h = true
-		if movement == 1:
-			anim.play("side_walk")		
-		elif movement == 0:
-			if attack_in_progress == false:
-				anim.play("side_idle")
-	if dir == "down":
-		anim.flip_h = false
-		if movement == 1:
-			anim.play("front_walk")
-		elif movement == 0:
-			if attack_in_progress == false:
-				anim.play("front_idle")
-	if dir == "up":
-		anim.flip_h = false
-		if movement == 1:
-			anim.play("back_walk")
-		elif movement == 0:
-			if attack_in_progress == false:
-				anim.play("back_idle")
-			
-
+	if moving == true:
+		if move_direction == "right":
+			if current_direction == "up":
+				animation = "back_walk"
+			elif current_direction == "down":
+				animation = "front_walk"
+			elif current_direction == "left":
+				rev = true
+			else:
+				animation = "side_walk"
+		elif move_direction == "left":
+			if current_direction == "up":
+				animation = "back_walk"
+			elif current_direction == "down":
+				animation = "front_walk"
+			elif current_direction == "left":
+				rev = true
+			else:
+				animation = "side_walk"
+		elif move_direction == "up":
+			if current_direction == "right" or current_direction == "left":
+				animation = "side_walk"
+			elif current_direction == "down":
+				animation = "front_walk"
+			else:
+				animation = "back_walk"
+		elif move_direction == "down":
+			if current_direction == "right" or current_direction == "left":
+				animation = "side_walk"
+			elif current_direction == "up":
+				animation = "back_walk"
+			else:
+				animation = "front_walk"
+	else:
+		animation = idle
+	
+	if attack_in_progress == false:
+		anim.play(animation)
+		
 func _on_player_hitbox_body_entered(body):
 	if body.has_method("enemy"):
 		enemy_in_attack_range = true
-		
-
 
 func _on_player_hitbox_body_exited(body):
 	if body.has_method("enemy"):
 		enemy_in_attack_range = false
-		
+
 func enemy_attack():
 	if enemy_in_attack_range and enemy_attack_cooldown == true:
 		_player_stat.health = _player_stat.health - 20
@@ -144,6 +163,9 @@ func attack():
 		if dir == "up":
 			$AnimatedSprite2D.play("back_attack")
 			$deal_attack_timer.start()
+		
+		if melee_range == true:
+			emit_signal("damage_enemy", _player_stat.attack)
 
 
 func _on_deal_attack_timer_timeout():
@@ -169,6 +191,7 @@ func _on_enemy_attack_body_entered(body):
 func _on_enemy_attack_body_exited(body):
 	if body.is_in_group("Enemy"):
 		body.state = body.SURROUND
+		
 
 func shoot():
 	var projectile = PROJECTILE_PATH.instantiate()
@@ -178,9 +201,55 @@ func shoot():
 	projectile.vel = get_global_mouse_position() - projectile.position
 
 
-func _on_hud_movement_upgrade():
+func _on_hud_movement_upgrade(): # Current prototype for speed boost when getting upgrade
 	speed_boost += 25
-
+	
 
 func _on_hud_attack_upgrade():
 	pass # Replace with function body.
+	
+
+func _input(event): # Gets player direction based on mouse when there is mouse movement and plays idle animations
+	if event is InputEventMouseMotion:
+		player_mouse_direction = (global_position - get_global_mouse_position())
+		player_mouse_direction.x *= -1
+	
+		var anim = $AnimatedSprite2D
+		
+		if player_mouse_direction.y > 0:
+			if player_mouse_direction.x / 2 * -1 > player_mouse_direction.y - 20:
+				current_direction = "left"
+				idle = "side_idle"
+				anim.flip_h = true
+			elif player_mouse_direction.x / 2 > player_mouse_direction.y - 20:
+				current_direction = "right"
+				idle = "side_idle"
+				anim.flip_h = false
+			else:
+				current_direction = "up"
+				idle = "back_idle"
+		elif player_mouse_direction.y < 0:
+			if player_mouse_direction.x / 2 < player_mouse_direction.y + 20:
+				current_direction = "left"
+				idle = "side_idle"
+				anim.flip_h = true
+			elif player_mouse_direction.x / 2 * -1 < player_mouse_direction.y + 20:
+				current_direction = "right"
+				idle = "side_idle"
+				anim.flip_h = false
+			else:
+				current_direction = "down"
+				idle = "front_idle"
+					
+		if moving == false and attack_in_progress == false:
+			anim.play(idle)
+
+
+func _on_melee_attack_body_entered(body):
+	if body.has_method("enemy"):
+		melee_range = true
+
+
+func _on_melee_attack_body_exited(body):
+	if body.has_method("enemy"):
+		melee_range = false

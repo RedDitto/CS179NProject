@@ -6,3 +6,4 @@ class_name Player_Stats
 @export var health : int
 @export var currency : int
 @export var upgrades : Array
+@export var attack : int
