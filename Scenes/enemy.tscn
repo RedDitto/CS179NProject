@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://22chh13e4h0i" path="res://Art/mystic_woods_free_2.1/sprites/characters/slime.png" id="1_6j2vw"]
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="1_cccma"]
-[ext_resource type="Script" path="res://Enemy_Stats.gd" id="2_rk1au"]
+[ext_resource type="Script" path="res://scripts/Enemy_Stats.gd" id="2_rk1au"]
 [ext_resource type="Texture2D" uid="uid://ghxw7s5a3p5d" path="res://Art/health_bar_progress.png" id="3_akq01"]
 [ext_resource type="Texture2D" uid="uid://d1d2agyuvluuh" path="res://Art/health_bar_over.png" id="4_gxqac"]
 [ext_resource type="Script" path="res://scripts/enemy_health_bar.gd" id="5_xnjpd"]

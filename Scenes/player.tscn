@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_7vfew"]
 [ext_resource type="Texture2D" uid="uid://dlbr8ocq67w0n" path="res://Art/mystic_woods_free_2.1/sprites/characters/player.png" id="2_4gu8u"]
-[ext_resource type="Resource" uid="uid://ch088lm0j46l" path="res://Player_Stats.tres" id="2_w3nkv"]
+[ext_resource type="Resource" uid="uid://ch088lm0j46l" path="res://scripts/Player_Stats.tres" id="2_w3nkv"]
 [ext_resource type="Script" path="res://scripts/Melee_Attack.gd" id="4_4bcrn"]
 [ext_resource type="Texture2D" uid="uid://c83pj1d28miho" path="res://Art/arrow.png" id="5_o5w4x"]
 

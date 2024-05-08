@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://bc7q7iwmec27j"]
 
 [ext_resource type="Script" path="res://scripts/hud.gd" id="1_jnqk4"]
-[ext_resource type="Resource" uid="uid://ch088lm0j46l" path="res://Player_Stats.tres" id="2_dnuhv"]
+[ext_resource type="Resource" uid="uid://ch088lm0j46l" path="res://scripts/Player_Stats.tres" id="2_dnuhv"]
 [ext_resource type="Script" path="res://scripts/Currency_UI.gd" id="3_en6bc"]
 [ext_resource type="Script" path="res://scripts/Upgrades_UI.gd" id="4_r6fcf"]
 [ext_resource type="Script" path="res://scripts/HP.gd" id="5_trqi7"]
