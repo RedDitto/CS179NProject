@@ -1,0 +1,40 @@
+[gd_scene load_steps=3 format=3 uid="uid://ral76o0hrtc3"]
+
+[ext_resource type="FontFile" uid="uid://cor31q1nk837p" path="res://fonts/xolonium/xolonium-fonts-4.1/ttf/Xolonium-Bold.ttf" id="1_ynf6p"]
+[ext_resource type="Script" path="res://scripts/menu.gd" id="2_lel2s"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = 58.0
+offset_top = -12.0
+offset_right = 258.0
+offset_bottom = 172.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TextureRect"]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 46.0
+offset_right = 119.0
+offset_bottom = 158.0
+
+[node name="Button" type="Button" parent="TextureRect/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_ynf6p")
+text = "Play"
+script = ExtResource("2_lel2s")
+
+[node name="Button2" type="Button" parent="TextureRect/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_ynf6p")
+text = "Credits
+"
+
+[node name="Button3" type="Button" parent="TextureRect/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_ynf6p")
+text = "Quit"
+
+[connection signal="pressed" from="TextureRect/VBoxContainer/Button" to="TextureRect/VBoxContainer/Button" method="_on_pressed"]
+[connection signal="pressed" from="TextureRect/VBoxContainer/Button2" to="TextureRect/VBoxContainer/Button" method="_on_button_2_pressed"]
+[connection signal="pressed" from="TextureRect/VBoxContainer/Button3" to="TextureRect/VBoxContainer/Button" method="_on_button_3_pressed"]
