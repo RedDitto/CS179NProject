@@ -453,11 +453,11 @@ visible = false
 position = Vector2(0, -6)
 shape = SubResource("CircleShape2D_4x7yq")
 
-[node name="Melee_Attack" type="Area2D" parent="."]
+[node name="Melee_Attack" type="Area2D" parent="." groups=["hitbox"]]
 position = Vector2(0, -2)
 script = ExtResource("4_4bcrn")
 
-[node name="Melee_Collision" type="CollisionShape2D" parent="Melee_Attack"]
+[node name="Melee_Collision" type="CollisionShape2D" parent="Melee_Attack" groups=["hitbox"]]
 position = Vector2(0, 14.2206)
 scale = Vector2(1, 1.01475)
 shape = SubResource("RectangleShape2D_eawrm")
@@ -501,6 +501,7 @@ position = Vector2(0, -6)
 
 [node name="Marker2D" type="Marker2D" parent="ProjectileDirection"]
 
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="body_entered" from="player_hitbox" to="." method="_on_player_hitbox_body_entered"]
 [connection signal="body_exited" from="player_hitbox" to="." method="_on_player_hitbox_body_exited"]
 [connection signal="body_entered" from="Melee_Attack" to="." method="_on_melee_attack_body_entered"]

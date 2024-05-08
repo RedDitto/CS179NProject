@@ -3,7 +3,6 @@ extends Area2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	#disable_mode = CollisionObject2D.DISABLE_MODE_REMOVE
 	pass
 
 

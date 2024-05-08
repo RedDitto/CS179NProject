@@ -26,6 +26,7 @@ var animation = "none"
 
 func _ready():
 	$AnimatedSprite2D.play("front_idle")
+	$Melee_Attack/Melee_Collision.disabled = true
 
 func _physics_process(delta):
 	player_movement(delta)
@@ -163,15 +164,18 @@ func attack():
 		if dir == "up":
 			$AnimatedSprite2D.play("back_attack")
 			$deal_attack_timer.start()
+			
+		$Melee_Attack/Melee_Collision.disabled = false
 		
-		if melee_range == true:
-			emit_signal("damage_enemy", _player_stat.attack)
+		#if melee_range == true:
+			#emit_signal("damage_enemy", _player_stat.attack)
 
 
 func _on_deal_attack_timer_timeout():
 	$deal_attack_timer.stop()
 	Global.player_current_attack = false
 	attack_in_progress = false
+	$Melee_Attack/Melee_Collision.disabled = true
 
 
 func _on_attract_body_entered(body):
@@ -217,11 +221,11 @@ func _input(event): # Gets player direction based on mouse when there is mouse m
 		var anim = $AnimatedSprite2D
 		
 		if player_mouse_direction.y > 0:
-			if player_mouse_direction.x / 2 * -1 > player_mouse_direction.y - 20:
+			if player_mouse_direction.x / 2 * -1 > player_mouse_direction.y - 10:
 				current_direction = "left"
 				idle = "side_idle"
 				anim.flip_h = true
-			elif player_mouse_direction.x / 2 > player_mouse_direction.y - 20:
+			elif player_mouse_direction.x / 2 > player_mouse_direction.y - 10:
 				current_direction = "right"
 				idle = "side_idle"
 				anim.flip_h = false
@@ -229,11 +233,11 @@ func _input(event): # Gets player direction based on mouse when there is mouse m
 				current_direction = "up"
 				idle = "back_idle"
 		elif player_mouse_direction.y < 0:
-			if player_mouse_direction.x / 2 < player_mouse_direction.y + 20:
+			if player_mouse_direction.x / 2 < player_mouse_direction.y + 0:
 				current_direction = "left"
 				idle = "side_idle"
 				anim.flip_h = true
-			elif player_mouse_direction.x / 2 * -1 < player_mouse_direction.y + 20:
+			elif player_mouse_direction.x / 2 * -1 < player_mouse_direction.y + 0:
 				current_direction = "right"
 				idle = "side_idle"
 				anim.flip_h = false
@@ -248,6 +252,8 @@ func _input(event): # Gets player direction based on mouse when there is mouse m
 func _on_melee_attack_body_entered(body):
 	if body.has_method("enemy"):
 		melee_range = true
+		body.deal_with_damage(_player_stat.attack)
+		print("Hit!!!")
 
 
 func _on_melee_attack_body_exited(body):

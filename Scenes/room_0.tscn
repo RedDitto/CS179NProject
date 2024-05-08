@@ -48,7 +48,7 @@ position = Vector2(-223, 465)
 [node name="HUD" parent="." index="7" instance=ExtResource("4_v8ko7")]
 
 [node name="Enemy" parent="." index="8" instance=ExtResource("5_ig8l6")]
-position = Vector2(-99, 246)
+position = Vector2(-100, 254)
 
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_player_detector_body_entered"]
 [connection signal="damage_enemy" from="Player" to="Enemy" method="_on_player_damage_enemy"]
