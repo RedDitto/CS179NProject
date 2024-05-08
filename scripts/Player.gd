@@ -11,10 +11,10 @@ var enemy_in_attack_range = false
 var enemy_attack_cooldown = true
 var player_alive = true
 var melee_range = false
+var _is_mouse_movement = false
 
 var attack_in_progress = false
 
-const SPEED = 100
 var speed_boost = 0
 var current_direction = "none"
 var move_direction = "none"
@@ -50,26 +50,26 @@ func player_movement(delta):
 		moving = true
 		move_direction = "right"
 		play_anim()
-		velocity.x = SPEED + speed_boost
+		velocity.x = _player_stat.speed + speed_boost
 		velocity.y = 0
 	elif Input.is_action_pressed("ui_left"):
 		moving = true
 		move_direction = "left"
 		play_anim()
-		velocity.x = -SPEED - speed_boost
+		velocity.x = -_player_stat.speed - speed_boost
 		velocity.y = 0 
 	elif Input.is_action_pressed("ui_down"):
 		moving = true
 		move_direction = "down"
 		play_anim()
 		velocity.x = 0
-		velocity.y = SPEED + speed_boost
+		velocity.y = _player_stat.speed + speed_boost
 	elif Input.is_action_pressed("ui_up"):
 		moving = true
 		move_direction = "up"
 		play_anim()
 		velocity.x = 0
-		velocity.y = -SPEED - speed_boost
+		velocity.y = -_player_stat.speed - speed_boost
 	else:
 		moving = false
 		play_anim()
@@ -88,8 +88,6 @@ func play_anim():
 				animation = "back_walk"
 			elif current_direction == "down":
 				animation = "front_walk"
-			elif current_direction == "left":
-				rev = true
 			else:
 				animation = "side_walk"
 		elif move_direction == "left":
@@ -97,8 +95,6 @@ func play_anim():
 				animation = "back_walk"
 			elif current_direction == "down":
 				animation = "front_walk"
-			elif current_direction == "left":
-				rev = true
 			else:
 				animation = "side_walk"
 		elif move_direction == "up":
@@ -217,7 +213,7 @@ func _input(event): # Gets player direction based on mouse when there is mouse m
 	if event is InputEventMouseMotion:
 		player_mouse_direction = (global_position - get_global_mouse_position())
 		player_mouse_direction.x *= -1
-	
+		
 		var anim = $AnimatedSprite2D
 		
 		if player_mouse_direction.y > 0:
@@ -247,7 +243,6 @@ func _input(event): # Gets player direction based on mouse when there is mouse m
 					
 		if moving == false and attack_in_progress == false:
 			anim.play(idle)
-
 
 func _on_melee_attack_body_entered(body):
 	if body.has_method("enemy"):

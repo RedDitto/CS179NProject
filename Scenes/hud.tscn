@@ -33,11 +33,11 @@ script = ExtResource("4_me064")
 
 [node name="HP" type="Label" parent="."]
 offset_left = 5.0
-offset_top = 146.0
-offset_right = 42.0
-offset_bottom = 160.0
-theme_override_font_sizes/font_size = 10
-text = "HP: 100"
+offset_top = 147.0
+offset_right = 43.0
+offset_bottom = 161.0
+theme_override_font_sizes/font_size = 9
+text = "HP: 1000"
 script = ExtResource("5_trqi7")
 
 [node name="Health Bar" type="TextureProgressBar" parent="."]
