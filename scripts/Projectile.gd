@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 
-const SPEED = 100.0
+const SPEED = 200.0
 var vel = Vector2(0, 1)
 
 
@@ -14,3 +14,6 @@ func _physics_process(delta):
 func _on_area_2d_body_entered(body):
 	if not body.is_in_group("Player"):
 		queue_free()
+	if body.has_method("enemy"):
+		body.deal_with_damage(20)
+		print("Hit Ranged!!!")
