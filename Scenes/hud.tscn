@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://scripts/hud.gd" id="1_jnqk4"]
 [ext_resource type="Resource" uid="uid://ch088lm0j46l" path="res://Player_Stats.tres" id="2_dnuhv"]
-[ext_resource type="Script" path="res://scripts/Currency.gd" id="3_n6808"]
-[ext_resource type="Script" path="res://scripts/Upgrades.gd" id="4_me064"]
+[ext_resource type="Script" path="res://scripts/Currency_UI.gd" id="3_en6bc"]
+[ext_resource type="Script" path="res://scripts/Upgrades_UI.gd" id="4_r6fcf"]
 [ext_resource type="Script" path="res://scripts/HP.gd" id="5_trqi7"]
 [ext_resource type="Texture2D" uid="uid://ghxw7s5a3p5d" path="res://Art/health_bar_progress.png" id="6_361yr"]
 [ext_resource type="Script" path="res://scripts/Health_Bar.gd" id="6_l87da"]
@@ -13,25 +13,25 @@
 script = ExtResource("1_jnqk4")
 _player_stat = ExtResource("2_dnuhv")
 
-[node name="Currency" type="Label" parent="."]
+[node name="Currency_UI" type="Label" parent="."]
 offset_left = 4.0
 offset_top = 2.0
 offset_right = 50.0
 offset_bottom = 14.0
 theme_override_font_sizes/font_size = 6
 text = "Currency: 0"
-script = ExtResource("3_n6808")
+script = ExtResource("3_en6bc")
 
-[node name="Upgrades" type="Label" parent="."]
+[node name="Upgrades_UI" type="Label" parent="."]
 offset_left = 4.0
 offset_top = 11.0
 offset_right = 44.0
 offset_bottom = 23.0
 theme_override_font_sizes/font_size = 6
 text = "Upgrades:"
-script = ExtResource("4_me064")
+script = ExtResource("4_r6fcf")
 
-[node name="HP" type="Label" parent="."]
+[node name="HP_UI" type="Label" parent="."]
 offset_left = 5.0
 offset_top = 147.0
 offset_right = 43.0
@@ -63,13 +63,8 @@ script = ExtResource("6_l87da")
 wait_time = 2.0
 autostart = true
 
-[node name="Upgrade_Test" type="Timer" parent="."]
-wait_time = 5.0
-autostart = true
-
-[connection signal="health_change" from="." to="HP" method="_on_hud_health_change"]
+[connection signal="health_change" from="." to="HP_UI" method="_on_hud_health_change"]
 [connection signal="health_change" from="." to="Health Bar" method="_on_hud_health_change"]
-[connection signal="attack_upgrade" from="Upgrades" to="." method="_on_upgrades_attack_upgrade"]
-[connection signal="movement_upgrade" from="Upgrades" to="." method="_on_upgrades_movement_upgrade"]
-[connection signal="timeout" from="Currency_Test" to="Currency" method="_on_currency_test_timeout"]
-[connection signal="timeout" from="Upgrade_Test" to="Upgrades" method="_on_upgrade_test_timeout"]
+[connection signal="attack_upgrade" from="Upgrades_UI" to="." method="_on_upgrades_attack_upgrade"]
+[connection signal="movement_upgrade" from="Upgrades_UI" to="." method="_on_upgrades_movement_upgrade"]
+[connection signal="timeout" from="Currency_Test" to="Currency_UI" method="_on_currency_test_timeout"]

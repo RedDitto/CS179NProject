@@ -53,6 +53,7 @@ func enemy():
 func _on_enemy_hitbox_body_entered(body):
 	if body.has_method("player"):
 		player_in_attack_zone = true
+		print("In body!")
 
 
 func _on_enemy_hitbox_body_exited(body):

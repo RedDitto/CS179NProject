@@ -18,3 +18,11 @@ func _on_upgrades_attack_upgrade():
 
 func _on_upgrades_movement_upgrade():
 	emit_signal("movement_upgrade")
+
+
+func _on_player_upgrade_gained():
+	get_node("Upgrades_UI")._update()
+
+
+func _on_player_currency_gained():
+	get_node("Currency_UI")._update()

@@ -2,6 +2,8 @@ extends CharacterBody2D
 
 signal health_loss
 signal damage_enemy
+signal upgrade_gained
+signal currency_gained
 
 @export var _player_stat : Player_Stats
 
@@ -254,3 +256,20 @@ func _on_melee_attack_body_entered(body):
 func _on_melee_attack_body_exited(body):
 	if body.has_method("enemy"):
 		melee_range = false
+
+
+func _on_upgrade_gain_upgrade(random_number):
+	if (random_number == 0 and _player_stat.upgrades[0][1] < 4):
+		_player_stat.upgrades[0][1] += 1
+		speed_boost += 25
+		print("Gained Movement Speed Boost.")
+	elif (random_number == 1 and _player_stat.upgrades[1][1] < 4):
+		_player_stat.upgrades[1][1] += 1
+		print("Gained Attack Speed Boost.")
+	
+	emit_signal("upgrade_gained")
+
+
+func _on_currency_gain_currency(amount):
+	_player_stat.currency += amount
+	emit_signal("currency_gained")

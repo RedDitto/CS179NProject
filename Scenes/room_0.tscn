@@ -1,10 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://cxkcivj775gim"]
+[gd_scene load_steps=9 format=3 uid="uid://cxkcivj775gim"]
 
 [ext_resource type="PackedScene" uid="uid://dh7r45oh824ur" path="res://Scenes/room.tscn" id="1_5j8ie"]
 [ext_resource type="PackedScene" uid="uid://xvo8q2ctv7bt" path="res://Scenes/door.tscn" id="2_e78y2"]
 [ext_resource type="PackedScene" uid="uid://8nccul0njthp" path="res://Scenes/player.tscn" id="3_38wop"]
+[ext_resource type="PackedScene" uid="uid://di6c2x2t350s3" path="res://Scenes/currency.tscn" id="4_qqp40"]
 [ext_resource type="PackedScene" uid="uid://bc7q7iwmec27j" path="res://Scenes/hud.tscn" id="4_v8ko7"]
 [ext_resource type="PackedScene" uid="uid://f4ufc1fr6op8" path="res://Scenes/enemy.tscn" id="5_ig8l6"]
+[ext_resource type="PackedScene" uid="uid://cvefens235g58" path="res://Scenes/upgrade.tscn" id="6_2rwlh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l1wof"]
 
@@ -42,16 +44,34 @@ collision_mask = 2
 position = Vector2(300, 293)
 shape = SubResource("RectangleShape2D_l1wof")
 
-[node name="Player" parent="." index="6" instance=ExtResource("3_38wop")]
+[node name="Upgrade" parent="." index="6" instance=ExtResource("6_2rwlh")]
+position = Vector2(-99, 419)
+
+[node name="Currency" parent="." index="7" instance=ExtResource("4_qqp40")]
+position = Vector2(-166, 460)
+
+[node name="Currency2" parent="." index="8" instance=ExtResource("4_qqp40")]
+position = Vector2(-146, 460)
+
+[node name="Currency3" parent="." index="9" instance=ExtResource("4_qqp40")]
+position = Vector2(-123, 460)
+
+[node name="Currency4" parent="." index="10" instance=ExtResource("4_qqp40")]
+position = Vector2(-100, 460)
+
+[node name="Player" parent="." index="11" instance=ExtResource("3_38wop")]
 position = Vector2(-223, 465)
 
-[node name="HUD" parent="." index="7" instance=ExtResource("4_v8ko7")]
+[node name="HUD" parent="." index="12" instance=ExtResource("4_v8ko7")]
 
-[node name="Enemy" parent="." index="8" instance=ExtResource("5_ig8l6")]
+[node name="Enemy" parent="." index="13" instance=ExtResource("5_ig8l6")]
 position = Vector2(-100, 254)
 
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_player_detector_body_entered"]
+[connection signal="gain_upgrade" from="Upgrade" to="Player" method="_on_upgrade_gain_upgrade"]
+[connection signal="currency_gained" from="Player" to="HUD" method="_on_player_currency_gained"]
 [connection signal="damage_enemy" from="Player" to="Enemy" method="_on_player_damage_enemy"]
 [connection signal="health_loss" from="Player" to="HUD" method="_on_player_health_loss"]
+[connection signal="upgrade_gained" from="Player" to="HUD" method="_on_player_upgrade_gained"]
 [connection signal="attack_upgrade" from="HUD" to="Player" method="_on_hud_attack_upgrade"]
 [connection signal="movement_upgrade" from="HUD" to="Player" method="_on_hud_movement_upgrade"]
