@@ -100,13 +100,16 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rsj6p"]
-radius = 63.0
+radius = 155.193
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pbvxn"]
 size = Vector2(16, 11)
 
 [node name="Fridge" type="CharacterBody2D"]
-collision_layer = 9
+collision_layer = 2
+collision_mask = 7
+motion_mode = 1
+wall_min_slide_angle = 0.0
 script = ExtResource("1_0x0k2")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -126,5 +129,15 @@ shape = SubResource("CircleShape2D_rsj6p")
 position = Vector2(0, -5.5)
 shape = SubResource("RectangleShape2D_pbvxn")
 
+[node name="Navigation" type="Node2D" parent="."]
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="Navigation"]
+debug_enabled = true
+
+[node name="Timer" type="Timer" parent="Navigation"]
+wait_time = 0.1
+autostart = true
+
 [connection signal="body_entered" from="detection_area" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="detection_area" to="." method="_on_detection_area_body_exited"]
+[connection signal="timeout" from="Navigation/Timer" to="." method="_on_timer_timeout"]
