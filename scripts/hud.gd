@@ -26,3 +26,8 @@ func _on_player_upgrade_gained():
 
 func _on_player_currency_gained():
 	get_node("Currency_UI")._update()
+
+
+func _on_picked_up_weapon(texture):
+	print()
+	get_node("WeaponDisplay").texture = ResourceLoader.load(texture.get_load_path())

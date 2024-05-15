@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://diqplg5blww12"]
+
+[ext_resource type="Script" path="res://scripts/weapon.gd" id="1_o4us2"]
+[ext_resource type="Texture2D" uid="uid://bpxlkkot1s7r4" path="res://Art/sword1.png" id="2_x5fb8"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cmswv"]
+radius = 20.0
+
+[node name="weapon_ground" type="Node2D"]
+scale = Vector2(0.25, 0.25)
+script = ExtResource("1_o4us2")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("2_x5fb8")
+region_rect = Rect2(31.4154, 100.249, 22.3041, 12.4556)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_cmswv")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
