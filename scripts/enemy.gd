@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 signal health_loss
 
-@export var _enemy_stat : Enemy_Stats
+@export var _enemy_stats : Enemy_Stats
 
 var player_chase = false
 var player = null
@@ -17,7 +17,7 @@ func _physics_process(delta):
 		if player_chase:
 			#position += (player.position - position) / speed
 			var direction = (player.position - position).normalized()
-			var desired_velocity = direction * _enemy_stat.speed
+			var desired_velocity = direction * _enemy_stats.speed
 			var steering = (desired_velocity - velocity) * delta * 2.5
 			velocity += steering
 			move_and_slide()
@@ -62,12 +62,15 @@ func _on_enemy_hitbox_body_exited(body):
 
 func deal_with_damage(damage):
 	if can_take_damage == true:
-		_enemy_stat.health = _enemy_stat.health - 20
+		if _enemy_stats.health - damage < 0:
+			_enemy_stats.health = 0
+		else:
+			_enemy_stats.health = _enemy_stats.health - damage
 		$take_damage_cooldown.start()
 		can_take_damage = false
-		print("slime health = ", _enemy_stat.health)
-		emit_signal("health_loss", _enemy_stat.health)
-		if _enemy_stat.health <= 0:
+		print("slime health = ", _enemy_stats.health)
+		emit_signal("health_loss", _enemy_stats.health)
+		if _enemy_stats.health <= 0:
 			alive = false
 			#self.queue_free()
 

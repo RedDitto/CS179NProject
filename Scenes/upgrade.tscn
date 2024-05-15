@@ -1,7 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://cvefens235g58"]
+[gd_scene load_steps=10 format=3 uid="uid://cvefens235g58"]
 
 [ext_resource type="Script" path="res://scripts/upgrade.gd" id="1_ehpal"]
 [ext_resource type="Texture2D" uid="uid://bpbgntcudvcs0" path="res://Art/upgrade.png" id="1_tfgfb"]
+[ext_resource type="Script" path="res://scripts/Upgrade_UI.gd" id="4_3bd01"]
+[ext_resource type="Texture2D" uid="uid://di1m1ets0m1nw" path="res://Art/border.png" id="4_rpjsk"]
+[ext_resource type="Texture2D" uid="uid://dghp861pelaos" path="res://Art/border_pressed.png" id="5_gbxot"]
+[ext_resource type="Texture2D" uid="uid://dn8ltotevn6hg" path="res://Art/border_hover.png" id="6_tc5xk"]
+[ext_resource type="Script" path="res://scripts/upgrade_button.gd" id="7_tarpk"]
+[ext_resource type="Script" path="res://scripts/Upgrade2_Button.gd" id="8_vt6gv"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lnxnt"]
 radius = 13.0
@@ -17,5 +23,101 @@ texture = ExtResource("1_tfgfb")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_lnxnt")
 
+[node name="Upgrade_UI" type="CanvasLayer" parent="."]
+script = ExtResource("4_3bd01")
+
+[node name="Upgrade1_Button" type="TextureButton" parent="Upgrade_UI"]
+offset_left = 35.0
+offset_top = 21.0
+offset_right = 149.0
+offset_bottom = 137.0
+texture_normal = ExtResource("4_rpjsk")
+texture_pressed = ExtResource("5_gbxot")
+texture_hover = ExtResource("6_tc5xk")
+stretch_mode = 0
+script = ExtResource("7_tarpk")
+metadata/_edit_use_anchors_ = true
+
+[node name="Upgrade1" type="Label" parent="Upgrade_UI/Upgrade1_Button"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.00260417
+anchor_bottom = 0.00771605
+offset_left = 15.0
+offset_top = 16.0
+offset_right = 95.0
+offset_bottom = 39.0
+theme_override_font_sizes/font_size = 8
+text = "Upgrade 1
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Upgrade1_Description" type="RichTextLabel" parent="Upgrade_UI/Upgrade1_Button"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.000868061
+anchor_top = -0.05662
+anchor_bottom = -0.05662
+offset_left = 20.099
+offset_top = 60.5679
+offset_right = 92.099
+offset_bottom = 108.568
+theme_override_font_sizes/normal_font_size = 7
+text = "Movement Speed is increased by 10%"
+metadata/_edit_use_anchors_ = true
+
+[node name="Upgrade2_Button" type="TextureButton" parent="Upgrade_UI"]
+offset_left = 143.0
+offset_top = 21.0
+offset_right = 257.0
+offset_bottom = 137.0
+texture_normal = ExtResource("4_rpjsk")
+texture_pressed = ExtResource("5_gbxot")
+texture_hover = ExtResource("6_tc5xk")
+stretch_mode = 0
+script = ExtResource("8_vt6gv")
+metadata/_edit_use_anchors_ = true
+
+[node name="Upgrade2" type="Label" parent="Upgrade_UI/Upgrade2_Button"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.00260417
+anchor_bottom = 0.00771605
+offset_left = 15.0
+offset_top = 16.0
+offset_right = 95.0
+offset_bottom = 39.0
+theme_override_font_sizes/font_size = 8
+text = "Upgrade 1
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Upgrade2_Description" type="RichTextLabel" parent="Upgrade_UI/Upgrade2_Button"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.000868056
+anchor_top = 0.0123457
+anchor_bottom = 0.0123457
+offset_left = 21.099
+offset_top = 52.5679
+offset_right = 93.099
+offset_bottom = 100.568
+theme_override_font_sizes/normal_font_size = 7
+text = "Movement Speed is increased by 10%"
+metadata/_edit_use_anchors_ = true
+
+[connection signal="open_menu" from="." to="Upgrade_UI" method="_on_upgrade_open_menu"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="is_visible" from="Upgrade_UI" to="Upgrade_UI/Upgrade1_Button" method="_on_upgrade_ui_is_visible"]
+[connection signal="is_visible" from="Upgrade_UI" to="Upgrade_UI/Upgrade2_Button" method="_on_upgrade_ui_is_visible"]
+[connection signal="pressed" from="Upgrade_UI/Upgrade1_Button" to="Upgrade_UI/Upgrade1_Button" method="_on_button_pressed"]
+[connection signal="upgrade_chosen" from="Upgrade_UI/Upgrade1_Button" to="." method="_on_upgrade_button_upgrade_chosen"]
+[connection signal="pressed" from="Upgrade_UI/Upgrade2_Button" to="Upgrade_UI/Upgrade2_Button" method="_on_button_pressed"]
+[connection signal="upgrade_chosen" from="Upgrade_UI/Upgrade2_Button" to="." method="_on_upgrade_button_upgrade_chosen"]

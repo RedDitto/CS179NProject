@@ -4,7 +4,7 @@ signal health_change
 signal movement_upgrade
 signal attack_upgrade
 
-@export var _player_stat : Player_Stats
+var _player_stat = Global._player_stats
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -26,3 +26,7 @@ func _on_player_upgrade_gained():
 
 func _on_player_currency_gained():
 	get_node("Currency_UI")._update()
+
+
+func _on_upgrade_gain_upgrade():
+	$Upgrades_UI._update()

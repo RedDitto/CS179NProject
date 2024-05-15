@@ -11,5 +11,5 @@ func _ready():
 
 func _on_area_2d_body_entered(body):
 	if body.has_method("player"):
-		body._player_stat.currency += 10
+		body._player_stats.currency += 10
 		queue_free()
