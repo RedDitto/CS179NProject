@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://bjlx0hq4dy24v"]
+
+[ext_resource type="Script" path="res://scripts/Crosshair.gd" id="1_nieys"]
+[ext_resource type="Texture2D" uid="uid://wimxo54h2n6m" path="res://Art/crosshair2.png" id="2_m7r8c"]
+
+[node name="Crosshair" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = -7.0
+offset_right = 3.0
+offset_bottom = -7.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_nieys")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 20.0
+offset_bottom = 0.17
+texture = ExtResource("2_m7r8c")
+expand_mode = 1
+stretch_mode = 3

@@ -2,9 +2,10 @@ extends Resource
 
 class_name Player_Stats
 
-@export var max_health : int
-@export var health : int
-@export var currency : int
-@export var upgrades : Array
-@export var attack : int
-@export var speed : int
+var max_health = 1000
+var health = 1000
+var currency = 0
+var attack = 20
+var attack_speed = 1.0
+var speed = 100
+var speed_boost = 0
