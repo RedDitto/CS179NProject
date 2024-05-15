@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cxkcivj775gim"]
+[gd_scene load_steps=11 format=3 uid="uid://cxkcivj775gim"]
 
 [ext_resource type="PackedScene" uid="uid://dh7r45oh824ur" path="res://Scenes/room.tscn" id="1_5j8ie"]
 [ext_resource type="PackedScene" uid="uid://xvo8q2ctv7bt" path="res://Scenes/door.tscn" id="2_e78y2"]
@@ -7,7 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://bc7q7iwmec27j" path="res://Scenes/hud.tscn" id="4_v8ko7"]
 [ext_resource type="PackedScene" uid="uid://f4ufc1fr6op8" path="res://Scenes/enemy.tscn" id="5_ig8l6"]
 [ext_resource type="PackedScene" uid="uid://cvefens235g58" path="res://Scenes/upgrade.tscn" id="6_2rwlh"]
-[ext_resource type="PackedScene" uid="uid://dsqacigqofet" path="res://Scenes/weapon_ground.tscn" id="8_i43mo"]
+[ext_resource type="PackedScene" uid="uid://dsqacigqofet" path="res://Scenes/ranged_weapon.tscn" id="8_i43mo"]
+[ext_resource type="PackedScene" uid="uid://diqplg5blww12" path="res://Scenes/melee_weapon.tscn" id="9_sp7m3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l1wof"]
 
@@ -68,8 +69,11 @@ position = Vector2(-223, 465)
 [node name="Enemy" parent="." index="13" instance=ExtResource("5_ig8l6")]
 position = Vector2(-100, 254)
 
-[node name="Weapon" parent="." index="14" instance=ExtResource("8_i43mo")]
+[node name="gun" parent="." index="14" instance=ExtResource("8_i43mo")]
 position = Vector2(-219, 422)
+
+[node name="sword" parent="." index="15" instance=ExtResource("9_sp7m3")]
+position = Vector2(-195, 422)
 
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_player_detector_body_entered"]
 [connection signal="gain_upgrade" from="Upgrade" to="Player" method="_on_upgrade_gain_upgrade"]
@@ -79,4 +83,5 @@ position = Vector2(-219, 422)
 [connection signal="upgrade_gained" from="Player" to="HUD" method="_on_player_upgrade_gained"]
 [connection signal="attack_upgrade" from="HUD" to="Player" method="_on_hud_attack_upgrade"]
 [connection signal="movement_upgrade" from="HUD" to="Player" method="_on_hud_movement_upgrade"]
-[connection signal="picked_up_weapon" from="Weapon" to="HUD" method="_on_picked_up_weapon"]
+[connection signal="picked_up_weapon" from="gun" to="HUD" method="_on_picked_up_weapon"]
+[connection signal="picked_up_weapon" from="sword" to="HUD" method="_on_picked_up_weapon"]

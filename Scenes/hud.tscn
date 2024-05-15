@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://ghxw7s5a3p5d" path="res://Art/health_bar_progress.png" id="6_361yr"]
 [ext_resource type="Script" path="res://scripts/Health_Bar.gd" id="6_l87da"]
 [ext_resource type="Texture2D" uid="uid://d1d2agyuvluuh" path="res://Art/health_bar_over.png" id="7_s5syh"]
-[ext_resource type="Script" path="res://Scenes/WeaponDisplay.gd" id="10_c6meu"]
+[ext_resource type="Script" path="res://scripts/WeaponDisplay.gd" id="10_c6meu"]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_jnqk4")
