@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dejwa6jil8g55"]
+[gd_scene load_steps=11 format=3 uid="uid://dejwa6jil8g55"]
 
 [ext_resource type="PackedScene" uid="uid://dh7r45oh824ur" path="res://Scenes/room.tscn" id="1_0bkqh"]
 [ext_resource type="PackedScene" uid="uid://8nccul0njthp" path="res://Scenes/player.tscn" id="2_kx6gi"]
@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://bc7q7iwmec27j" path="res://Scenes/hud.tscn" id="5_gy34m"]
 [ext_resource type="PackedScene" uid="uid://f4ufc1fr6op8" path="res://Scenes/enemy.tscn" id="6_dcxgi"]
 [ext_resource type="PackedScene" uid="uid://d58vtcppf45o" path="res://Scenes/oscillating_fan.tscn" id="7_x77hh"]
+[ext_resource type="PackedScene" uid="uid://diqplg5blww12" path="res://Scenes/melee_weapon.tscn" id="8_b1u56"]
+[ext_resource type="PackedScene" uid="uid://dsqacigqofet" path="res://Scenes/ranged_weapon.tscn" id="9_ohvqi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o43sk"]
 size = Vector2(15.5, 15)
@@ -59,4 +61,12 @@ collision_mask = 7
 position = Vector2(274, 108)
 target = NodePath("../Player")
 
+[node name="weapon_ground" parent="." index="12" instance=ExtResource("8_b1u56")]
+position = Vector2(506, 234)
+
+[node name="weapon_ground2" parent="." index="13" instance=ExtResource("9_ohvqi")]
+position = Vector2(506, 256)
+
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_player_detector_body_entered"]
+[connection signal="picked_up_weapon" from="weapon_ground" to="HUD" method="_on_picked_up_weapon"]
+[connection signal="picked_up_weapon" from="weapon_ground2" to="HUD" method="_on_picked_up_weapon"]
