@@ -1,13 +1,13 @@
 [gd_scene load_steps=4 format=3 uid="uid://di6c2x2t350s3"]
 
-[ext_resource type="Script" path="res://scripts/currency.gd" id="1_enakk"]
+[ext_resource type="Script" path="res://scripts/Currency.gd" id="1_fdf6f"]
 [ext_resource type="Texture2D" uid="uid://c4la3tw4onko" path="res://Art/currency.png" id="1_he42g"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cmswv"]
 radius = 16.6666
 
 [node name="Currency" type="Node2D"]
-script = ExtResource("1_enakk")
+script = ExtResource("1_fdf6f")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_he42g")
