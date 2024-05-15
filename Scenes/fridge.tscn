@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=3 uid="uid://cwai0pk8uh5y1"]
 
 [ext_resource type="Script" path="res://scripts/fridge.gd" id="1_0x0k2"]
-[ext_resource type="Texture2D" uid="uid://bkphj4ydai2l2" path="res://Art/Modern_Interiors_RPG_Maker_Version/RPG_MAKER_MV/Animated_Objects/!$Kitchen_fridge.png" id="1_24o3a"]
+[ext_resource type="Texture2D" uid="uid://bkphj4ydai2l2" path="res://Art/Animated_Objects/!$Kitchen_fridge.png" id="1_24o3a"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_efts2"]
 atlas = ExtResource("1_24o3a")
