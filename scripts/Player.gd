@@ -252,13 +252,11 @@ func _on_melee_attack_body_entered(body):
 		body.deal_with_damage(_player_stats.attack)
 		print("Hit!!!")
 
-
 func _on_melee_attack_body_exited(body):
 	if body.has_method("enemy"):
 		melee_range = false
 
-
-func _on_upgrade_gain_upgrade(choice):
+func _on_upgrade_gain(choice):
 	if (choice == 0 and _player_upgrades.upgrades[0][1] < 4):
 		_player_stats.speed_boost += _player_upgrades.upgrades[0][2]
 		print(_player_upgrades.upgrades[0][0])
@@ -271,8 +269,4 @@ func _on_upgrade_gain_upgrade(choice):
 		_player_stats.attack += _player_upgrades.upgrades[2][2]
 		print(_player_upgrades.upgrades[2][0])
 		print("Attack Damage: " + str(_player_stats.attack))
-
-
-func _on_currency_gain_currency(amount):
-	_player_stats.currency += amount
-	emit_signal("currency_gained")
+	emit_signal("upgrade_gained")

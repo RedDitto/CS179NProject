@@ -4,6 +4,8 @@ signal health_loss
 
 @export var _enemy_stats : Enemy_Stats
 
+var currency_drop = preload("res://Scenes/currency.tscn")
+
 var player_chase = false
 var player = null
 var player_in_attack_zone = false
@@ -36,6 +38,10 @@ func _physics_process(delta):
 			death_finished = true
 			$AnimatedSprite2D.play("death")
 			$death_cooldown.start()
+			var currency = currency_drop.instantiate()
+			get_parent().add_child(currency)
+			currency.position = self.position
+			
 			
 func _on_detection_area_body_entered(body):
 	player = body

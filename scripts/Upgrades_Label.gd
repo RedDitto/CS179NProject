@@ -1,13 +1,11 @@
 extends Label
 
-signal movement_upgrade
-signal attack_upgrade
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
 
 func _update():
+	print("Updating Upgrade UI")
 	text = "Upgrades:"
 	for i in Global._player_upgrades.upgrades:
 		if i[1] > 0:

@@ -6,12 +6,10 @@ signal upgrade_chosen
 func _ready():
 	self.disabled = true
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if Input.is_action_pressed("Use"):
 		get_tree().paused = false
-
 
 func _on_upgrade_ui_is_visible():
 	self.disabled = false

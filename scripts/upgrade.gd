@@ -13,11 +13,6 @@ func _ready():
 	$Sprite2D.visible = true
 	$Upgrade_UI.visible = false
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-
 func _on_area_2d_body_entered(body):
 	if body.has_method("player"):
 		player_in_area = true
