@@ -4,9 +4,3 @@
 
 [resource]
 script = ExtResource("1_h2bt0")
-max_health = 1000
-health = 1000
-currency = 0
-upgrades = [["Movement Speed", 0], ["Attack Speed", 0]]
-attack = 40
-speed = 100

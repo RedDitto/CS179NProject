@@ -1,18 +1,11 @@
-[gd_scene load_steps=27 format=3 uid="uid://f4ufc1fr6op8"]
+[gd_scene load_steps=26 format=3 uid="uid://f4ufc1fr6op8"]
 
 [ext_resource type="Texture2D" uid="uid://22chh13e4h0i" path="res://Art/mystic_woods_free_2.1/sprites/characters/slime.png" id="1_6j2vw"]
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="1_cccma"]
-[ext_resource type="Script" path="res://scripts/Enemy_Stats.gd" id="2_rk1au"]
+[ext_resource type="Resource" uid="uid://2ep76dgo4kd8" path="res://scripts/Enemy_Stats.tres" id="2_pv0fh"]
 [ext_resource type="Texture2D" uid="uid://ghxw7s5a3p5d" path="res://Art/health_bar_progress.png" id="3_akq01"]
 [ext_resource type="Texture2D" uid="uid://d1d2agyuvluuh" path="res://Art/health_bar_over.png" id="4_gxqac"]
 [ext_resource type="Script" path="res://scripts/enemy_health_bar.gd" id="5_xnjpd"]
-
-[sub_resource type="Resource" id="Resource_32c1k"]
-script = ExtResource("2_rk1au")
-max_health = 100
-health = 100
-attack = 10
-speed = 40
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xcc8w"]
 atlas = ExtResource("1_6j2vw")
@@ -148,7 +141,7 @@ radius = 9.0
 
 [node name="Enemy" type="CharacterBody2D"]
 script = ExtResource("1_cccma")
-_enemy_stat = SubResource("Resource_32c1k")
+_enemy_stats = ExtResource("2_pv0fh")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_xbnsb")
