@@ -5,7 +5,8 @@ signal damage_enemy
 signal upgrade_gained
 signal currency_gained
 
-@export var _player_stat : Player_Stats
+var _player_stats = Global._player_stats
+var _player_upgrades = Global._player_upgrades
 
 const PROJECTILE_PATH = preload('res://Scenes/Projectile.tscn')
 var DashDirection = Vector2.ZERO
@@ -33,20 +34,21 @@ func _ready():
 	$Melee_Attack/Melee_Collision.disabled = true
 
 func _physics_process(delta):
-	player_movement(delta)
+	player_movement()
 	enemy_attack()
-	attack()
-	if _player_stat.health <= 0:
-		player_alive = false #where you would add go back to menu / respawn
-		_player_stat.health = 0
-		print("Y O U   D I E D")
-		self.queue_free()
-	
+	_mouse_direction()
 	#projectile shooting
-	if Input.is_action_just_pressed("shoot_projectile"):
+	if Input.is_action_just_pressed("shoot_projectile") and !Global._menu_open:
 		shoot()
+	elif Input.is_action_just_pressed("attack") and !Global._menu_open:
+		attack()
 	$ProjectileDirection.look_at(get_global_mouse_position())
 	
+	if _player_stats.health <= 0:
+		player_alive = false #where you would add go back to menu / respawn
+		_player_stats.health = 0
+		print("Y O U   D I E D")
+		self.queue_free()
 
 func player_movement(delta):
 	if Input.is_action_just_pressed("dash") and can_dash:
@@ -91,6 +93,7 @@ func player_movement(delta):
 		play_anim()
 	
 	move_and_slide()
+
 	
 func play_anim(): 
 	var anim = $AnimatedSprite2D
@@ -141,11 +144,11 @@ func _on_player_hitbox_body_exited(body):
 
 func enemy_attack():
 	if enemy_in_attack_range and enemy_attack_cooldown == true:
-		_player_stat.health = _player_stat.health - 20
+		_player_stats.health = _player_stats.health - 20
 		enemy_attack_cooldown = false
 		$attack_cooldown.start()
 		emit_signal("health_loss")
-		print(_player_stat.health)
+		print(_player_stats.health)
 	
 
 func _on_attack_cooldown_timeout():
@@ -157,28 +160,27 @@ func player():
 func attack():
 	var dir = current_direction
 	
-	if Input.is_action_just_pressed("attack"):
-		Global.player_current_attack = true
-		attack_in_progress = true
-		if dir == "right":
-			$AnimatedSprite2D.flip_h = false
-			$AnimatedSprite2D.play("side_attack")
-			$deal_attack_timer.start()
-		if dir == "left":
-			$AnimatedSprite2D.flip_h = true
-			$AnimatedSprite2D.play("side_attack")
-			$deal_attack_timer.start()
-		if dir == "down":
-			$AnimatedSprite2D.play("front_attack")
-			$deal_attack_timer.start()
-		if dir == "up":
-			$AnimatedSprite2D.play("back_attack")
-			$deal_attack_timer.start()
-			
-		$Melee_Attack/Melee_Collision.disabled = false
+	Global.player_current_attack = true
+	attack_in_progress = true
+	if dir == "right":
+		$AnimatedSprite2D.flip_h = false
+		$AnimatedSprite2D.play("side_attack")
+		$deal_attack_timer.start()
+	if dir == "left":
+		$AnimatedSprite2D.flip_h = true
+		$AnimatedSprite2D.play("side_attack")
+		$deal_attack_timer.start()
+	if dir == "down":
+		$AnimatedSprite2D.play("front_attack")
+		$deal_attack_timer.start()
+	if dir == "up":
+		$AnimatedSprite2D.play("back_attack")
+		$deal_attack_timer.start()
 		
-		#if melee_range == true:
-			#emit_signal("damage_enemy", _player_stat.attack)
+	$Melee_Attack/Melee_Collision.disabled = false
+	
+	#if melee_range == true:
+		#emit_signal("damage_enemy", _player_stat.attack)
 
 
 func _on_deal_attack_timer_timeout():
@@ -223,62 +225,63 @@ func _on_hud_attack_upgrade():
 	pass # Replace with function body.
 	
 
-func _input(event): # Gets player direction based on mouse when there is mouse movement and plays idle animations
-	if event is InputEventMouseMotion:
-		player_mouse_direction = (global_position - get_global_mouse_position())
-		player_mouse_direction.x *= -1
-		
-		var anim = $AnimatedSprite2D
-		
-		if player_mouse_direction.y > 0:
-			if player_mouse_direction.x / 2 * -1 > player_mouse_direction.y - 10:
-				current_direction = "left"
-				idle = "side_idle"
-				anim.flip_h = true
-			elif player_mouse_direction.x / 2 > player_mouse_direction.y - 10:
-				current_direction = "right"
-				idle = "side_idle"
-				anim.flip_h = false
-			else:
-				current_direction = "up"
-				idle = "back_idle"
-		elif player_mouse_direction.y < 0:
-			if player_mouse_direction.x / 2 < player_mouse_direction.y + 0:
-				current_direction = "left"
-				idle = "side_idle"
-				anim.flip_h = true
-			elif player_mouse_direction.x / 2 * -1 < player_mouse_direction.y + 0:
-				current_direction = "right"
-				idle = "side_idle"
-				anim.flip_h = false
-			else:
-				current_direction = "down"
-				idle = "front_idle"
-					
-		if moving == false and attack_in_progress == false:
-			anim.play(idle)
+func _mouse_direction(): # Gets player direction based on mouse when there is mouse movement and plays idle animations
+	player_mouse_direction = (global_position - get_global_mouse_position())
+	player_mouse_direction.x *= -1
+	
+	var anim = $AnimatedSprite2D
+	
+	if player_mouse_direction.y > 0:
+		if player_mouse_direction.x / 2 * -1 > player_mouse_direction.y - 10:
+			current_direction = "left"
+			idle = "side_idle"
+			anim.flip_h = true
+		elif player_mouse_direction.x / 2 > player_mouse_direction.y - 10:
+			current_direction = "right"
+			idle = "side_idle"
+			anim.flip_h = false
+		else:
+			current_direction = "up"
+			idle = "back_idle"
+	elif player_mouse_direction.y < 0:
+		if player_mouse_direction.x / 2 < player_mouse_direction.y + 0:
+			current_direction = "left"
+			idle = "side_idle"
+			anim.flip_h = true
+		elif player_mouse_direction.x / 2 * -1 < player_mouse_direction.y + 0:
+			current_direction = "right"
+			idle = "side_idle"
+			anim.flip_h = false
+		else:
+			current_direction = "down"
+			idle = "front_idle"
+				
+	if moving == false and attack_in_progress == false:
+		anim.play(idle)
 
 func _on_melee_attack_body_entered(body):
 	if body.has_method("enemy"):
 		melee_range = true
-		body.deal_with_damage(_player_stat.attack)
+		body.deal_with_damage(_player_stats.attack)
 		print("Hit!!!")
-
 
 func _on_melee_attack_body_exited(body):
 	if body.has_method("enemy"):
 		melee_range = false
 
-
-func _on_upgrade_gain_upgrade(random_number):
-	if (random_number == 0 and _player_stat.upgrades[0][1] < 4):
-		_player_stat.upgrades[0][1] += 1
-		speed_boost += 25
-		print("Gained Movement Speed Boost.")
-	elif (random_number == 1 and _player_stat.upgrades[1][1] < 4):
-		_player_stat.upgrades[1][1] += 1
-		print("Gained Attack Speed Boost.")
-	
+func _on_upgrade_gain(choice):
+	if (choice == 0 and _player_upgrades.upgrades[0][1] < 4):
+		_player_stats.speed_boost += _player_upgrades.upgrades[0][2]
+		print(_player_upgrades.upgrades[0][0])
+		print("Movement Speed: " + str(_player_stats.speed + _player_stats.speed_boost))
+	elif (choice == 1 and _player_upgrades.upgrades[1][1] < 4):
+		_player_stats.attack_speed += _player_upgrades.upgrades[1][2] 
+		print(_player_upgrades.upgrades[1][0])
+		print("Attack Damage: " + str(_player_stats.attack_speed))
+	elif (choice == 2 and _player_upgrades.upgrades[2][1] < 4):
+		_player_stats.attack += _player_upgrades.upgrades[2][2]
+		print(_player_upgrades.upgrades[2][0])
+		print("Attack Damage: " + str(_player_stats.attack))
 	emit_signal("upgrade_gained")
 
 
@@ -293,3 +296,4 @@ func _on_dash_timer_timeout():
 
 func _on_dash_again_timer_timeout():
 	can_dash = true
+

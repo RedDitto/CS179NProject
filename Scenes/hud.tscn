@@ -1,37 +1,37 @@
-[gd_scene load_steps=9 format=3 uid="uid://bc7q7iwmec27j"]
+[gd_scene load_steps=10 format=3 uid="uid://bc7q7iwmec27j"]
 
 [ext_resource type="Script" path="res://scripts/hud.gd" id="1_jnqk4"]
-[ext_resource type="Resource" uid="uid://ch088lm0j46l" path="res://scripts/Player_Stats.tres" id="2_dnuhv"]
-[ext_resource type="Script" path="res://scripts/Currency_UI.gd" id="3_en6bc"]
-[ext_resource type="Script" path="res://scripts/Upgrades_UI.gd" id="4_r6fcf"]
+[ext_resource type="Script" path="res://scripts/Currency_Label.gd" id="2_wbevc"]
+[ext_resource type="Script" path="res://scripts/Upgrades_Label.gd" id="3_805f5"]
 [ext_resource type="Script" path="res://scripts/HP.gd" id="5_trqi7"]
 [ext_resource type="Texture2D" uid="uid://ghxw7s5a3p5d" path="res://Art/health_bar_progress.png" id="6_361yr"]
 [ext_resource type="Script" path="res://scripts/Health_Bar.gd" id="6_l87da"]
 [ext_resource type="Texture2D" uid="uid://d1d2agyuvluuh" path="res://Art/health_bar_over.png" id="7_s5syh"]
+[ext_resource type="Script" path="res://scripts/FPS.gd" id="8_gk8av"]
+[ext_resource type="Script" path="res://scripts/WeaponDisplay.gd" id="10_c6meu"]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_jnqk4")
-_player_stat = ExtResource("2_dnuhv")
 
-[node name="Currency_UI" type="Label" parent="."]
+[node name="Currency_Label" type="Label" parent="."]
 offset_left = 4.0
 offset_top = 2.0
 offset_right = 50.0
 offset_bottom = 14.0
 theme_override_font_sizes/font_size = 6
 text = "Currency: 0"
-script = ExtResource("3_en6bc")
+script = ExtResource("2_wbevc")
 
-[node name="Upgrades_UI" type="Label" parent="."]
+[node name="Upgrades_Label" type="Label" parent="."]
 offset_left = 4.0
 offset_top = 11.0
 offset_right = 44.0
 offset_bottom = 23.0
 theme_override_font_sizes/font_size = 6
 text = "Upgrades:"
-script = ExtResource("4_r6fcf")
+script = ExtResource("3_805f5")
 
-[node name="HP_UI" type="Label" parent="."]
+[node name="HP_Label" type="Label" parent="."]
 offset_left = 5.0
 offset_top = 147.0
 offset_right = 43.0
@@ -59,9 +59,21 @@ tint_over = Color(0.121569, 0.121569, 0.121569, 1)
 tint_progress = Color(0.666667, 0, 0, 1)
 script = ExtResource("6_l87da")
 
-[node name="Currency_Test" type="Timer" parent="."]
-wait_time = 2.0
-autostart = true
+[node name="FPS" type="Label" parent="."]
+offset_left = 141.0
+offset_top = 1.0
+offset_right = 157.0
+offset_bottom = 10.0
+theme_override_font_sizes/font_size = 4
+text = "FPS: 60"
+script = ExtResource("8_gk8av")
+
+[node name="WeaponDisplay" type="TextureRect" parent="."]
+offset_left = 243.0
+offset_top = 140.0
+offset_right = 278.0
+offset_bottom = 161.0
+script = ExtResource("10_c6meu")
 
 [connection signal="health_change" from="." to="HP_UI" method="_on_hud_health_change"]
 [connection signal="health_change" from="." to="Health Bar" method="_on_hud_health_change"]

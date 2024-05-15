@@ -1,10 +1,9 @@
-[gd_scene load_steps=63 format=3 uid="uid://8nccul0njthp"]
+[gd_scene load_steps=62 format=3 uid="uid://8nccul0njthp"]
 
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_7vfew"]
 [ext_resource type="Texture2D" uid="uid://dlbr8ocq67w0n" path="res://Art/mystic_woods_free_2.1/sprites/characters/player.png" id="2_4gu8u"]
-[ext_resource type="Resource" uid="uid://ch088lm0j46l" path="res://scripts/Player_Stats.tres" id="2_w3nkv"]
 [ext_resource type="Script" path="res://scripts/Melee_Attack.gd" id="4_4bcrn"]
-[ext_resource type="Texture2D" uid="uid://c83pj1d28miho" path="res://Art/arrow.png" id="5_o5w4x"]
+[ext_resource type="Texture2D" uid="uid://bocgji2ksdvi7" path="res://Art/arrow3.png" id="4_ggp2n"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wu43k"]
 atlas = ExtResource("2_4gu8u")
@@ -432,9 +431,8 @@ radius = 11.0454
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 y_sort_enabled = true
-collision_layer = 3
+collision_layer = 4
 script = ExtResource("1_7vfew")
-_player_stat = ExtResource("2_w3nkv")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_uh3uc")
@@ -465,10 +463,10 @@ debug_color = Color(0, 0.6, 0.701961, 0.627451)
 
 [node name="Arrow" type="TextureRect" parent="Melee_Attack"]
 offset_left = -8.0
-offset_top = 3.0
+offset_top = 1.0
 offset_right = 8.0
-offset_bottom = 17.0
-texture = ExtResource("5_o5w4x")
+offset_bottom = 15.0
+texture = ExtResource("4_ggp2n")
 expand_mode = 3
 flip_v = true
 metadata/_edit_use_anchors_ = true
