@@ -14,7 +14,7 @@ func _on_player_currency_gained():
 	$Currency_Label._update()
 
 func _on_player_upgrade_gained():
-  $Upgrades_Label._update()
+	$Upgrades_Label._update()
 
 func _on_picked_up_weapon(texture):
 	get_node("WeaponDisplay").texture = ResourceLoader.load(texture.get_load_path())

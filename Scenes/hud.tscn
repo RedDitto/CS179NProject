@@ -16,35 +16,35 @@ script = ExtResource("1_jnqk4")
 [node name="Currency_Label" type="Label" parent="."]
 offset_left = 4.0
 offset_top = 2.0
-offset_right = 50.0
-offset_bottom = 14.0
-theme_override_font_sizes/font_size = 6
+offset_right = 59.0
+offset_bottom = 16.0
+theme_override_font_sizes/font_size = 10
 text = "Currency: 0"
 script = ExtResource("2_wbevc")
 
 [node name="Upgrades_Label" type="Label" parent="."]
 offset_left = 4.0
-offset_top = 11.0
-offset_right = 44.0
-offset_bottom = 23.0
-theme_override_font_sizes/font_size = 6
+offset_top = 16.0
+offset_right = 53.0
+offset_bottom = 30.0
+theme_override_font_sizes/font_size = 10
 text = "Upgrades:"
 script = ExtResource("3_805f5")
 
 [node name="HP_Label" type="Label" parent="."]
-offset_left = 5.0
-offset_top = 147.0
-offset_right = 43.0
-offset_bottom = 161.0
-theme_override_font_sizes/font_size = 9
+offset_left = 4.0
+offset_top = 305.0
+offset_right = 46.0
+offset_bottom = 319.0
+theme_override_font_sizes/font_size = 10
 text = "HP: 1000"
 script = ExtResource("5_trqi7")
 
 [node name="Health Bar" type="TextureProgressBar" parent="."]
-offset_left = 44.0
-offset_top = 148.0
-offset_right = 134.0
-offset_bottom = 159.0
+offset_left = 47.0
+offset_top = 305.0
+offset_right = 242.0
+offset_bottom = 321.0
 value = 100.0
 nine_patch_stretch = true
 stretch_margin_left = 3
@@ -60,23 +60,17 @@ tint_progress = Color(0.666667, 0, 0, 1)
 script = ExtResource("6_l87da")
 
 [node name="FPS" type="Label" parent="."]
-offset_left = 141.0
+offset_left = 538.0
 offset_top = 1.0
-offset_right = 157.0
-offset_bottom = 10.0
-theme_override_font_sizes/font_size = 4
+offset_right = 579.0
+offset_bottom = 18.0
+theme_override_font_sizes/font_size = 10
 text = "FPS: 60"
 script = ExtResource("8_gk8av")
 
 [node name="WeaponDisplay" type="TextureRect" parent="."]
-offset_left = 243.0
-offset_top = 140.0
-offset_right = 278.0
-offset_bottom = 161.0
+offset_left = 530.0
+offset_top = 300.0
+offset_right = 565.0
+offset_bottom = 321.0
 script = ExtResource("10_c6meu")
-
-[connection signal="health_change" from="." to="HP_UI" method="_on_hud_health_change"]
-[connection signal="health_change" from="." to="Health Bar" method="_on_hud_health_change"]
-[connection signal="attack_upgrade" from="Upgrades_UI" to="." method="_on_upgrades_attack_upgrade"]
-[connection signal="movement_upgrade" from="Upgrades_UI" to="." method="_on_upgrades_movement_upgrade"]
-[connection signal="timeout" from="Currency_Test" to="Currency_UI" method="_on_currency_test_timeout"]

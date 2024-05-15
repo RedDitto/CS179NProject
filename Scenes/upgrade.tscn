@@ -19,6 +19,7 @@ script = ExtResource("1_ehpal")
 texture = ExtResource("1_tfgfb")
 
 [node name="Area2D" type="Area2D" parent="."]
+collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_lnxnt")
@@ -27,10 +28,10 @@ shape = SubResource("CircleShape2D_lnxnt")
 script = ExtResource("4_3bd01")
 
 [node name="Upgrade1_Button" type="TextureButton" parent="Upgrade_UI"]
-offset_left = 35.0
-offset_top = 21.0
-offset_right = 149.0
-offset_bottom = 137.0
+offset_left = 30.0
+offset_top = 10.0
+offset_right = 280.0
+offset_bottom = 310.0
 texture_normal = ExtResource("4_rpjsk")
 texture_pressed = ExtResource("5_gbxot")
 texture_hover = ExtResource("6_tc5xk")
@@ -41,13 +42,15 @@ metadata/_edit_use_anchors_ = true
 [node name="Upgrade1" type="Label" parent="Upgrade_UI/Upgrade1_Button"]
 layout_mode = 1
 anchors_preset = -1
-anchor_right = 0.00260417
-anchor_bottom = 0.00771605
+anchor_left = 0.06
+anchor_top = 0.04
+anchor_right = 0.472
+anchor_bottom = 0.313333
 offset_left = 15.0
-offset_top = 16.0
+offset_top = 18.0
 offset_right = 95.0
-offset_bottom = 39.0
-theme_override_font_sizes/font_size = 8
+offset_bottom = 41.0
+theme_override_font_sizes/font_size = 25
 text = "Upgrade 1
 "
 horizontal_alignment = 1
@@ -58,22 +61,23 @@ metadata/_edit_use_anchors_ = true
 [node name="Upgrade1_Description" type="RichTextLabel" parent="Upgrade_UI/Upgrade1_Button"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = -0.000868061
-anchor_top = -0.05662
-anchor_bottom = -0.05662
+anchor_left = 0.079604
+anchor_top = 0.29144
+anchor_right = 0.475604
+anchor_bottom = 0.468107
 offset_left = 20.099
-offset_top = 60.5679
+offset_top = 62.5679
 offset_right = 92.099
-offset_bottom = 108.568
-theme_override_font_sizes/normal_font_size = 7
+offset_bottom = 110.568
+theme_override_font_sizes/normal_font_size = 20
 text = "Movement Speed is increased by 10%"
 metadata/_edit_use_anchors_ = true
 
 [node name="Upgrade2_Button" type="TextureButton" parent="Upgrade_UI"]
-offset_left = 143.0
-offset_top = 21.0
-offset_right = 257.0
-offset_bottom = 137.0
+offset_left = 300.0
+offset_top = 10.0
+offset_right = 550.0
+offset_bottom = 310.0
 texture_normal = ExtResource("4_rpjsk")
 texture_pressed = ExtResource("5_gbxot")
 texture_hover = ExtResource("6_tc5xk")
@@ -84,13 +88,13 @@ metadata/_edit_use_anchors_ = true
 [node name="Upgrade2" type="Label" parent="Upgrade_UI/Upgrade2_Button"]
 layout_mode = 1
 anchors_preset = -1
-anchor_right = 0.00260417
-anchor_bottom = 0.00771605
-offset_left = 15.0
-offset_top = 16.0
-offset_right = 95.0
-offset_bottom = 39.0
-theme_override_font_sizes/font_size = 8
+anchor_right = 0.312
+anchor_bottom = 0.0510494
+offset_left = 45.0
+offset_top = 30.0
+offset_right = 125.0
+offset_bottom = 100.685
+theme_override_font_sizes/font_size = 25
 text = "Upgrade 1
 "
 horizontal_alignment = 1
@@ -101,14 +105,15 @@ metadata/_edit_use_anchors_ = true
 [node name="Upgrade2_Description" type="RichTextLabel" parent="Upgrade_UI/Upgrade2_Button"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = -0.000868056
-anchor_top = 0.0123457
-anchor_bottom = 0.0123457
+anchor_left = 0.039604
+anchor_top = 0.31144
+anchor_right = 0.499604
+anchor_bottom = 0.57144
 offset_left = 21.099
-offset_top = 52.5679
+offset_top = 56.5679
 offset_right = 93.099
-offset_bottom = 100.568
-theme_override_font_sizes/normal_font_size = 7
+offset_bottom = 104.568
+theme_override_font_sizes/normal_font_size = 20
 text = "Movement Speed is increased by 10%"
 metadata/_edit_use_anchors_ = true
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cxkcivj775gim"]
+[gd_scene load_steps=12 format=3 uid="uid://cxkcivj775gim"]
 
 [ext_resource type="PackedScene" uid="uid://dh7r45oh824ur" path="res://Scenes/room.tscn" id="1_5j8ie"]
 [ext_resource type="PackedScene" uid="uid://xvo8q2ctv7bt" path="res://Scenes/door.tscn" id="2_e78y2"]
@@ -66,13 +66,13 @@ position = Vector2(-223, 465)
 [node name="Enemy" parent="." index="13" instance=ExtResource("5_ig8l6")]
 position = Vector2(-100, 254)
 
-[node name="Crosshair" parent="." index="14" instance=ExtResource("8_hwgwm")]
-
 [node name="gun" parent="." index="14" instance=ExtResource("8_i43mo")]
 position = Vector2(-219, 422)
 
 [node name="sword" parent="." index="15" instance=ExtResource("9_sp7m3")]
 position = Vector2(-195, 422)
+
+[node name="Crosshair" parent="." index="16" instance=ExtResource("8_hwgwm")]
 
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_player_detector_body_entered"]
 [connection signal="gain_upgrade" from="Upgrade" to="Player" method="_on_upgrade_gain"]

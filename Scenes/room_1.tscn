@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dejwa6jil8g55"]
+[gd_scene load_steps=13 format=3 uid="uid://dejwa6jil8g55"]
 
 [ext_resource type="PackedScene" uid="uid://dh7r45oh824ur" path="res://Scenes/room.tscn" id="1_0bkqh"]
 [ext_resource type="PackedScene" uid="uid://8nccul0njthp" path="res://Scenes/player.tscn" id="2_kx6gi"]
@@ -9,6 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://d58vtcppf45o" path="res://Scenes/oscillating_fan.tscn" id="7_x77hh"]
 [ext_resource type="PackedScene" uid="uid://diqplg5blww12" path="res://Scenes/melee_weapon.tscn" id="8_b1u56"]
 [ext_resource type="PackedScene" uid="uid://dsqacigqofet" path="res://Scenes/ranged_weapon.tscn" id="9_ohvqi"]
+[ext_resource type="PackedScene" uid="uid://cvefens235g58" path="res://Scenes/upgrade.tscn" id="10_1itfp"]
+[ext_resource type="PackedScene" uid="uid://bjlx0hq4dy24v" path="res://Scenes/crosshair.tscn" id="11_culhw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o43sk"]
 size = Vector2(15.5, 15)
@@ -67,6 +69,14 @@ position = Vector2(506, 234)
 [node name="weapon_ground2" parent="." index="13" instance=ExtResource("9_ohvqi")]
 position = Vector2(506, 256)
 
+[node name="Upgrade" parent="." index="14" instance=ExtResource("10_1itfp")]
+position = Vector2(505, 219)
+
+[node name="Crosshair" parent="." index="15" instance=ExtResource("11_culhw")]
+
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_player_detector_body_entered"]
+[connection signal="health_loss" from="Player" to="HUD" method="_on_player_health_loss"]
+[connection signal="upgrade_gained" from="Player" to="HUD" method="_on_player_upgrade_gained"]
 [connection signal="picked_up_weapon" from="weapon_ground" to="HUD" method="_on_picked_up_weapon"]
 [connection signal="picked_up_weapon" from="weapon_ground2" to="HUD" method="_on_picked_up_weapon"]
+[connection signal="gain_upgrade" from="Upgrade" to="Player" method="_on_upgrade_gain"]
