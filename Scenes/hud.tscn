@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bc7q7iwmec27j"]
+[gd_scene load_steps=10 format=3 uid="uid://bc7q7iwmec27j"]
 
 [ext_resource type="Script" path="res://scripts/hud.gd" id="1_jnqk4"]
 [ext_resource type="Script" path="res://scripts/Currency_Label.gd" id="2_wbevc"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://scripts/Health_Bar.gd" id="6_l87da"]
 [ext_resource type="Texture2D" uid="uid://d1d2agyuvluuh" path="res://Art/health_bar_over.png" id="7_s5syh"]
 [ext_resource type="Script" path="res://scripts/FPS.gd" id="8_gk8av"]
+[ext_resource type="Script" path="res://scripts/WeaponDisplay.gd" id="10_c6meu"]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_jnqk4")
@@ -66,3 +67,16 @@ offset_bottom = 10.0
 theme_override_font_sizes/font_size = 4
 text = "FPS: 60"
 script = ExtResource("8_gk8av")
+
+[node name="WeaponDisplay" type="TextureRect" parent="."]
+offset_left = 243.0
+offset_top = 140.0
+offset_right = 278.0
+offset_bottom = 161.0
+script = ExtResource("10_c6meu")
+
+[connection signal="health_change" from="." to="HP_UI" method="_on_hud_health_change"]
+[connection signal="health_change" from="." to="Health Bar" method="_on_hud_health_change"]
+[connection signal="attack_upgrade" from="Upgrades_UI" to="." method="_on_upgrades_attack_upgrade"]
+[connection signal="movement_upgrade" from="Upgrades_UI" to="." method="_on_upgrades_movement_upgrade"]
+[connection signal="timeout" from="Currency_Test" to="Currency_UI" method="_on_currency_test_timeout"]
