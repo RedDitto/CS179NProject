@@ -432,7 +432,7 @@ radius = 11.0454
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 y_sort_enabled = true
-collision_layer = 3
+collision_layer = 4
 script = ExtResource("1_7vfew")
 _player_stat = ExtResource("2_w3nkv")
 
