@@ -8,6 +8,9 @@ var can_take_damage = true
 var alive = true
 var death_finished = false
 
+@onready var health_bar = $Health_Bar
+
+
 signal health_loss
 
 @export var _enemy_stats : Enemy_Stats
@@ -18,6 +21,7 @@ signal health_loss
 
 func _ready():
 	call_deferred("seeker_setup")
+	health_bar.visible = false
 	
 func seeker_setup():
 	await get_tree().physics_frame
@@ -60,6 +64,7 @@ func _on_detection_area_body_entered(body):
 		#print("FAN DETECTS PLAYER")
 		player = body
 		player_chase = true
+		health_bar.visible = true
 
 func _on_detection_area_body_exited(body):
 	#if body.is_in_group("Player"):

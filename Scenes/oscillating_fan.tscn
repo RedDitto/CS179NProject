@@ -158,9 +158,9 @@ wait_time = 0.5
 
 [node name="Health_Bar" type="TextureProgressBar" parent="."]
 offset_left = -10.0
-offset_top = -22.0
+offset_top = -31.0
 offset_right = 10.0
-offset_bottom = -16.0
+offset_bottom = -25.0
 nine_patch_stretch = true
 stretch_margin_left = 2
 stretch_margin_top = 2

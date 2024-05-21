@@ -13,3 +13,7 @@ func _on_oscillating_fan_health_loss(health):
 
 func _on_enemy_health_loss(health):
 	value = health
+
+
+func _on_microwave_health_loss(health):
+	value = health

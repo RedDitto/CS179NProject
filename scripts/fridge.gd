@@ -13,6 +13,7 @@ signal health_loss
 
 @export var _enemy_stats : Enemy_Stats
 
+@onready var health_bar = $Health_Bar
 
 @export var target: Node2D = null
 
@@ -20,7 +21,7 @@ signal health_loss
 
 func _ready():
 	call_deferred("seeker_setup")
-	
+	health_bar.visible = false
 func seeker_setup():
 	await get_tree().physics_frame
 	if target:
@@ -58,6 +59,7 @@ func _on_detection_area_body_entered(body):
 	if body.is_in_group("Player"):
 		player = body
 		player_chase = true
+		health_bar.visible = true
 		
 
 
