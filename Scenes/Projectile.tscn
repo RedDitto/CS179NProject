@@ -3,7 +3,6 @@
 [ext_resource type="Script" path="res://scripts/Projectile.gd" id="1_rr7co"]
 [ext_resource type="Texture2D" uid="uid://dwfne001rqa60" path="res://Art/icon.svg" id="2_ct0qs"]
 
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_336he"]
 
 [node name="Projectile" type="CharacterBody2D"]
@@ -15,12 +14,12 @@ script = ExtResource("1_rr7co")
 scale = Vector2(0.025, 0.025)
 texture = ExtResource("2_ct0qs")
 
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(0.2, 0.2)
 shape = SubResource("CircleShape2D_336he")
 
 [node name="Area2D" type="Area2D" parent="."]
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 scale = Vector2(0.2, 0.2)
