@@ -9,13 +9,15 @@ var _player_stats = Global._player_stats
 var _player_upgrades = Global._player_upgrades
 
 const PROJECTILE_PATH = preload('res://Scenes/Projectile.tscn')
-
+var DashDirection = Vector2.ZERO
 var enemy_in_attack_range = false
 var enemy_attack_cooldown = true
 var player_alive = true
 var melee_range = false
 var _is_mouse_movement = false
-
+var dashing = false
+var can_dash = true
+var DashSpeed = 10
 var attack_in_progress = false
 
 var speed_boost = 0
@@ -48,39 +50,50 @@ func _physics_process(delta):
 		print("Y O U   D I E D")
 		self.queue_free()
 
-func player_movement():
-	if Global._menu_open == false:
-		if Input.is_action_pressed("ui_right"):
-			moving = true
-			move_direction = "right"
-			play_anim()
-			velocity.x = _player_stats.speed + speed_boost
-			velocity.y = 0
-		elif Input.is_action_pressed("ui_left"):
-			moving = true
-			move_direction = "left"
-			play_anim()
-			velocity.x = -_player_stats.speed - speed_boost
-			velocity.y = 0 
-		elif Input.is_action_pressed("ui_down"):
-			moving = true
-			move_direction = "down"
-			play_anim()
-			velocity.x = 0
-			velocity.y = _player_stats.speed + speed_boost
-		elif Input.is_action_pressed("ui_up"):
-			moving = true
-			move_direction = "up"
-			play_anim()
-			velocity.x = 0
-			velocity.y = -_player_stats.speed - speed_boost
+func player_movement(delta):
+	if Input.is_action_just_pressed("dash") and can_dash:
+		dashing = true
+		can_dash = false
+		$dash_timer.start()
+		$dash_again_timer.start()
+	var directionX := Input.get_axis("ui_left", "ui_right")
+	var directionY := Input.get_axis("ui_up", "ui_down")
+	if directionX:
+		if dashing:
+			velocity.x = directionX * (_player_stat.speed + speed_boost)*DashSpeed
 		else:
-			moving = false
-			play_anim()
-			velocity.x = 0
-			velocity.y = 0
-		
-		move_and_slide()
+			velocity.x = directionX * _player_stat.speed + speed_boost
+	else:
+		velocity.x = move_toward(velocity.x, 0, _player_stat.speed + speed_boost)
+	if directionY:
+		if dashing:
+			velocity.y = directionY * (_player_stat.speed + speed_boost)*DashSpeed
+		else:
+			velocity.y = directionY * _player_stat.speed + speed_boost
+	else:
+		velocity.y = move_toward(velocity.y, 0, _player_stat.speed + speed_boost)
+	if Input.is_action_pressed("ui_right"):
+		moving = true
+		move_direction = "right"
+		play_anim()
+	elif Input.is_action_pressed("ui_left"):
+		moving = true
+		move_direction = "left"
+		play_anim()
+	elif Input.is_action_pressed("ui_down"):
+		moving = true
+		move_direction = "down"
+		play_anim()
+	elif Input.is_action_pressed("ui_up"):
+		moving = true
+		move_direction = "up"
+		play_anim()
+	else:
+		moving = false
+		play_anim()
+	
+	move_and_slide()
+
 	
 func play_anim(): 
 	var anim = $AnimatedSprite2D
@@ -270,3 +283,17 @@ func _on_upgrade_gain(choice):
 		print(_player_upgrades.upgrades[2][0])
 		print("Attack Damage: " + str(_player_stats.attack))
 	emit_signal("upgrade_gained")
+
+
+func _on_currency_gain_currency(amount):
+	_player_stat.currency += amount
+	emit_signal("currency_gained")
+
+
+func _on_dash_timer_timeout():
+	dashing = false
+
+
+func _on_dash_again_timer_timeout():
+	can_dash = true
+
