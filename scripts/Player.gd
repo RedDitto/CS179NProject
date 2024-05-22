@@ -161,6 +161,7 @@ func enemy_attack():
 		$attack_cooldown.start()
 		emit_signal("health_loss")
 		print(_player_stats.health)
+		$hit.play()
 	
 
 func _on_attack_cooldown_timeout():
@@ -229,6 +230,7 @@ func shoot():
 	get_parent().add_child(projectile)
 	projectile.position = $ProjectileDirection/Marker2D.global_position
 	projectile.vel = get_global_mouse_position() - projectile.position
+	$gunshot.play()
 
 
 func _on_hud_movement_upgrade(): # Current prototype for speed boost when getting upgrade

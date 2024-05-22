@@ -19,6 +19,7 @@ config/icon="res://Art/icon.svg"
 [autoload]
 
 Global="*res://scripts/Global.gd"
+GlobalAudioStreamPlayer="*res://Scenes/audio_stream_player.tscn"
 
 [display]
 
