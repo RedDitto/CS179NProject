@@ -24,8 +24,10 @@ position = Vector2(1, 0)
 position = Vector2(103, 56)
 
 [node name="EnemyPositions" parent="." index="4"]
-visible = false
 position = Vector2(9, 9)
+
+[node name="Marker2D" type="Marker2D" parent="EnemyPositions" index="0"]
+position = Vector2(123, 110)
 
 [node name="PlayerDetector" parent="." index="5"]
 position = Vector2(-398, 16)
