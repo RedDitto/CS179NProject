@@ -1,50 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://dejwa6jil8g55"]
+[gd_scene load_steps=4 format=3 uid="uid://dejwa6jil8g55"]
 
 [ext_resource type="PackedScene" uid="uid://dh7r45oh824ur" path="res://Scenes/room.tscn" id="1_ah2oc"]
 [ext_resource type="PackedScene" uid="uid://xvo8q2ctv7bt" path="res://Scenes/door.tscn" id="2_mnavn"]
-[ext_resource type="PackedScene" uid="uid://cwai0pk8uh5y1" path="res://Scenes/fridge.tscn" id="3_75ked"]
-[ext_resource type="Script" path="res://scripts/Enemy_Stats.gd" id="4_mp5kr"]
-[ext_resource type="PackedScene" uid="uid://bropqibhxc8jm" path="res://Scenes/Microwave.tscn" id="5_mbeg4"]
-[ext_resource type="PackedScene" uid="uid://f4ufc1fr6op8" path="res://Scenes/enemy.tscn" id="6_6jr7h"]
-[ext_resource type="PackedScene" uid="uid://d58vtcppf45o" path="res://Scenes/oscillating_fan.tscn" id="7_nstkw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o43sk"]
 size = Vector2(15.5, 15)
-
-[sub_resource type="Resource" id="Resource_fyk5l"]
-script = ExtResource("4_mp5kr")
-max_health = 100
-health = 100
-attack = 10
-speed = 40
-
-[sub_resource type="Resource" id="Resource_dtoke"]
-script = ExtResource("4_mp5kr")
-max_health = 100
-health = 100
-attack = 10
-speed = 40
-
-[sub_resource type="Resource" id="Resource_1cof0"]
-script = ExtResource("4_mp5kr")
-max_health = 100
-health = 100
-attack = 10
-speed = 40
-
-[sub_resource type="Resource" id="Resource_xiihu"]
-script = ExtResource("4_mp5kr")
-max_health = 100
-health = 100
-attack = 10
-speed = 40
-
-[sub_resource type="Resource" id="Resource_j4oy6"]
-script = ExtResource("4_mp5kr")
-max_health = 100
-health = 100
-attack = 10
-speed = 40
 
 [node name="Room" instance=ExtResource("1_ah2oc")]
 y_sort_enabled = true
@@ -62,38 +22,23 @@ position = Vector2(504, 247)
 [node name="Door" parent="Doors" index="0" instance=ExtResource("2_mnavn")]
 position = Vector2(120, 56)
 
+[node name="Marker2D" type="Marker2D" parent="EnemyPositions" index="0"]
+position = Vector2(85, 77)
+
+[node name="Marker2D2" type="Marker2D" parent="EnemyPositions" index="1"]
+position = Vector2(335, 125)
+
+[node name="Marker2D3" type="Marker2D" parent="EnemyPositions" index="2"]
+position = Vector2(507, 118)
+
+[node name="Marker2D4" type="Marker2D" parent="EnemyPositions" index="3"]
+position = Vector2(108, 231)
+
 [node name="PlayerDetector" parent="." index="5"]
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector" index="0"]
 position = Vector2(505, 229)
 shape = SubResource("RectangleShape2D_o43sk")
-
-[node name="oscillating_fan" parent="." index="6" instance=ExtResource("7_nstkw")]
-position = Vector2(288, 182)
-_enemy_stats = SubResource("Resource_fyk5l")
-
-[node name="oscillating_fan2" parent="." index="7" instance=ExtResource("7_nstkw")]
-position = Vector2(199, 218)
-_enemy_stats = SubResource("Resource_dtoke")
-
-[node name="Microwave" parent="." index="8" instance=ExtResource("5_mbeg4")]
-position = Vector2(505, 126)
-_enemy_stats = SubResource("Resource_1cof0")
-
-[node name="Fridge" parent="." index="9" instance=ExtResource("3_75ked")]
-position = Vector2(86, 82)
-scale = Vector2(0.9, 0.9)
-wall_min_slide_angle = 0.0
-_enemy_stats = SubResource("Resource_xiihu")
-
-[node name="Fridge2" parent="." index="10" instance=ExtResource("3_75ked")]
-position = Vector2(60, 205)
-scale = Vector2(0.9, 0.9)
-wall_min_slide_angle = 0.0
-_enemy_stats = SubResource("Resource_j4oy6")
-
-[node name="Enemy" parent="." index="11" instance=ExtResource("6_6jr7h")]
-position = Vector2(347, 115)
 
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_player_detector_body_entered"]

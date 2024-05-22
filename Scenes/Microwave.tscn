@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://d1d2agyuvluuh" path="res://Art/health_bar_over.png" id="4_30vef"]
 [ext_resource type="Script" path="res://scripts/enemy_health_bar.gd" id="5_hjbdg"]
 
-[sub_resource type="Resource" id="Resource_jj5tr"]
+[sub_resource type="Resource" id="Resource_6ggqd"]
 script = ExtResource("2_g1656")
 max_health = 100
 health = 100
@@ -68,14 +68,16 @@ animations = [{
 radius = 242.427
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oqfec"]
-size = Vector2(48, 27)
+size = Vector2(45.2121, 23.7121)
 
 [node name="Microwave" type="CharacterBody2D"]
 scale = Vector2(0.33, 0.33)
 collision_layer = 2
 collision_mask = 7
+motion_mode = 1
+wall_min_slide_angle = 0.0
 script = ExtResource("1_fe1up")
-_enemy_stats = SubResource("Resource_jj5tr")
+_enemy_stats = SubResource("Resource_6ggqd")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, 8)
@@ -90,7 +92,7 @@ position = Vector2(0, -11)
 shape = SubResource("CircleShape2D_1875f")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -11)
+position = Vector2(1.19209e-07, -9.09091)
 shape = SubResource("RectangleShape2D_oqfec")
 
 [node name="Navigation" type="Node2D" parent="."]
