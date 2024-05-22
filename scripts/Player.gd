@@ -45,6 +45,7 @@ func _physics_process(delta):
 	if _player_stats.health <= 0:
 		player_alive = false #where you would add go back to menu / respawn
 		_player_stats.health = 0
+		$AnimatedSprite2D.play("death")
 		print("Y O U   D I E D")
 		self.queue_free()
 
@@ -177,23 +178,23 @@ func _on_deal_attack_timer_timeout():
 	$Melee_Attack/Melee_Collision.disabled = true
 
 
-func _on_attract_body_entered(body):
-	if body.is_in_group("Enemy"):
-		body.attack_timer.start()
-
-func _on_attract_body_exited(body):
-	if body.is_in_group("Enemy"):
-		body.attack_timer.stop()
-		body.state = body.SURROUND
-		
-func _on_enemy_attack_body_entered(body):
-	if body.is_in_group("Enemy"):
-		body.state = body.HIT
-		
-
-func _on_enemy_attack_body_exited(body):
-	if body.is_in_group("Enemy"):
-		body.state = body.SURROUND
+#func _on_attract_body_entered(body):
+	#if body.is_in_group("Enemy"):
+		#body.attack_timer.start()
+#
+#func _on_attract_body_exited(body):
+	#if body.is_in_group("Enemy"):
+		#body.attack_timer.stop()
+		#body.state = body.SURROUND
+		#
+#func _on_enemy_attack_body_entered(body):
+	#if body.is_in_group("Enemy"):
+		#body.state = body.HIT
+		#
+#
+#func _on_enemy_attack_body_exited(body):
+	#if body.is_in_group("Enemy"):
+		#body.state = body.SURROUND
 		
 
 func shoot():

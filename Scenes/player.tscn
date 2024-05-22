@@ -432,11 +432,12 @@ radius = 11.0454
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 y_sort_enabled = true
 collision_layer = 4
+collision_mask = 3
 script = ExtResource("1_7vfew")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_uh3uc")
-animation = &"front_attack"
+animation = &"death"
 offset = Vector2(0, -15)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -446,6 +447,8 @@ shape = SubResource("CircleShape2D_855eh")
 
 [node name="player_hitbox" type="Area2D" parent="."]
 visible = false
+collision_layer = 4
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player_hitbox"]
 position = Vector2(0, -6)
@@ -453,6 +456,7 @@ shape = SubResource("CircleShape2D_4x7yq")
 
 [node name="Melee_Attack" type="Area2D" parent="." groups=["hitbox"]]
 position = Vector2(0, -2)
+collision_mask = 3
 script = ExtResource("4_4bcrn")
 
 [node name="Melee_Collision" type="CollisionShape2D" parent="Melee_Attack" groups=["hitbox"]]
@@ -489,6 +493,7 @@ position = Vector2(0, -6)
 shape = SubResource("CircleShape2D_i84gw")
 
 [node name="Enemy_Attack" type="Area2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy_Attack"]
 position = Vector2(0, -6)
