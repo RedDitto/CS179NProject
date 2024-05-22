@@ -308,5 +308,8 @@ func _on_picked_up_weapon_ranged(sprite):
 	hasRangedWeapon = true
 
 
-func _on__picked_up_weapon_melee(sprite):
+func _on_picked_up_weapon_melee(sprite):
 	hasMeleeWeapon = true
+
+
+

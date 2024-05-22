@@ -13,6 +13,8 @@ const TILE_SIZE: int = 16
 @export var num_levels: int = 5
 
 @onready var player = get_parent().get_node("Player")
+@onready var melee_weapon = get_parent().get_node("weapon_ground_melee")
+@onready var ranged_weapon = get_parent().get_node("weapon_ground_ranged")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -26,6 +28,8 @@ func _spawn_rooms():
 		if i == 0:
 			room = SPAWN_ROOMS[randi() % SPAWN_ROOMS.size()].instantiate()
 			player.position = room.get_node("PlayerSpawn").position
+			melee_weapon.position = room.get_node("MeleeWeaponSpawn").position
+			ranged_weapon.position = room.get_node("RangedWeaponSpawn").position
 		
 		else:
 			if i == num_levels - 1:
