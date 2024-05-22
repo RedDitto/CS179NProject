@@ -1,13 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://bc7q7iwmec27j"]
+[gd_scene load_steps=6 format=3 uid="uid://bc7q7iwmec27j"]
 
 [ext_resource type="Script" path="res://scripts/hud.gd" id="1_jnqk4"]
-[ext_resource type="Script" path="res://scripts/Currency_Label.gd" id="2_wbevc"]
 [ext_resource type="Script" path="res://scripts/Upgrades_Label.gd" id="3_805f5"]
-[ext_resource type="Script" path="res://scripts/HP.gd" id="5_trqi7"]
 [ext_resource type="Texture2D" uid="uid://ghxw7s5a3p5d" path="res://Art/health_bar_progress.png" id="6_361yr"]
-[ext_resource type="Script" path="res://scripts/Health_Bar.gd" id="6_l87da"]
 [ext_resource type="Texture2D" uid="uid://d1d2agyuvluuh" path="res://Art/health_bar_over.png" id="7_s5syh"]
-[ext_resource type="Script" path="res://scripts/FPS.gd" id="8_gk8av"]
 [ext_resource type="Script" path="res://scripts/WeaponDisplay.gd" id="10_c6meu"]
 
 [node name="HUD" type="CanvasLayer"]
@@ -20,7 +16,6 @@ offset_right = 59.0
 offset_bottom = 16.0
 theme_override_font_sizes/font_size = 10
 text = "Currency: 0"
-script = ExtResource("2_wbevc")
 
 [node name="Upgrades_Label" type="Label" parent="."]
 offset_left = 4.0
@@ -38,9 +33,8 @@ offset_right = 46.0
 offset_bottom = 319.0
 theme_override_font_sizes/font_size = 10
 text = "HP: 1000"
-script = ExtResource("5_trqi7")
 
-[node name="Health Bar" type="TextureProgressBar" parent="."]
+[node name="Health_Bar" type="TextureProgressBar" parent="."]
 offset_left = 47.0
 offset_top = 305.0
 offset_right = 242.0
@@ -57,7 +51,6 @@ texture_progress = ExtResource("6_361yr")
 tint_under = Color(0.164706, 0.164706, 0.164706, 0.945098)
 tint_over = Color(0.121569, 0.121569, 0.121569, 1)
 tint_progress = Color(0.666667, 0, 0, 1)
-script = ExtResource("6_l87da")
 
 [node name="FPS" type="Label" parent="."]
 offset_left = 538.0
@@ -66,11 +59,17 @@ offset_right = 579.0
 offset_bottom = 18.0
 theme_override_font_sizes/font_size = 10
 text = "FPS: 60"
-script = ExtResource("8_gk8av")
 
-[node name="WeaponDisplay" type="TextureRect" parent="."]
+[node name="WeaponDisplayMelee" type="TextureRect" parent="."]
 offset_left = 530.0
 offset_top = 300.0
 offset_right = 565.0
+offset_bottom = 321.0
+script = ExtResource("10_c6meu")
+
+[node name="WeaponDisplayRanged" type="TextureRect" parent="."]
+offset_left = 486.0
+offset_top = 300.0
+offset_right = 521.0
 offset_bottom = 321.0
 script = ExtResource("10_c6meu")

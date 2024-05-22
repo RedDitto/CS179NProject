@@ -9,6 +9,7 @@ var _player_stats = Global._player_stats
 var _player_upgrades = Global._player_upgrades
 
 const PROJECTILE_PATH = preload('res://Scenes/Projectile.tscn')
+const fridgePATH = preload('res://Scenes/fridge.tscn')
 var DashDirection = Vector2.ZERO
 var enemy_in_attack_range = false
 var enemy_attack_cooldown = true
@@ -19,6 +20,7 @@ var dashing = false
 var can_dash = true
 var DashSpeed = 10
 var attack_in_progress = false
+var cheat_death_used = false
 
 var speed_boost = 0
 var current_direction = "none"
@@ -27,6 +29,9 @@ var player_mouse_direction = Vector2(0,0)
 var moving = false
 var idle = "none"
 var animation = "none"
+
+var hasRangedWeapon = false
+var hasMeleeWeapon = false
 
 
 func _ready():
@@ -39,16 +44,23 @@ func _physics_process(delta):
 	_mouse_direction()
 	#projectile shooting
 	if Input.is_action_just_pressed("shoot_projectile") and !Global._menu_open:
-		shoot()
+		if (hasRangedWeapon):
+			shoot()
 	elif Input.is_action_just_pressed("attack") and !Global._menu_open:
-		attack()
+		if (hasMeleeWeapon):
+			attack()
 	$ProjectileDirection.look_at(get_global_mouse_position())
 	
 	if _player_stats.health <= 0:
-		player_alive = false #where you would add go back to menu / respawn
-		_player_stats.health = 0
-		print("Y O U   D I E D")
-		self.queue_free()
+		if _player_stats.cheat_death == 1 and !cheat_death_used:
+				_player_stats.health = 0.5 * _player_stats.max_health
+				cheat_death_used = true
+		else:
+			player_alive = false #where you would add go back to menu / respawn
+			_player_stats.health = 0
+			get_tree().quit()
+			print("Y O U   D I E D")
+			self.queue_free()
 
 func player_movement(delta):
 	if Input.is_action_just_pressed("dash") and can_dash:
@@ -183,6 +195,8 @@ func attack():
 	#if melee_range == true:
 		#emit_signal("damage_enemy", _player_stat.attack)
 
+func banana():
+	pass
 
 func _on_deal_attack_timer_timeout():
 	$deal_attack_timer.stop()
@@ -264,7 +278,7 @@ func _mouse_direction(): # Gets player direction based on mouse when there is mo
 func _on_melee_attack_body_entered(body):
 	if body.has_method("enemy"):
 		melee_range = true
-		body.deal_with_damage(_player_stats.attack)
+		body.deal_with_damage(_player_stats.attack*3)
 		print("Hit!!!")
 
 func _on_melee_attack_body_exited(body):
@@ -298,4 +312,15 @@ func _on_dash_timer_timeout():
 
 func _on_dash_again_timer_timeout():
 	can_dash = true
+
+
+
+func _on_picked_up_weapon_ranged(sprite):
+	hasRangedWeapon = true
+
+
+func _on_picked_up_weapon_melee(sprite):
+	hasMeleeWeapon = true
+
+
 

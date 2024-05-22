@@ -1,7 +1,6 @@
 extends Node2D
 
 signal gain_upgrade
-signal open_menu
 
 var _player_upgrades = Global._player_upgrades
 var player_in_area = false
@@ -36,9 +35,9 @@ func _input(event):
 				if count > 1:
 					while random_number1 == random_number2 or Global._player_upgrades.upgrades[random_number2][1] == 4:
 						random_number2 = randi_range(0,2)
-					emit_signal("open_menu", random_number1, random_number2)
+					$Upgrade_UI._open_menu(random_number1, random_number2)
 				else:
-					emit_signal("open_menu", random_number1, null)
+					$Upgrade_UI._open_menu(random_number1, null)
 				Global._menu_open = true
 
 
@@ -50,4 +49,4 @@ func _on_upgrade_button_upgrade_chosen(choice):
 		_player_upgrades.upgrades[random_number2][1] += 1
 		emit_signal("gain_upgrade", random_number2)
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-	self.queue_free()
+	queue_free()

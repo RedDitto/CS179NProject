@@ -1,7 +1,18 @@
-[gd_scene load_steps=18 format=3 uid="uid://d58vtcppf45o"]
+[gd_scene load_steps=23 format=3 uid="uid://d58vtcppf45o"]
 
 [ext_resource type="Script" path="res://scripts/oscillating_fan.gd" id="1_7jm04"]
 [ext_resource type="Texture2D" uid="uid://vvfb1rtq7kbx" path="res://Art/sierrassets furniture pack/furniture/furniture pack coloured outline.png" id="2_lhljo"]
+[ext_resource type="Script" path="res://scripts/Enemy_Stats.gd" id="2_tkalj"]
+[ext_resource type="Texture2D" uid="uid://ghxw7s5a3p5d" path="res://Art/health_bar_progress.png" id="3_3l624"]
+[ext_resource type="Texture2D" uid="uid://d1d2agyuvluuh" path="res://Art/health_bar_over.png" id="4_ceu6n"]
+[ext_resource type="Script" path="res://scripts/enemy_health_bar.gd" id="5_3rflv"]
+
+[sub_resource type="Resource" id="Resource_51cr2"]
+script = ExtResource("2_tkalj")
+max_health = 100
+health = 100
+attack = 10
+speed = 40
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_iljyy"]
 atlas = ExtResource("2_lhljo")
@@ -107,10 +118,12 @@ radius = 37.0135
 size = Vector2(11, 6)
 
 [node name="oscillating_fan" type="CharacterBody2D"]
+collision_layer = 2
 collision_mask = 7
 motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_7jm04")
+_enemy_stats = SubResource("Resource_51cr2")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_yks03")
@@ -119,7 +132,7 @@ frame_progress = 0.612123
 offset = Vector2(0, -14)
 
 [node name="detection_area" type="Area2D" parent="."]
-collision_mask = 7
+collision_mask = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="detection_area"]
 shape = SubResource("CircleShape2D_v8qtb")
@@ -140,6 +153,30 @@ debug_enabled = true
 wait_time = 0.1
 autostart = true
 
+[node name="take_damage_cooldown" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="Health_Bar" type="TextureProgressBar" parent="."]
+offset_left = -10.0
+offset_top = -31.0
+offset_right = 10.0
+offset_bottom = -25.0
+nine_patch_stretch = true
+stretch_margin_left = 2
+stretch_margin_top = 2
+stretch_margin_right = 2
+stretch_margin_bottom = 2
+texture_under = ExtResource("3_3l624")
+texture_over = ExtResource("4_ceu6n")
+texture_progress = ExtResource("3_3l624")
+tint_under = Color(0.164706, 0.164706, 0.164706, 1)
+tint_over = Color(0.121569, 0.121569, 0.121569, 1)
+tint_progress = Color(0.666667, 0, 0, 1)
+script = ExtResource("5_3rflv")
+
+[connection signal="health_loss" from="." to="Health_Bar" method="_on_oscillating_fan_health_loss"]
 [connection signal="body_entered" from="detection_area" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="detection_area" to="." method="_on_detection_area_body_exited"]
 [connection signal="velocity_computed" from="Navigation/NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]
+[connection signal="timeout" from="Navigation/Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="take_damage_cooldown" to="." method="_on_take_damage_cooldown_timeout"]
