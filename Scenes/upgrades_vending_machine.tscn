@@ -38,6 +38,7 @@ position = Vector2(1, 22)
 shape = SubResource("RectangleShape2D_k3w0h")
 
 [node name="Menu" type="CanvasLayer" parent="."]
+visible = false
 script = ExtResource("3_hgg2e")
 
 [node name="TextureButton" type="TextureRect" parent="Menu"]
