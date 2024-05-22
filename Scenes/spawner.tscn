@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://cncro8g47a5d7"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hni3j"]
+radius = 30.5941
+
+[node name="Spawner" type="Node2D"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+position = Vector2(117, 46)
+
+[node name="detection_area" type="Area2D" parent="CharacterBody2D"]
+position = Vector2(0, 18)
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/detection_area"]
+position = Vector2(0, -18)
+shape = SubResource("CircleShape2D_hni3j")

@@ -22,6 +22,7 @@ func _physics_process(delta):
 			var desired_velocity = direction * _enemy_stats.speed
 			var steering = (desired_velocity - velocity) * delta * 2.5
 			velocity += steering
+			
 			move_and_slide()
 			$AnimatedSprite2D.play("walk")
 			if (player.position.x - position.x) < 0:

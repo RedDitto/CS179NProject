@@ -1,7 +1,18 @@
-[gd_scene load_steps=10 format=3 uid="uid://bropqibhxc8jm"]
+[gd_scene load_steps=15 format=3 uid="uid://bropqibhxc8jm"]
 
 [ext_resource type="Script" path="res://scripts/Microwave.gd" id="1_fe1up"]
+[ext_resource type="Script" path="res://scripts/Enemy_Stats.gd" id="2_g1656"]
 [ext_resource type="Texture2D" uid="uid://br241jsjdbqil" path="res://Art/Animated_Objects/!Small_doors_and_others.png" id="2_wr1gd"]
+[ext_resource type="Texture2D" uid="uid://ghxw7s5a3p5d" path="res://Art/health_bar_progress.png" id="3_clsed"]
+[ext_resource type="Texture2D" uid="uid://d1d2agyuvluuh" path="res://Art/health_bar_over.png" id="4_30vef"]
+[ext_resource type="Script" path="res://scripts/enemy_health_bar.gd" id="5_hjbdg"]
+
+[sub_resource type="Resource" id="Resource_6ggqd"]
+script = ExtResource("2_g1656")
+max_health = 100
+health = 100
+attack = 10
+speed = 40
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dttgc"]
 atlas = ExtResource("2_wr1gd")
@@ -41,7 +52,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_2gm0y")
 }],
 "loop": true,
-"name": &"attack",
+"name": &"chase",
 "speed": 5.0
 }, {
 "frames": [{
@@ -49,37 +60,76 @@ animations = [{
 "texture": SubResource("AtlasTexture_dttgc")
 }],
 "loop": true,
-"name": &"walk",
+"name": &"idle",
 "speed": 5.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1875f"]
-radius = 241.0
+radius = 242.427
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oqfec"]
-size = Vector2(48, 27)
+size = Vector2(45.2121, 23.7121)
 
-[node name="Microwave" type="CharacterBody2D" groups=["Enemy"]]
+[node name="Microwave" type="CharacterBody2D"]
+scale = Vector2(0.33, 0.33)
+collision_layer = 2
+collision_mask = 7
+motion_mode = 1
+wall_min_slide_angle = 0.0
 script = ExtResource("1_fe1up")
+_enemy_stats = SubResource("Resource_6ggqd")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, 8)
 sprite_frames = SubResource("SpriteFrames_cppuu")
-animation = &"walk"
+animation = &"chase"
 
 [node name="detection_area" type="Area2D" parent="."]
+collision_mask = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="detection_area"]
 position = Vector2(0, -11)
 shape = SubResource("CircleShape2D_1875f")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -11)
+position = Vector2(1.19209e-07, -9.09091)
 shape = SubResource("RectangleShape2D_oqfec")
 
-[node name="attack_timer" type="Timer" parent="."]
-wait_time = 2.0
+[node name="Navigation" type="Node2D" parent="."]
 
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="Navigation"]
+path_postprocessing = 1
+avoidance_enabled = true
+radius = 15.0
+debug_enabled = true
+
+[node name="Timer" type="Timer" parent="Navigation"]
+wait_time = 0.1
+autostart = true
+
+[node name="take_damage_cooldown" type="Timer" parent="."]
+
+[node name="Health_Bar" type="TextureProgressBar" parent="."]
+offset_left = -27.0
+offset_top = -52.0
+offset_right = 27.0
+offset_bottom = -42.0
+nine_patch_stretch = true
+stretch_margin_left = 2
+stretch_margin_top = 2
+stretch_margin_right = 2
+stretch_margin_bottom = 2
+texture_under = ExtResource("3_clsed")
+texture_over = ExtResource("4_30vef")
+texture_progress = ExtResource("3_clsed")
+tint_under = Color(0.164706, 0.164706, 0.164706, 1)
+tint_over = Color(0.121569, 0.121569, 0.121569, 1)
+tint_progress = Color(0.666667, 0, 0, 1)
+script = ExtResource("5_hjbdg")
+
+[connection signal="health_loss" from="." to="Health_Bar" method="_on_microwave_health_loss"]
 [connection signal="body_entered" from="detection_area" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="detection_area" to="." method="_on_detection_area_body_exited"]
-[connection signal="timeout" from="attack_timer" to="." method="_on_attack_timer_timeout"]
+[connection signal="velocity_computed" from="Navigation/NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]
+[connection signal="timeout" from="Navigation/Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="take_damage_cooldown" to="." method="_on_take_damage_cooldown_timeout"]

@@ -9,6 +9,11 @@ var num_enemies = 0
 @onready var player_detector: Area2D = get_node("PlayerDetector")
 
 
+const ENEMY_SCENES: Dictionary = {
+	"fan": preload("res://Scenes/oscillating_fan.tscn"),
+	"fridge": preload("res://Scenes/fridge.tscn"), "microwave": preload("res://Scenes/Microwave.tscn")
+}
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	num_enemies = enemy_positions_container.get_child_count()
@@ -28,14 +33,27 @@ func _close_entrance():
 		tilemap.set_cell(0,tilemap.local_to_map(entry_position.position),0, Vector2i(1,20))
 
 func _spawn_enemies():
-	num_enemies = 1
-	_on_enemy_killed()
+	for enemy_position in enemy_positions_container.get_children():
+		var enemy: CharacterBody2D
+		var rannum = randi() % 3
+		if rannum == 0:
+			enemy = ENEMY_SCENES.fan.instantiate()
+		if rannum == 1:
+			enemy = ENEMY_SCENES.fridge.instantiate()
+		if rannum == 2:
+			enemy = ENEMY_SCENES.microwave.instantiate()
+		enemy.position = enemy_position.position
+		call_deferred("add_child", enemy)
 
 func _on_player_detector_body_entered(body):
 	print("working")
 	player_detector.queue_free()
-	_close_entrance()
-	_spawn_enemies()
+	if num_enemies > 0:
+		_close_entrance()
+		_spawn_enemies()
+	else:
+		_close_entrance()
+		_open_doors()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

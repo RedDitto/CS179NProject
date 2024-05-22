@@ -1,53 +1,54 @@
-[gd_scene load_steps=20 format=3 uid="uid://cwai0pk8uh5y1"]
+[gd_scene load_steps=21 format=3 uid="uid://2d1eyvtljnwp"]
 
-[ext_resource type="Script" path="res://scripts/fridge.gd" id="1_0x0k2"]
-[ext_resource type="Texture2D" uid="uid://bkphj4ydai2l2" path="res://Art/Animated_Objects/!$Kitchen_fridge.png" id="1_24o3a"]
-[ext_resource type="Script" path="res://scripts/Enemy_Stats.gd" id="2_50hny"]
-[ext_resource type="Texture2D" uid="uid://ghxw7s5a3p5d" path="res://Art/health_bar_progress.png" id="4_d8c76"]
-[ext_resource type="Texture2D" uid="uid://d1d2agyuvluuh" path="res://Art/health_bar_over.png" id="5_pdn3u"]
-[ext_resource type="Script" path="res://scripts/enemy_health_bar.gd" id="6_6gkkh"]
+[ext_resource type="Script" path="res://scripts/fridge.gd" id="1_p8sc8"]
+[ext_resource type="Script" path="res://scripts/Enemy_Stats.gd" id="2_1n7s7"]
+[ext_resource type="Texture2D" uid="uid://bkphj4ydai2l2" path="res://Art/Animated_Objects/!$Kitchen_fridge.png" id="3_cq4ll"]
+[ext_resource type="Texture2D" uid="uid://ghxw7s5a3p5d" path="res://Art/health_bar_progress.png" id="4_di8jw"]
+[ext_resource type="Texture2D" uid="uid://d1d2agyuvluuh" path="res://Art/health_bar_over.png" id="5_x4ngi"]
+[ext_resource type="Script" path="res://scripts/enemy_health_bar.gd" id="6_1qi2d"]
+[ext_resource type="PackedScene" uid="uid://cvqxrdtcp6ado" path="res://spawner.tscn" id="7_vbd4t"]
 
 [sub_resource type="Resource" id="Resource_qfqm3"]
-script = ExtResource("2_50hny")
+script = ExtResource("2_1n7s7")
 max_health = 100
 health = 100
 attack = 10
 speed = 40
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_efts2"]
-atlas = ExtResource("1_24o3a")
+atlas = ExtResource("3_cq4ll")
 region = Rect2(0, 0, 96, 144)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_m1fw2"]
-atlas = ExtResource("1_24o3a")
+atlas = ExtResource("3_cq4ll")
 region = Rect2(0, 0, 96, 144)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fv7o3"]
-atlas = ExtResource("1_24o3a")
+atlas = ExtResource("3_cq4ll")
 region = Rect2(0, 144, 96, 144)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vimg5"]
-atlas = ExtResource("1_24o3a")
+atlas = ExtResource("3_cq4ll")
 region = Rect2(0, 288, 96, 144)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_17uk4"]
-atlas = ExtResource("1_24o3a")
+atlas = ExtResource("3_cq4ll")
 region = Rect2(0, 432, 96, 144)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gn5ul"]
-atlas = ExtResource("1_24o3a")
+atlas = ExtResource("3_cq4ll")
 region = Rect2(0, 0, 96, 144)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_le0cf"]
-atlas = ExtResource("1_24o3a")
+atlas = ExtResource("3_cq4ll")
 region = Rect2(0, 147, 96, 142)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_amuwp"]
-atlas = ExtResource("1_24o3a")
+atlas = ExtResource("3_cq4ll")
 region = Rect2(0, 295, 96, 140)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jgg1m"]
-atlas = ExtResource("1_24o3a")
+atlas = ExtResource("3_cq4ll")
 region = Rect2(0, 436, 96, 137)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_bokfs"]
@@ -114,19 +115,19 @@ animations = [{
 radius = 86.209
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6sr2l"]
-size = Vector2(12, 8)
+size = Vector2(41, 79)
 
 [node name="Fridge" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 7
 motion_mode = 1
 wall_min_slide_angle = 0.0
-script = ExtResource("1_0x0k2")
+script = ExtResource("1_p8sc8")
 _enemy_stats = SubResource("Resource_qfqm3")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(8, -19)
-scale = Vector2(0.33, 0.33)
+position = Vector2(20, -7)
+scale = Vector2(0.862917, 0.741389)
 sprite_frames = SubResource("SpriteFrames_bokfs")
 animation = &"fridge_open"
 frame_progress = 0.0617151
@@ -139,7 +140,7 @@ position = Vector2(0, -18)
 shape = SubResource("CircleShape2D_rsj6p")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -4)
+position = Vector2(-0.5, -5.5)
 shape = SubResource("RectangleShape2D_6sr2l")
 
 [node name="Navigation" type="Node2D" parent="."]
@@ -166,13 +167,37 @@ stretch_margin_left = 2
 stretch_margin_top = 2
 stretch_margin_right = 2
 stretch_margin_bottom = 2
-texture_under = ExtResource("4_d8c76")
-texture_over = ExtResource("5_pdn3u")
-texture_progress = ExtResource("4_d8c76")
+texture_under = ExtResource("4_di8jw")
+texture_over = ExtResource("5_x4ngi")
+texture_progress = ExtResource("4_di8jw")
 tint_under = Color(0.164706, 0.164706, 0.164706, 1)
 tint_over = Color(0.121569, 0.121569, 0.121569, 1)
 tint_progress = Color(0.666667, 0, 0, 1)
-script = ExtResource("6_6gkkh")
+script = ExtResource("6_1qi2d")
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("7_vbd4t")]
+position = Vector2(-2, 55)
+
+[node name="CharacterBody2D" parent="CharacterBody2D" instance=ExtResource("7_vbd4t")]
+position = Vector2(-44, -58)
+
+[node name="CharacterBody2D" parent="CharacterBody2D/CharacterBody2D" instance=ExtResource("7_vbd4t")]
+position = Vector2(88, -9)
+
+[node name="CharacterBody2D" parent="CharacterBody2D/CharacterBody2D/CharacterBody2D" instance=ExtResource("7_vbd4t")]
+position = Vector2(19, 55)
+
+[node name="CharacterBody2D" parent="CharacterBody2D/CharacterBody2D/CharacterBody2D/CharacterBody2D" instance=ExtResource("7_vbd4t")]
+position = Vector2(-131, 3)
+
+[node name="CharacterBody2D2" parent="." instance=ExtResource("7_vbd4t")]
+position = Vector2(0, -66)
+
+[node name="CharacterBody2D2" parent="CharacterBody2D2" instance=ExtResource("7_vbd4t")]
+position = Vector2(52, -6)
+
+[node name="CharacterBody2D2" parent="CharacterBody2D2/CharacterBody2D2" instance=ExtResource("7_vbd4t")]
+position = Vector2(-122, 6)
 
 [connection signal="health_loss" from="." to="Health_Bar" method="_on_fridge_health_loss"]
 [connection signal="body_entered" from="detection_area" to="." method="_on_detection_area_body_entered"]
