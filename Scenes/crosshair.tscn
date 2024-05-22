@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://wimxo54h2n6m" path="res://Art/crosshair2.png" id="2_m7r8c"]
 
 [node name="Crosshair" type="Control"]
+top_level = true
 z_index = 20
 layout_mode = 3
 anchors_preset = 15

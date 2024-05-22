@@ -25,6 +25,7 @@ collision_mask = 4
 shape = SubResource("CircleShape2D_lnxnt")
 
 [node name="Upgrade_UI" type="CanvasLayer" parent="."]
+visible = false
 script = ExtResource("4_3bd01")
 
 [node name="Upgrade1_Button" type="TextureButton" parent="Upgrade_UI"]
@@ -117,7 +118,6 @@ theme_override_font_sizes/normal_font_size = 20
 text = "Movement Speed is increased by 10%"
 metadata/_edit_use_anchors_ = true
 
-[connection signal="open_menu" from="." to="Upgrade_UI" method="_on_upgrade_open_menu"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
 [connection signal="is_visible" from="Upgrade_UI" to="Upgrade_UI/Upgrade1_Button" method="_on_upgrade_ui_is_visible"]

@@ -20,6 +20,7 @@ var dashing = false
 var can_dash = true
 var DashSpeed = 10
 var attack_in_progress = false
+var cheat_death_used = false
 
 var speed_boost = 0
 var current_direction = "none"
@@ -51,10 +52,15 @@ func _physics_process(delta):
 	$ProjectileDirection.look_at(get_global_mouse_position())
 	
 	if _player_stats.health <= 0:
-		player_alive = false #where you would add go back to menu / respawn
-		get_tree().quit()
-		print("Y O U   D I E D")
-		self.queue_free()
+    if _player_stats.cheat_death == 1 and !cheat_death_used:
+			_player_stats.health = 0.5 * _player_stats.max_health
+			cheat_death_used = true
+		else:
+			player_alive = false #where you would add go back to menu / respawn
+      _player_stats.health = 0
+      get_tree().quit()
+      print("Y O U   D I E D")
+      self.queue_free()
 
 func player_movement(delta):
 	if Input.is_action_just_pressed("dash") and can_dash:
