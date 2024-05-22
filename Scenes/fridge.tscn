@@ -114,13 +114,13 @@ animations = [{
 radius = 86.209
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6sr2l"]
-size = Vector2(16, 11)
+size = Vector2(12, 8)
 
 [node name="Fridge" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 7
 motion_mode = 1
-wall_min_slide_angle = 0.174533
+wall_min_slide_angle = 0.0
 script = ExtResource("1_0x0k2")
 _enemy_stats = SubResource("Resource_qfqm3")
 
@@ -139,14 +139,14 @@ position = Vector2(0, -18)
 shape = SubResource("CircleShape2D_rsj6p")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -5.5)
+position = Vector2(0, -4)
 shape = SubResource("RectangleShape2D_6sr2l")
 
 [node name="Navigation" type="Node2D" parent="."]
+position = Vector2(0, -12)
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="Navigation"]
 path_postprocessing = 1
-avoidance_enabled = true
 radius = 15.0
 debug_enabled = true
 
