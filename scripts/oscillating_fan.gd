@@ -1,7 +1,5 @@
 extends CharacterBody2D
 
-@export var _enemy_stats : Enemy_Stats
-
 var speed = 50
 var player_chase = false
 var player = null
@@ -15,6 +13,8 @@ var death_finished = false
 
 signal health_loss
 
+@export var _enemy_stats : Enemy_Stats
+
 var health = 100
 
 @export var target: Node2D = null
@@ -24,7 +24,7 @@ var health = 100
 func _ready():
 	var __ = connect("tree_exited", Callable(get_parent(), "_on_enemy_killed"))
 	call_deferred("seeker_setup")
-	$Health_Bar.visible = false
+	health_bar.visible = false
 	
 func seeker_setup():
 	await get_tree().physics_frame
@@ -33,7 +33,6 @@ func seeker_setup():
 
 func _physics_process(delta):
 	if alive:
-		$Health_Bar.value = _enemy_stats.health
 		if player_chase:
 			if target:
 				navigation_agent_2d.target_position = target.global_position
@@ -57,6 +56,7 @@ func _physics_process(delta):
 				$AnimatedSprite2D.flip_h = true
 			else:
 				$AnimatedSprite2D.flip_h = false
+			
 		else:
 			$AnimatedSprite2D.play("idle")
 	else:
@@ -64,10 +64,7 @@ func _physics_process(delta):
 
 func _on_detection_area_body_entered(body):
 	if body.is_in_group("Player"):
-		$Health_Bar.visible = true
-		$Health_Bar.max_value = _enemy_stats.max_health
-		$Health_Bar.value = _enemy_stats.health
-	#print("FAN DETECTS PLAYER")
+		#print("FAN DETECTS PLAYER")
 		player = body
 		player_chase = true
 		health_bar.visible = true
