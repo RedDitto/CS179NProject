@@ -51,7 +51,7 @@ func _physics_process(delta):
 	
 	if _player_stats.health <= 0:
 		player_alive = false #where you would add go back to menu / respawn
-		_player_stats.health = 0
+		get_tree().quit()
 		print("Y O U   D I E D")
 		self.queue_free()
 
