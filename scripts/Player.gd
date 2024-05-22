@@ -28,6 +28,9 @@ var moving = false
 var idle = "none"
 var animation = "none"
 
+var hasRangedWeapon = false
+var hasMeleeWeapon = false
+
 
 func _ready():
 	$AnimatedSprite2D.play("front_idle")
@@ -39,9 +42,11 @@ func _physics_process(delta):
 	_mouse_direction()
 	#projectile shooting
 	if Input.is_action_just_pressed("shoot_projectile") and !Global._menu_open:
-		shoot()
+		if (hasRangedWeapon):
+			shoot()
 	elif Input.is_action_just_pressed("attack") and !Global._menu_open:
-		attack()
+		if (hasMeleeWeapon):
+			attack()
 	$ProjectileDirection.look_at(get_global_mouse_position())
 	
 	if _player_stats.health <= 0:
@@ -297,3 +302,11 @@ func _on_dash_timer_timeout():
 func _on_dash_again_timer_timeout():
 	can_dash = true
 
+
+
+func _on_picked_up_weapon_ranged(sprite):
+	hasRangedWeapon = true
+
+
+func _on__picked_up_weapon_melee(sprite):
+	hasMeleeWeapon = true

@@ -16,5 +16,10 @@ func _on_player_currency_gained():
 func _on_player_upgrade_gained():
 	$Upgrades_Label._update()
 
-func _on_picked_up_weapon(texture):
-	get_node("WeaponDisplay").texture = ResourceLoader.load(texture.get_load_path())
+
+func _on_picked_up_weapon_melee(texture):
+	get_node("WeaponDisplayMelee").texture = ResourceLoader.load(texture.get_load_path())
+
+
+func _on_picked_up_weapon_ranged(texture):
+	get_node("WeaponDisplayRanged").texture = ResourceLoader.load(texture.get_load_path())
