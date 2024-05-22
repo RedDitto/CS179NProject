@@ -70,13 +70,13 @@ position = Vector2(506, 234)
 [node name="weapon_ground_ranged" parent="." index="14" instance=ExtResource("9_ohvqi")]
 position = Vector2(506, 256)
 
-[node name="Upgrade" parent="." index="15" instance=ExtResource("10_1itfp")]
-position = Vector2(505, 219)
-
-[node name="Crosshair" parent="." index="15" instance=ExtResource("11_culhw")]
+[node name="Crosshair2" parent="." index="15" instance=ExtResource("11_culhw")]
 
 [node name="Upgrades_Vending_Machine" parent="." index="16" instance=ExtResource("12_3u2xr")]
 position = Vector2(440, 209)
+
+[node name="Upgrade" parent="." index="17" instance=ExtResource("10_1itfp")]
+position = Vector2(505, 219)
 
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_player_detector_body_entered"]
 [connection signal="health_loss" from="Player" to="HUD" method="_on_player_health_loss"]

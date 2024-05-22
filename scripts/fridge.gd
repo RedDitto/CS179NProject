@@ -13,8 +13,6 @@ var death_finished = false
 
 signal health_loss
 
-@export var _enemy_stats : Enemy_Stats
-
 var health = 100
 
 @onready var health_bar = $Health_Bar
@@ -26,7 +24,7 @@ var health = 100
 func _ready():
 	var __ = connect("tree_exited", Callable(get_parent(), "_on_enemy_killed"))
 	call_deferred("seeker_setup")
-  $Health_Bar.visible = false
+	$Health_Bar.visible = false
   
 func seeker_setup():
 	await get_tree().physics_frame
@@ -34,9 +32,9 @@ func seeker_setup():
 		navigation_agent.target_position = target.global_position
 
 func _physics_process(delta):
-  if alive:
+	if alive:
 		if player_chase:
-      $Health_Bar.value = _enemy_stats.health
+			$Health_Bar.value = _enemy_stats.health
 			if target:
 				#print(target.global_position)
 				navigation_agent.target_position = target.global_position
