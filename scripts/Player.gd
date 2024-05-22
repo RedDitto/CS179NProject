@@ -9,6 +9,7 @@ var _player_stats = Global._player_stats
 var _player_upgrades = Global._player_upgrades
 
 const PROJECTILE_PATH = preload('res://Scenes/Projectile.tscn')
+const fridgePATH = preload('res://Scenes/fridge.tscn')
 var DashDirection = Vector2.ZERO
 var enemy_in_attack_range = false
 var enemy_attack_cooldown = true
@@ -187,6 +188,8 @@ func attack():
 	#if melee_range == true:
 		#emit_signal("damage_enemy", _player_stat.attack)
 
+func banana():
+	pass
 
 func _on_deal_attack_timer_timeout():
 	$deal_attack_timer.stop()
@@ -267,7 +270,7 @@ func _mouse_direction(): # Gets player direction based on mouse when there is mo
 func _on_melee_attack_body_entered(body):
 	if body.has_method("enemy"):
 		melee_range = true
-		body.deal_with_damage(_player_stats.attack)
+		body.deal_with_damage(_player_stats.attack*10)
 		print("Hit!!!")
 
 func _on_melee_attack_body_exited(body):

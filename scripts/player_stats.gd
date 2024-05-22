@@ -7,5 +7,5 @@ var health = 1000
 var currency = 0
 var attack = 20
 var attack_speed = 1.0
-var speed = 100
+var speed = 200
 var speed_boost = 0
