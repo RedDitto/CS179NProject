@@ -270,7 +270,7 @@ func _mouse_direction(): # Gets player direction based on mouse when there is mo
 func _on_melee_attack_body_entered(body):
 	if body.has_method("enemy"):
 		melee_range = true
-		body.deal_with_damage(_player_stats.attack*10)
+		body.deal_with_damage(_player_stats.attack*3)
 		print("Hit!!!")
 
 func _on_melee_attack_body_exited(body):

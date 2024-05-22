@@ -176,16 +176,28 @@ tint_progress = Color(0.666667, 0, 0, 1)
 script = ExtResource("6_1qi2d")
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("7_vbd4t")]
-position = Vector2(-1, 42)
+position = Vector2(-2, 55)
 
 [node name="CharacterBody2D" parent="CharacterBody2D" instance=ExtResource("7_vbd4t")]
-position = Vector2(-30, -45)
+position = Vector2(-44, -58)
 
 [node name="CharacterBody2D" parent="CharacterBody2D/CharacterBody2D" instance=ExtResource("7_vbd4t")]
-position = Vector2(54, -5)
+position = Vector2(88, -9)
 
 [node name="CharacterBody2D" parent="CharacterBody2D/CharacterBody2D/CharacterBody2D" instance=ExtResource("7_vbd4t")]
-position = Vector2(-26, -45)
+position = Vector2(19, 55)
+
+[node name="CharacterBody2D" parent="CharacterBody2D/CharacterBody2D/CharacterBody2D/CharacterBody2D" instance=ExtResource("7_vbd4t")]
+position = Vector2(-131, 3)
+
+[node name="CharacterBody2D2" parent="." instance=ExtResource("7_vbd4t")]
+position = Vector2(0, -66)
+
+[node name="CharacterBody2D2" parent="CharacterBody2D2" instance=ExtResource("7_vbd4t")]
+position = Vector2(52, -6)
+
+[node name="CharacterBody2D2" parent="CharacterBody2D2/CharacterBody2D2" instance=ExtResource("7_vbd4t")]
+position = Vector2(-122, 6)
 
 [connection signal="health_loss" from="." to="Health_Bar" method="_on_fridge_health_loss"]
 [connection signal="body_entered" from="detection_area" to="." method="_on_detection_area_body_entered"]
