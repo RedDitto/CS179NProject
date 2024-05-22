@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://c4y5r7d5dtha1" path="res://Art/4 BigSet.png" id="1_hglot"]
 [ext_resource type="Script" path="res://scripts/room.gd" id="1_mo1rc"]
-[ext_resource type="Script" path="res://Scenes/TileMap.gd" id="3_ib5r5"]
+[ext_resource type="Script" path="res://scripts/TileMap.gd" id="3_ib5r5"]
 [ext_resource type="Texture2D" uid="uid://lpptv7kaorr6" path="res://Art/sierrassets furniture pack/furniture/furniture spritesheet.png" id="7_lcffh"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_o83if"]

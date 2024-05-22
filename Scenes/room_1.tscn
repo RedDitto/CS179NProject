@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dejwa6jil8g55"]
+[gd_scene load_steps=14 format=3 uid="uid://dejwa6jil8g55"]
 
 [ext_resource type="PackedScene" uid="uid://dh7r45oh824ur" path="res://Scenes/room.tscn" id="1_0bkqh"]
 [ext_resource type="PackedScene" uid="uid://8nccul0njthp" path="res://Scenes/player.tscn" id="2_kx6gi"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://dsqacigqofet" path="res://Scenes/ranged_weapon.tscn" id="9_ohvqi"]
 [ext_resource type="PackedScene" uid="uid://cvefens235g58" path="res://Scenes/upgrade.tscn" id="10_1itfp"]
 [ext_resource type="PackedScene" uid="uid://bjlx0hq4dy24v" path="res://Scenes/crosshair.tscn" id="11_culhw"]
+[ext_resource type="PackedScene" uid="uid://cpjwgaqueaxt3" path="res://Scenes/upgrades_vending_machine.tscn" id="12_3u2xr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o43sk"]
 size = Vector2(15.5, 15)
@@ -73,6 +74,9 @@ position = Vector2(506, 256)
 position = Vector2(505, 219)
 
 [node name="Crosshair" parent="." index="15" instance=ExtResource("11_culhw")]
+
+[node name="Upgrades_Vending_Machine" parent="." index="16" instance=ExtResource("12_3u2xr")]
+position = Vector2(440, 209)
 
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_player_detector_body_entered"]
 [connection signal="health_loss" from="Player" to="HUD" method="_on_player_health_loss"]

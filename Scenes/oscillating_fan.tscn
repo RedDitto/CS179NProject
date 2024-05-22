@@ -1,7 +1,9 @@
-[gd_scene load_steps=18 format=3 uid="uid://d58vtcppf45o"]
+[gd_scene load_steps=20 format=3 uid="uid://d58vtcppf45o"]
 
 [ext_resource type="Script" path="res://scripts/oscillating_fan.gd" id="1_7jm04"]
 [ext_resource type="Texture2D" uid="uid://vvfb1rtq7kbx" path="res://Art/sierrassets furniture pack/furniture/furniture pack coloured outline.png" id="2_lhljo"]
+[ext_resource type="Texture2D" uid="uid://ghxw7s5a3p5d" path="res://Art/health_bar_progress.png" id="3_1seq6"]
+[ext_resource type="Texture2D" uid="uid://d1d2agyuvluuh" path="res://Art/health_bar_over.png" id="4_rnr2d"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_iljyy"]
 atlas = ExtResource("2_lhljo")
@@ -139,6 +141,23 @@ debug_enabled = true
 [node name="Timer" type="Timer" parent="Navigation"]
 wait_time = 0.1
 autostart = true
+
+[node name="Health_Bar" type="TextureProgressBar" parent="."]
+offset_left = -10.0
+offset_top = -31.0
+offset_right = 10.0
+offset_bottom = -25.0
+nine_patch_stretch = true
+stretch_margin_left = 2
+stretch_margin_top = 2
+stretch_margin_right = 2
+stretch_margin_bottom = 2
+texture_under = ExtResource("3_1seq6")
+texture_over = ExtResource("4_rnr2d")
+texture_progress = ExtResource("3_1seq6")
+tint_under = Color(0.164706, 0.164706, 0.164706, 1)
+tint_over = Color(0.121569, 0.121569, 0.121569, 1)
+tint_progress = Color(0.666667, 0, 0, 1)
 
 [connection signal="body_entered" from="detection_area" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="detection_area" to="." method="_on_detection_area_body_exited"]

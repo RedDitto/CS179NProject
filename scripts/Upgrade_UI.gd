@@ -6,7 +6,7 @@ signal is_visible
 func _ready():
 	pass
 
-func _on_upgrade_open_menu(rn1, rn2):
+func _open_menu(rn1, rn2):
 	$Upgrade1_Button/Upgrade1.text = Global._player_upgrades.upgrades[rn1][0]
 	$Upgrade1_Button/Upgrade1_Description.text = Global._player_upgrades.descriptions[rn1]
 	$Upgrade2_Button/Upgrade2.text = Global._player_upgrades.upgrades[rn2][0]

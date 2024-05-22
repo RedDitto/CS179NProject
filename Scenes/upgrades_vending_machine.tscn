@@ -1,0 +1,177 @@
+[gd_scene load_steps=14 format=3 uid="uid://cpjwgaqueaxt3"]
+
+[ext_resource type="Texture2D" uid="uid://cotl2wqqmyumt" path="res://Art/vending_machine.png" id="1_8xf4y"]
+[ext_resource type="Script" path="res://scripts/upgrades_vending_machine.gd" id="1_ypat6"]
+[ext_resource type="Texture2D" uid="uid://di1m1ets0m1nw" path="res://Art/border.png" id="3_a2mo8"]
+[ext_resource type="Script" path="res://scripts/Upgrades_Vending_Machine_Menu.gd" id="3_hgg2e"]
+[ext_resource type="Texture2D" uid="uid://w17dtr23nd3w" path="res://Art/button.png" id="5_plfkt"]
+[ext_resource type="Texture2D" uid="uid://cfbfj41cqsstv" path="res://Art/button_pressed.png" id="6_pkhjo"]
+[ext_resource type="Texture2D" uid="uid://domj51m6j0nj4" path="res://Art/button_hover.png" id="7_hguya"]
+[ext_resource type="Texture2D" uid="uid://cqk5e2kxkb6pe" path="res://Art/close_button.png" id="8_f4dbv"]
+[ext_resource type="Texture2D" uid="uid://diyshcl0q2f41" path="res://Art/close_button_pressed.png" id="9_rdlyw"]
+[ext_resource type="Texture2D" uid="uid://cmouvtu7yulsk" path="res://Art/close_button_hover.png" id="10_63tvw"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_wxlu1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p4f1g"]
+size = Vector2(18, 15)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k3w0h"]
+size = Vector2(18, 12)
+
+[node name="Upgrades_Vending_Machine" type="StaticBody2D"]
+physics_material_override = SubResource("PhysicsMaterial_wxlu1")
+script = ExtResource("1_ypat6")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_8xf4y")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 8.5)
+shape = SubResource("RectangleShape2D_p4f1g")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(1, 22)
+shape = SubResource("RectangleShape2D_k3w0h")
+
+[node name="Menu" type="CanvasLayer" parent="."]
+script = ExtResource("3_hgg2e")
+
+[node name="TextureButton" type="TextureRect" parent="Menu"]
+offset_left = 124.0
+offset_top = -9.0
+offset_right = 456.0
+offset_bottom = 323.0
+texture = ExtResource("3_a2mo8")
+stretch_mode = 4
+
+[node name="Upgrades_Store_Label" type="Label" parent="Menu"]
+offset_left = 204.0
+offset_top = 26.0
+offset_right = 414.0
+offset_bottom = 49.0
+text = "Permanent Upgrades"
+
+[node name="Upgrades_Label" type="Label" parent="Menu"]
+offset_left = 168.0
+offset_top = 69.0
+offset_right = 242.0
+offset_bottom = 92.0
+text = "Upgrades"
+
+[node name="Rank" type="Label" parent="Menu"]
+offset_left = 297.0
+offset_top = 67.0
+offset_right = 337.0
+offset_bottom = 90.0
+text = "Rank"
+
+[node name="Cost" type="Label" parent="Menu"]
+offset_left = 355.0
+offset_top = 66.0
+offset_right = 395.0
+offset_bottom = 89.0
+text = "Cost"
+
+[node name="Upgrade1_Label" type="Label" parent="Menu"]
+offset_left = 168.0
+offset_top = 109.0
+offset_right = 252.0
+offset_bottom = 132.0
+theme_override_font_sizes/font_size = 12
+text = "Upgrade 1:"
+
+[node name="Rank" type="Label" parent="Menu/Upgrade1_Label"]
+layout_mode = 0
+offset_left = 131.0
+offset_top = -1.0
+offset_right = 171.0
+offset_bottom = 22.0
+theme_override_font_sizes/font_size = 12
+text = "0"
+horizontal_alignment = 1
+
+[node name="Cost" type="Label" parent="Menu/Upgrade1_Label"]
+layout_mode = 0
+offset_left = 178.0
+offset_right = 218.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 12
+text = "100"
+horizontal_alignment = 2
+
+[node name="Button1" type="TextureButton" parent="Menu/Upgrade1_Label"]
+layout_mode = 0
+offset_left = 222.0
+offset_top = -7.0
+offset_right = 255.0
+offset_bottom = 27.0
+texture_normal = ExtResource("5_plfkt")
+texture_pressed = ExtResource("6_pkhjo")
+texture_hover = ExtResource("7_hguya")
+stretch_mode = 4
+
+[node name="Upgrade2_Label" type="Label" parent="Menu"]
+offset_left = 169.0
+offset_top = 156.0
+offset_right = 253.0
+offset_bottom = 179.0
+theme_override_font_sizes/font_size = 12
+text = "Upgrade 2:"
+
+[node name="Rank" type="Label" parent="Menu/Upgrade2_Label"]
+layout_mode = 0
+offset_left = 131.0
+offset_top = -1.0
+offset_right = 171.0
+offset_bottom = 22.0
+theme_override_font_sizes/font_size = 12
+text = "0"
+horizontal_alignment = 1
+
+[node name="Cost" type="Label" parent="Menu/Upgrade2_Label"]
+layout_mode = 0
+offset_left = 181.0
+offset_right = 221.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 12
+text = "2000
+"
+horizontal_alignment = 2
+
+[node name="Button2" type="TextureButton" parent="Menu/Upgrade2_Label"]
+layout_mode = 0
+offset_left = 221.0
+offset_top = -7.0
+offset_right = 254.0
+offset_bottom = 27.0
+texture_normal = ExtResource("5_plfkt")
+texture_pressed = ExtResource("6_pkhjo")
+texture_hover = ExtResource("7_hguya")
+stretch_mode = 4
+
+[node name="CloseButton" type="TextureButton" parent="Menu"]
+offset_left = 392.0
+offset_top = 23.0
+offset_right = 427.0
+offset_bottom = 57.0
+texture_normal = ExtResource("8_f4dbv")
+texture_pressed = ExtResource("9_rdlyw")
+texture_hover = ExtResource("10_63tvw")
+stretch_mode = 4
+
+[node name="Bank" type="Label" parent="Menu"]
+offset_left = 164.0
+offset_top = 279.0
+offset_right = 270.0
+offset_bottom = 302.0
+text = "Bank: $100"
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="pressed" from="Menu/Upgrade1_Label/Button1" to="Menu" method="_on_button1_pressed"]
+[connection signal="pressed" from="Menu/Upgrade2_Label/Button2" to="Menu" method="_on_button2_pressed"]
+[connection signal="pressed" from="Menu/CloseButton" to="Menu" method="_on_close_button_pressed"]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://bropqibhxc8jm"]
 
 [ext_resource type="Script" path="res://scripts/Microwave.gd" id="1_fe1up"]
-[ext_resource type="Texture2D" uid="uid://br241jsjdbqil" path="res://Art/Modern_Interiors_RPG_Maker_Version/RPG_MAKER_MV/Animated_Objects/!Small_doors_and_others.png" id="2_wr1gd"]
+[ext_resource type="Texture2D" uid="uid://br241jsjdbqil" path="res://Art/Animated_Objects/!Small_doors_and_others.png" id="2_wr1gd"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dttgc"]
 atlas = ExtResource("2_wr1gd")
