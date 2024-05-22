@@ -15,11 +15,14 @@ signal health_loss
 
 @export var _enemy_stats : Enemy_Stats
 
+var health = 100
+
 @export var target: Node2D = null
 
 @onready var navigation_agent_2d = $Navigation/NavigationAgent2D
 
 func _ready():
+	var __ = connect("tree_exited", Callable(get_parent(), "_on_enemy_killed"))
 	call_deferred("seeker_setup")
 	health_bar.visible = false
 	
@@ -74,15 +77,15 @@ func _on_detection_area_body_exited(body):
 
 func deal_with_damage(damage):
 	if can_take_damage == true:
-		if _enemy_stats.health - damage < 0:
-			_enemy_stats.health = 0
+		if health - damage < 0:
+			health = 0
 		else:
-			_enemy_stats.health = _enemy_stats.health - damage
+			health = health - damage
 		$take_damage_cooldown.start()
 		can_take_damage = false
-		print("fan health = ", _enemy_stats.health)
-		emit_signal("health_loss", _enemy_stats.health)
-		if _enemy_stats.health <= 0:
+		print("fan health = ", health)
+		emit_signal("health_loss", health)
+		if health <= 0:
 			alive = false
 
 func _on_take_damage_cooldown_timeout():
