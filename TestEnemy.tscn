@@ -1,0 +1,55 @@
+[gd_scene load_steps=9 format=3 uid="uid://okbr1ggvaovg"]
+
+[ext_resource type="Script" path="res://scripts/TestEnemy.gd" id="1_bsawc"]
+[ext_resource type="Texture2D" uid="uid://22chh13e4h0i" path="res://Art/mystic_woods_free_2.1/sprites/characters/slime.png" id="1_ov7c1"]
+[ext_resource type="Texture2D" uid="uid://ghxw7s5a3p5d" path="res://Art/health_bar_progress.png" id="3_kk01l"]
+[ext_resource type="Texture2D" uid="uid://d1d2agyuvluuh" path="res://Art/health_bar_over.png" id="4_mh8ku"]
+[ext_resource type="Script" path="res://scripts/healthBar.gd" id="5_g4gey"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mjywu"]
+atlas = ExtResource("1_ov7c1")
+region = Rect2(1, 2, 30, 30)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_x7ghi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mjywu")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_no5w6"]
+size = Vector2(40, 36)
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+script = ExtResource("1_bsawc")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -2)
+scale = Vector2(3.13333, 2.81667)
+sprite_frames = SubResource("SpriteFrames_x7ghi")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_no5w6")
+
+[node name="Health_Bar" type="TextureProgressBar" parent="."]
+offset_left = -20.0
+offset_top = -28.0
+offset_right = 22.0
+offset_bottom = -18.0
+nine_patch_stretch = true
+stretch_margin_left = 2
+stretch_margin_top = 2
+stretch_margin_right = 2
+stretch_margin_bottom = 2
+texture_under = ExtResource("3_kk01l")
+texture_over = ExtResource("4_mh8ku")
+texture_progress = ExtResource("3_kk01l")
+tint_under = Color(0.164706, 0.164706, 0.164706, 1)
+tint_over = Color(0.121569, 0.121569, 0.121569, 1)
+tint_progress = Color(0.666667, 0, 0, 1)
+script = ExtResource("5_g4gey")

@@ -124,6 +124,7 @@ motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_p8sc8")
 _enemy_stats = SubResource("Resource_qfqm3")
+metadata/asdf = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(20, -7)

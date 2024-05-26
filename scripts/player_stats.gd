@@ -2,8 +2,8 @@ extends Resource
 
 class_name Player_Stats
 
-var max_health = 100
-var health = 100
+var max_health = 1000
+var health = 1000
 var currency = 0
 var attack = 20
 var attack_speed = 1.0
