@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://dh7r45oh824ur" path="res://Scenes/room.tscn" id="1_to223"]
 [ext_resource type="PackedScene" uid="uid://2d1eyvtljnwp" path="res://Scenes/boss1.tscn" id="2_vil2c"]
 [ext_resource type="PackedScene" uid="uid://cwai0pk8uh5y1" path="res://Scenes/fridge.tscn" id="3_6rgln"]
-[ext_resource type="PackedScene" uid="uid://cvqxrdtcp6ado" path="res://spawner.tscn" id="4_cwxua"]
+[ext_resource type="PackedScene" uid="uid://cvqxrdtcp6ado" path="res://Scenes/spawner.tscn" id="4_4o084"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l1wof"]
 
@@ -39,13 +39,13 @@ position = Vector2(280, 189)
 [node name="Fridge2" parent="." index="7" instance=ExtResource("3_6rgln")]
 position = Vector2(405, 108)
 
-[node name="CharacterBody2D2" parent="." index="8" instance=ExtResource("4_cwxua")]
+[node name="CharacterBody2D2" parent="." index="8" instance=ExtResource("4_4o084")]
 position = Vector2(141, 92)
 
-[node name="CharacterBody2D3" parent="." index="9" instance=ExtResource("4_cwxua")]
+[node name="CharacterBody2D3" parent="." index="9" instance=ExtResource("4_4o084")]
 position = Vector2(141, 276)
 
-[node name="CharacterBody2D" parent="." index="10" instance=ExtResource("4_cwxua")]
+[node name="CharacterBody2D" parent="." index="10" instance=ExtResource("4_4o084")]
 position = Vector2(401, 279)
 
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_player_detector_body_entered"]

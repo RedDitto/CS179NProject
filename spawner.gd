@@ -10,7 +10,6 @@ func _on_collision_shape_2d_child_entered_tree(node):
 
 
 func _on_detection_area_body_entered(body):
-	print("EE")
 	if(body.has_method("banana")):
 		var aaa = fridgePATH.instantiate()
 		aaa.position = Vector2(position.x, position.y)

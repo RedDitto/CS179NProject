@@ -1,17 +1,27 @@
-[gd_scene load_steps=2 format=3 uid="uid://cncro8g47a5d7"]
+[gd_scene load_steps=4 format=3 uid="uid://cvqxrdtcp6ado"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_hni3j"]
-radius = 30.5941
+[ext_resource type="Script" path="res://spawner.gd" id="1_ajj1k"]
 
-[node name="Spawner" type="Node2D"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_nu657"]
+radius = 21.2132
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
-position = Vector2(117, 46)
+[sub_resource type="CircleShape2D" id="CircleShape2D_21jb4"]
+radius = 3.0
 
-[node name="detection_area" type="Area2D" parent="CharacterBody2D"]
-position = Vector2(0, 18)
+[node name="CharacterBody2D" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 7
+script = ExtResource("1_ajj1k")
+
+[node name="detection_area" type="Area2D" parent="."]
 collision_mask = 7
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/detection_area"]
-position = Vector2(0, -18)
-shape = SubResource("CircleShape2D_hni3j")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="detection_area"]
+position = Vector2(1, -1)
+shape = SubResource("CircleShape2D_nu657")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_21jb4")
+
+[connection signal="body_entered" from="detection_area" to="." method="_on_detection_area_body_entered"]
+[connection signal="child_entered_tree" from="detection_area/CollisionShape2D" to="." method="_on_collision_shape_2d_child_entered_tree"]

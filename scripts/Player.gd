@@ -32,7 +32,19 @@ var animation = "none"
 
 var hasRangedWeapon = false
 var hasMeleeWeapon = false
+var collision = true
+var mouseAngle = 0
 
+func _input(event):
+	if event.is_action_pressed("print"):
+		print(position)
+		collision = !collision
+		self.set_collision_layer_value(3,collision)
+		self.set_collision_mask_value(1,collision)
+		self.set_collision_mask_value(2,collision)
+	if event.is_action_pressed("tp"):
+
+		position = position - (global_position - get_global_mouse_position())
 
 func _ready():
 	$AnimatedSprite2D.play("front_idle")
@@ -323,6 +335,9 @@ func _on_picked_up_weapon_ranged(sprite):
 
 func _on_picked_up_weapon_melee(sprite):
 	hasMeleeWeapon = true
+	
+	
+	
 
 
 

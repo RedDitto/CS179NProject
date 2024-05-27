@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dh7r45oh824ur" path="res://Scenes/room.tscn" id="1_gpa1l"]
 [ext_resource type="PackedScene" uid="uid://xvo8q2ctv7bt" path="res://Scenes/door.tscn" id="2_u56e0"]
-[ext_resource type="PackedScene" uid="uid://cvqxrdtcp6ado" path="res://spawner.tscn" id="3_s6axr"]
+[ext_resource type="PackedScene" uid="uid://cvqxrdtcp6ado" path="res://Scenes/spawner.tscn" id="3_s6axr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l1wof"]
 
