@@ -67,6 +67,13 @@ offset_right = 565.0
 offset_bottom = 321.0
 script = ExtResource("10_c6meu")
 
+[node name="ItemDisplay" type="TextureRect" parent="."]
+offset_left = 530.0
+offset_top = 268.0
+offset_right = 565.0
+offset_bottom = 289.0
+script = ExtResource("10_c6meu")
+
 [node name="WeaponDisplayRanged" type="TextureRect" parent="."]
 offset_left = 486.0
 offset_top = 300.0

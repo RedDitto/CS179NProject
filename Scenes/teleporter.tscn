@@ -1,25 +1,37 @@
-[gd_scene load_steps=4 format=3 uid="uid://cu6hs4ffu8hj7"]
+[gd_scene load_steps=6 format=3 uid="uid://ynraaj7q6m30"]
 
 [ext_resource type="Script" path="res://scripts/teleporter.gd" id="1_2kfkt"]
-[ext_resource type="Texture2D" path="res://Art/randomArt/tp.png" id="2_gnqk1"]
+[ext_resource type="Texture2D" uid="uid://d24h1h77tkayc" path="res://Art/randomArt/tp.png" id="1_wfusy"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_cmswv"]
-radius = 20.0
+[sub_resource type="AtlasTexture" id="AtlasTexture_sy08x"]
+atlas = ExtResource("1_wfusy")
+region = Rect2(0, 0, 60, 60)
 
-[node name="teleporter" type="Node2D"]
-scale = Vector2(0.25, 0.25)
+[sub_resource type="SpriteFrames" id="SpriteFrames_n2bfv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sy08x")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_20vmo"]
+radius = 21.1896
+
+[node name="Node2D" type="Node2D"]
 script = ExtResource("1_2kfkt")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(2, 2)
-texture = ExtResource("2_gnqk1")
-region_rect = Rect2(31.4154, 100.249, 22.3041, 12.4556)
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_n2bfv")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("CircleShape2D_cmswv")
+shape = SubResource("CircleShape2D_20vmo")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
