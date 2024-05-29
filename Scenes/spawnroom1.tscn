@@ -31,7 +31,7 @@ position = Vector2(251, 203)
 [node name="RangedWeaponSpawn" type="Marker2D" parent="." index="8"]
 position = Vector2(320, 203)
 
-[node name="Upgrades_Vending_Machine" parent="." index="9" instance=ExtResource("3_tglvd")]
-position = Vector2(292, 165)
+[node name="Upgrades_Vending_Machine" parent="." index="9" instance=ExtResource("3_6pcvc")]
+position = Vector2(238, 161)
 
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_player_detector_body_entered"]

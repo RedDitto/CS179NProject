@@ -9,7 +9,7 @@ func _ready():
 
 func _open_menu():
 	self.visible = true
-	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	#Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	$Upgrade1_Label/Button1.disabled = false
 	$Upgrade2_Label/Button2.disabled = false
 	$Upgrade1_Label.text = get_parent()._player_permanent_upgrades.upgrades[0][0] + ": " + str(Global._player_stats.health)
