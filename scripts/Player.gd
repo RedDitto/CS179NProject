@@ -33,15 +33,16 @@ var animation = "none"
 var hasRangedWeapon = false
 var hasMeleeWeapon = false
 var hastp = false
+var collision = true
 
 
 func _input(event):
 	if event.is_action_pressed("print"):
 		print(position)
-		#collision = !collision
-		#self.set_collision_layer_value(3,collision)
-		#self.set_collision_mask_value(1,collision)
-		#self.set_collision_mask_value(2,collision)
+		collision = !collision
+		self.set_collision_layer_value(3,collision)
+		self.set_collision_mask_value(1,collision)
+		self.set_collision_mask_value(2,collision)
 	if event.is_action_pressed("tp"):
 		print("action tp")
 		if hastp:
