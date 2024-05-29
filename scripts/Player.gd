@@ -32,8 +32,22 @@ var animation = "none"
 
 var hasRangedWeapon = false
 var hasMeleeWeapon = false
+var hastp = false
 
 
+func _input(event):
+	if event.is_action_pressed("print"):
+		print(position)
+		#collision = !collision
+		#self.set_collision_layer_value(3,collision)
+		#self.set_collision_mask_value(1,collision)
+		#self.set_collision_mask_value(2,collision)
+	if event.is_action_pressed("tp"):
+		print("action tp")
+		if hastp:
+			position = position - (global_position - get_global_mouse_position())
+			
+			
 func _ready():
 	$AnimatedSprite2D.play("front_idle")
 	$Melee_Attack/Melee_Collision.disabled = true
@@ -312,6 +326,10 @@ func _on_dash_timer_timeout():
 
 func _on_dash_again_timer_timeout():
 	can_dash = true
+	
+func pick_up_tp():
+	hastp = true
+
 
 
 
