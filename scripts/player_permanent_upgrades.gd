@@ -2,6 +2,7 @@ extends Resource
 
 class_name Player_Permanent_Upgrades
 
+# Format is [Name of permanent upgrade, Upgrade rank, Max upgrade rank, Upgrade cost]
 var upgrades = [
 	["Starting Health", 0, 10, 100],
 	["Cheat Death", 0, 1, 5000]
@@ -26,3 +27,4 @@ func _upgrade_increase(choice, _player_stats):
 			_player_stats.bank -= upgrades[1][3]
 			if upgrades[1][1] == upgrades[1][2]:
 				is_max[1] = true
+	Global.save_data()
