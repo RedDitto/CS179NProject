@@ -1,7 +1,7 @@
 extends Node2D
 
 var SPAWN_ROOMS: Array = [preload("res://Scenes/spawnroom1.tscn"), preload("res://Scenes/spawnroom2.tscn")]
-var ENEMY_ROOMS: Array = [preload("res://Scenes/room1.tscn"), preload("res://Scenes/room2.tscn"), preload("res://Scenes/room3.tscn"), preload("res://Scenes/finroom1.tscn"), preload("res://Scenes/room4.tscn"), preload("res://Scenes/room5.tscn"), preload("res://Scenes/room6.tscn")]
+var ENEMY_ROOMS: Array = [preload("res://Scenes/room1.tscn"), preload("res://Scenes/room2.tscn"), preload("res://Scenes/room3.tscn"), preload("res://Scenes/finroom1.tscn"), preload("res://Scenes/room4.tscn"), preload("res://Scenes/room5.tscn"), preload("res://Scenes/room6.tscn"), preload("res://Scenes/room7.tscn"), preload("res://Scenes/room8.tscn")]
 var END_ROOMS: Array = [preload("res://Scenes/endroom1.tscn")]
 
 const TILE_SIZE: int = 16
