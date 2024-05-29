@@ -12,6 +12,7 @@ script = ExtResource("1_uou2p")
 
 [node name="Rooms" type="Node2D" parent="."]
 script = ExtResource("2_0a6hj")
+num_levels = null
 
 [node name="Player" parent="." instance=ExtResource("1_c05ou")]
 
