@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+var currency_drop = preload("res://Scenes/currency.tscn")
+
 var speed = 60
 var player_chase = false
 var player = null
@@ -61,6 +63,9 @@ func _physics_process(delta):
 		else:
 			$AnimatedSprite2D.play("idle")
 	else:
+		var currency = currency_drop.instantiate()
+		get_parent().add_child(currency)
+		currency.position = self.position
 		self.queue_free()
 
 	
