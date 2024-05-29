@@ -57,4 +57,4 @@ func _on_close_button_pressed():
 	self.visible = false
 	$Upgrade1_Label/Button1.disabled = true
 	$Upgrade2_Label/Button2.disabled = true
-	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	#Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)

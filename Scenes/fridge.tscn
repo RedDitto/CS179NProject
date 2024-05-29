@@ -1,8 +1,9 @@
-[gd_scene load_steps=20 format=3 uid="uid://cwai0pk8uh5y1"]
+[gd_scene load_steps=25 format=3 uid="uid://cwai0pk8uh5y1"]
 
 [ext_resource type="Script" path="res://scripts/fridge.gd" id="1_0x0k2"]
 [ext_resource type="Texture2D" uid="uid://bkphj4ydai2l2" path="res://Art/Animated_Objects/!$Kitchen_fridge.png" id="1_24o3a"]
 [ext_resource type="Script" path="res://scripts/Enemy_Stats.gd" id="2_50hny"]
+[ext_resource type="Shader" uid="uid://wbegqqaqwpc" path="res://scripts/hit_flash_shader.tres" id="3_p0sb7"]
 [ext_resource type="Texture2D" uid="uid://ghxw7s5a3p5d" path="res://Art/health_bar_progress.png" id="4_d8c76"]
 [ext_resource type="Texture2D" uid="uid://d1d2agyuvluuh" path="res://Art/health_bar_over.png" id="5_pdn3u"]
 [ext_resource type="Script" path="res://scripts/enemy_health_bar.gd" id="6_6gkkh"]
@@ -13,6 +14,12 @@ max_health = 100
 health = 100
 attack = 10
 speed = 40
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_s8282"]
+resource_local_to_scene = true
+shader = ExtResource("3_p0sb7")
+shader_parameter/enabled = false
+shader_parameter/hit_color = Color(1, 1, 1, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_efts2"]
 atlas = ExtResource("1_24o3a")
@@ -116,15 +123,54 @@ radius = 86.209
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6sr2l"]
 size = Vector2(12, 8)
 
+[sub_resource type="Animation" id="Animation_ptf4w"]
+resource_name = "hit"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:material:shader_parameter/enabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_snvyx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:material:shader_parameter/enabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mc6ux"]
+_data = {
+"RESET": SubResource("Animation_snvyx"),
+"hit": SubResource("Animation_ptf4w")
+}
+
 [node name="Fridge" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 7
 motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_0x0k2")
+knockback_modifier = 50.0
 _enemy_stats = SubResource("Resource_qfqm3")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_s8282")
 position = Vector2(8, -19)
 scale = Vector2(0.33, 0.33)
 sprite_frames = SubResource("SpriteFrames_bokfs")
@@ -155,6 +201,7 @@ wait_time = 0.1
 autostart = true
 
 [node name="take_damage_cooldown" type="Timer" parent="."]
+wait_time = 0.5
 
 [node name="Health_Bar" type="TextureProgressBar" parent="."]
 offset_left = -10.0
@@ -174,9 +221,18 @@ tint_over = Color(0.121569, 0.121569, 0.121569, 1)
 tint_progress = Color(0.666667, 0, 0, 1)
 script = ExtResource("6_6gkkh")
 
+[node name="Hit_AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_mc6ux")
+}
+
+[node name="Knockback_timer" type="Timer" parent="."]
+wait_time = 0.25
+
 [connection signal="health_loss" from="." to="Health_Bar" method="_on_fridge_health_loss"]
 [connection signal="body_entered" from="detection_area" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="detection_area" to="." method="_on_detection_area_body_exited"]
 [connection signal="velocity_computed" from="Navigation/NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]
 [connection signal="timeout" from="Navigation/Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="take_damage_cooldown" to="." method="_on_take_damage_cooldown_timeout"]
+[connection signal="timeout" from="Knockback_timer" to="." method="_on_knockback_timer_timeout"]

@@ -10,8 +10,11 @@ var alive = true
 var death_finished = false
 
 signal health_loss
-
+var in_knockback = false
+@export var knockback_modifier : float
+@export var enabled_knockback : bool = true
 @export var _enemy_stats : Enemy_Stats
+@onready var hit_animation_player = $Hit_AnimationPlayer
 
 var health = 100
 
@@ -38,15 +41,15 @@ func _physics_process(delta):
 				navigation_agent.target_position = target.global_position
 			if navigation_agent.is_navigation_finished():
 				return
-			
-			var current_agent_position = global_position
-			var next_path_position = navigation_agent.get_next_path_position()
-			var new_velocity = current_agent_position.direction_to(next_path_position) * speed
-			
-			if navigation_agent.avoidance_enabled:
-				navigation_agent.set_velocity(new_velocity)
-			else:
-				_on_navigation_agent_2d_velocity_computed(new_velocity)
+			if !in_knockback:
+				var current_agent_position = global_position
+				var next_path_position = navigation_agent.get_next_path_position()
+				var new_velocity = current_agent_position.direction_to(next_path_position) * speed
+				
+				if navigation_agent.avoidance_enabled:
+					navigation_agent.set_velocity(new_velocity)
+				else:
+					_on_navigation_agent_2d_velocity_computed(new_velocity)
 			
 			move_and_slide()
 			$AnimatedSprite2D.play("walk")
@@ -78,14 +81,27 @@ func deal_with_damage(damage):
 			health = 0
 		else:
 			health = health - damage
+		if enabled_knockback:
+			in_knockback = true
+			var knockback_direction = navigation_agent.target_position.direction_to(self.global_position)
+			velocity = knockback_direction * knockback_modifier
+			$Knockback_timer.start()
+			
 		$take_damage_cooldown.start()
+		
+		
+		
 		print("cooldown start")
 		can_take_damage = false
 		print("fridge health = ", health)
 		emit_signal("health_loss", health)
 		if health <= 0:
 			alive = false
-			
+		else:
+			hit_animation_player.play("hit")
+
+
+
 func _on_take_damage_cooldown_timeout():
 	can_take_damage = true
 	
@@ -105,4 +121,5 @@ func _on_navigation_agent_2d_velocity_computed(safe_velocity):
 	velocity = safe_velocity
 
 
-
+func _on_knockback_timer_timeout():
+	in_knockback = false
