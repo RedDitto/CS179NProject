@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://ghxw7s5a3p5d" path="res://Art/health_bar_progress.png" id="4_di8jw"]
 [ext_resource type="Texture2D" uid="uid://d1d2agyuvluuh" path="res://Art/health_bar_over.png" id="5_x4ngi"]
 [ext_resource type="Script" path="res://scripts/enemy_health_bar.gd" id="6_1qi2d"]
-[ext_resource type="PackedScene" path="res://spawner.tscn" id="7_vbd4t"]
+[ext_resource type="PackedScene" uid="uid://cvqxrdtcp6ado" path="res://spawner.tscn" id="7_vbd4t"]
 
 [sub_resource type="Resource" id="Resource_qfqm3"]
 script = ExtResource("2_1n7s7")
@@ -123,21 +123,6 @@ radius = 86.209
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6sr2l"]
 size = Vector2(41, 79)
 
-[sub_resource type="Animation" id="Animation_0mj5i"]
-resource_name = "hit"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:material:shader_parameter/enabled")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-
 [sub_resource type="Animation" id="Animation_y2yl8"]
 length = 0.001
 tracks/0/type = "value"
@@ -151,6 +136,21 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_0mj5i"]
+resource_name = "hit"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:material:shader_parameter/enabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_y44x8"]
