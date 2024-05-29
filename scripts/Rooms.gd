@@ -1,7 +1,7 @@
 extends Node2D
 
 var SPAWN_ROOMS: Array = [preload("res://Scenes/spawnroom1.tscn"), preload("res://Scenes/spawnroom2.tscn")]
-var ENEMY_ROOMS: Array = [preload("res://Scenes/room1.tscn"), preload("res://Scenes/room2.tscn"), preload("res://Scenes/room3.tscn"), preload("res://Scenes/finroom1.tscn")]
+var ENEMY_ROOMS: Array = [preload("res://Scenes/room1.tscn"), preload("res://Scenes/room2.tscn"), preload("res://Scenes/room3.tscn"), preload("res://Scenes/finroom1.tscn"), preload("res://Scenes/room4.tscn"), preload("res://Scenes/room5.tscn"), preload("res://Scenes/room6.tscn")]
 var END_ROOMS: Array = [preload("res://Scenes/endroom1.tscn")]
 
 const TILE_SIZE: int = 16
@@ -10,7 +10,7 @@ const TILE_SIZE: int = 16
 # floor tile Vector2i(1,19)
 # right wall Vector2i(2,19)
 
-@export var num_levels: int = 5
+@export var num_levels: int = 9
 
 @onready var player = get_parent().get_node("Player")
 @onready var melee_weapon = get_parent().get_node("weapon_ground_melee")
@@ -44,7 +44,7 @@ func _spawn_rooms():
 			var previous_room_door: StaticBody2D = previous_room.get_node("Doors/Door")
 			var exit_tile_pos: Vector2i = previous_room_tilemap.local_to_map(previous_room_door.position) + Vector2i.UP
 		
-			var corridor_height: int = randi() % 5 + 3
+			var corridor_height: int = randi() % 5 + 6
 		
 			for y in corridor_height:
 				previous_room_tilemap.set_cell(0, exit_tile_pos + Vector2i(-1, -y),0, Vector2i(0,19))

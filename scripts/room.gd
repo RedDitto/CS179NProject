@@ -8,6 +8,7 @@ var num_enemies = 0
 @onready var enemy_positions_container: Node2D = get_node("EnemyPositions")
 @onready var player_detector: Area2D = get_node("PlayerDetector")
 
+const UPGRADES: Dictionary = {"upgrade" : preload("res://Scenes/upgrade.tscn")}
 
 const ENEMY_SCENES: Dictionary = {
 	"fan": preload("res://Scenes/oscillating_fan.tscn"),
@@ -22,6 +23,7 @@ func _ready():
 func _on_enemy_killed():
 	num_enemies -= 1
 	if num_enemies == 0:
+		_spawn_upgrade()
 		_open_doors()
 
 func _open_doors():
@@ -45,6 +47,13 @@ func _spawn_enemies():
 		enemy.position = enemy_position.position
 		call_deferred("add_child", enemy)
 
+func _spawn_upgrade():
+	var tempupgrade
+	tempupgrade = UPGRADES.upgrade.instantiate()
+	for door in door_container.get_children():
+		tempupgrade.position = door.position
+		call_deferred("add_child", tempupgrade)
+	
 func _on_player_detector_body_entered(body):
 	print("working")
 	player_detector.queue_free()

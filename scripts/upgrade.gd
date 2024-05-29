@@ -48,5 +48,5 @@ func _on_upgrade_button_upgrade_chosen(choice):
 	else:
 		_player_upgrades.upgrades[random_number2][1] += 1
 		emit_signal("gain_upgrade", random_number2)
-	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	#Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	queue_free()
