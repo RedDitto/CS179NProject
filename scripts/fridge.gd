@@ -59,7 +59,7 @@ func _physics_process(delta):
 				
 				if attacking:
 					$AnimatedSprite2D.play("ground_pound")
-					speed = 10
+					speed = 0
 				else:
 					#$AnimatedSprite2D.play("walk")
 					$AnimatedSprite2D.play('still_walk')	
@@ -163,13 +163,13 @@ func _on_attack_animation_cooldown_timeout():
 		ground_pound = true
 		print('START GROUND POUND')
 		$Attack/pound_animation_cooldown.start()
-		$Attack/ground_pound_hurtbox/CollisionShape2D.disabled = false
-
+		#$Attack/ground_pound_hurtbox/CollisionShape2D.disabled = false
+		$Attack/ground_pound_hurtbox/aoe.disabled = false
 func _on_pound_animation_cooldown_timeout():
 	print('END GROUND POUND')
 	ground_pound = false
-	$Attack/ground_pound_hurtbox/CollisionShape2D.disabled = true
-	
+	#$Attack/ground_pound_hurtbox/CollisionShape2D.disabled = true
+	$Attack/ground_pound_hurtbox/aoe.disabled = true
 
 
 func _on_ground_pound_hurtbox_body_entered(body):
