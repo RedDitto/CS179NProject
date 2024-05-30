@@ -18,7 +18,7 @@ var melee_range = false
 var _is_mouse_movement = false
 var dashing = false
 var can_dash = true
-var DashSpeed = 10
+var DashSpeed = 2.3
 var attack_in_progress = false
 var cheat_death_used = false
 
@@ -341,5 +341,14 @@ func _on_picked_up_weapon_ranged(sprite):
 func _on_picked_up_weapon_melee(sprite):
 	hasMeleeWeapon = true
 
-
+func deal_with_damage(damage):
+	#print('PLAYER TAKES GROUND POUND DAMAGE')
+	if enemy_attack_cooldown:
+		_player_stats.health = _player_stats.health - damage
+		enemy_attack_cooldown = false
+		$attack_cooldown.start()
+		emit_signal("health_loss")
+		print(_player_stats.health)
+		$hit.play()
+	pass
 

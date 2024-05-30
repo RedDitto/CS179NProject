@@ -507,10 +507,9 @@ position = Vector2(0, -6)
 [node name="Marker2D" type="Marker2D" parent="ProjectileDirection"]
 
 [node name="dash_timer" type="Timer" parent="."]
-wait_time = 0.1
+wait_time = 0.25
 
 [node name="dash_again_timer" type="Timer" parent="."]
-wait_time = 3.0
 
 [node name="hit" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_8k2gg")

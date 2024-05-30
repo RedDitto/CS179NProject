@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://dh7r45oh824ur" path="res://Scenes/room.tscn" id="1_to223"]
 [ext_resource type="PackedScene" uid="uid://daflx53hyukid" path="res://Scenes/boss1.tscn" id="2_vil2c"]
 [ext_resource type="PackedScene" uid="uid://cwai0pk8uh5y1" path="res://Scenes/fridge.tscn" id="3_6rgln"]
-[ext_resource type="PackedScene" uid="uid://cvqxrdtcp6ado" path="res://spawner.tscn" id="4_cwxua"]
+[ext_resource type="PackedScene" path="res://spawner.tscn" id="4_cwxua"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l1wof"]
 
