@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://c6ubyglnhvsem"]
+[gd_scene load_steps=8 format=3 uid="uid://c6ubyglnhvsem"]
 
 [ext_resource type="PackedScene" uid="uid://dh7r45oh824ur" path="res://Scenes/room.tscn" id="1_u5s4s"]
 [ext_resource type="PackedScene" uid="uid://xvo8q2ctv7bt" path="res://Scenes/door.tscn" id="2_owk7w"]
 [ext_resource type="PackedScene" uid="uid://cm0bqtg0tnk1w" path="res://Scenes/upgrades_vending_machine.tscn" id="3_ms6qi"]
 [ext_resource type="PackedScene" uid="uid://dx0i224w6knwl" path="res://Scenes/teleporter.tscn" id="4_ibef3"]
 [ext_resource type="PackedScene" uid="uid://c6s838vl1c53p" path="res://Scenes/RangedEnemy.tscn" id="5_ni3tl"]
+[ext_resource type="PackedScene" uid="uid://dmvfnuipx1qf3" path="res://Scenes/fridge2.tscn" id="6_yqdbj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_epjvc"]
 size = Vector2(15, 16)
@@ -45,5 +46,8 @@ position = Vector2(531, 316)
 
 [node name="CharacterBody2D" parent="." index="12" instance=ExtResource("5_ni3tl")]
 position = Vector2(525, 265)
+
+[node name="Fridge" parent="." index="13" instance=ExtResource("6_yqdbj")]
+position = Vector2(343, 259)
 
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_player_detector_body_entered"]

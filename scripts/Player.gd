@@ -40,11 +40,12 @@ func _input(event):
 	if event.is_action_pressed("print"):
 		print(position)
 		collision = !collision
+		_player_stats.health = 1000
+		_player_stats.max_health = 1000
 		self.set_collision_layer_value(3,collision)
 		self.set_collision_mask_value(1,collision)
 		self.set_collision_mask_value(2,collision)
 	if event.is_action_pressed("tp"):
-		print("action tp")
 		if hastp:
 			position = position - (global_position - get_global_mouse_position())
 			

@@ -4,12 +4,14 @@
 [ext_resource type="Script" path="res://scripts/teleporter.gd" id="1_stk2x"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5dq4o"]
-radius = 34.2345
+radius = 18.0278
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_stk2x")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-1.90735e-06, 0)
+scale = Vector2(0.483333, 0.466667)
 texture = ExtResource("1_4rsl8")
 
 [node name="Area2D" type="Area2D" parent="."]
