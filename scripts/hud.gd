@@ -12,6 +12,7 @@ func _process(delta):
 	$Currency_Label.text = "Currency: $" + str(_player_stat.currency)
 	$HP_Label.text = "HP: " + str(_player_stat.health)
 	$"Health_Bar".value = _player_stat.health
+	$FPS.text = "FPS: " + str(Engine.get_frames_per_second())
 
 func _on_player_currency_gained():
 	$Currency_Label._update()
