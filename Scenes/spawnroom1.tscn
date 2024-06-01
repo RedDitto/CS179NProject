@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://c2eombehxctxx"]
+[gd_scene load_steps=6 format=3 uid="uid://c2eombehxctxx"]
 
 [ext_resource type="PackedScene" uid="uid://dh7r45oh824ur" path="res://Scenes/room.tscn" id="1_itoi3"]
 [ext_resource type="PackedScene" uid="uid://xvo8q2ctv7bt" path="res://Scenes/door.tscn" id="2_mvhyk"]
+[ext_resource type="PackedScene" uid="uid://c6s838vl1c53p" path="res://Scenes/RangedEnemy.tscn" id="3_6ebls"]
 [ext_resource type="PackedScene" uid="uid://dx0i224w6knwl" path="res://Scenes/teleporter.tscn" id="3_cyp5b"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ek85a"]
@@ -31,7 +32,13 @@ position = Vector2(251, 203)
 [node name="RangedWeaponSpawn" type="Marker2D" parent="." index="8"]
 position = Vector2(320, 203)
 
-[node name="Node2D" parent="." index="9" instance=ExtResource("3_cyp5b")]
-position = Vector2(293, 193)
+[node name="CharacterBody2D" parent="." index="9" instance=ExtResource("3_6ebls")]
+position = Vector2(279, 222)
+
+[node name="Node2D" parent="." index="10" instance=ExtResource("3_cyp5b")]
+position = Vector2(331, 175)
+
+[node name="CharacterBody2D2" parent="." index="11" instance=ExtResource("3_6ebls")]
+position = Vector2(341, 288)
 
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_player_detector_body_entered"]
