@@ -23,7 +23,7 @@ var max_health = 1000
 var rd = RandomNumberGenerator.new()
 var numFridges = 0
 var maxFridges = 25
-signal fridgeDied
+
 
 
 @onready var health_bar = $Health_Bar
@@ -92,10 +92,8 @@ func poison() :
 
 
 func _on_detection_area_body_exited(body):
-	#if body.is_in_group("Player"):
-		#player = null
-		#player_chase = false
-	pass
+	if body.has_method("fridge2"):
+		fridgeDied() # or left detection zone
 	
 func deal_with_damage(damage):
 	if can_take_damage == true:
@@ -165,7 +163,9 @@ func _on_spawn_timer_timeout():
 			aaa.speed = 100 
 
 
-func _on_fridge_died():
+func fridgeDied():
 	numFridges -= 1
+	print("fridge died")
+	print(numFridges)
 	if numFridges < 0: 
 		numFridges = 0

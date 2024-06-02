@@ -225,7 +225,6 @@ script = ExtResource("6_akelr")
 
 [node name="Quick_Spawn" type="Timer" parent="."]
 
-[connection signal="fridgeDied" from="." to="." method="_on_fridge_died"]
 [connection signal="body_entered" from="detection_area" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="detection_area" to="." method="_on_detection_area_body_exited"]
 [connection signal="velocity_computed" from="Navigation/NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]

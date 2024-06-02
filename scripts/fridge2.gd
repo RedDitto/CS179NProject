@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 var currency_drop = preload("res://Scenes/currency.tscn")
-
+var explosion = preload("res://Scenes/Explosion.tscn")
 var speed = 60
 var acceleration = 7
 var player_chase = false
@@ -31,6 +31,7 @@ func _ready():
 	var __ = connect("tree_exited", Callable(get_parent(), "_on_enemy_killed"))
 	call_deferred("seeker_setup")
 	health_bar.visible = false
+	
 func seeker_setup():
 	await get_tree().physics_frame
 	if target:
@@ -63,10 +64,15 @@ func _physics_process(delta):
 		var currency = currency_drop.instantiate()
 		get_parent().add_child(currency)
 		currency.position = self.position
-		emit_signal("fridgeDied")
+		
+		var exp = explosion.instantiate()
+		exp.position = position
+		get_parent().add_child(exp)
 		self.queue_free()
 
-
+func fridge2():
+	pass
+	
 func _on_detection_area_body_entered(body):
 	#print("ENTERED")
 	if body.is_in_group("Player"):
