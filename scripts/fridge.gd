@@ -31,6 +31,7 @@ func _ready():
 	var __ = connect("tree_exited", Callable(get_parent(), "_on_enemy_killed"))
 	call_deferred("seeker_setup")
 	health_bar.visible = false
+	
 func seeker_setup():
 	await get_tree().physics_frame
 	if target:

@@ -21,7 +21,9 @@ const fridgePATH = preload('res://Scenes/fridge2.tscn')
 var health = 1000
 var max_health = 1000
 var rd = RandomNumberGenerator.new()
-
+var numFridges = 0
+var maxFridges = 25
+signal fridgeDied
 
 
 @onready var health_bar = $Health_Bar
@@ -35,6 +37,7 @@ func _ready():
 	call_deferred("seeker_setup")
 	health_bar.visible = false
 	rd.randomize()
+	$Spawn_Timer.wait_time = 5
 	$Spawn_Timer.start()
 func seeker_setup():
 	await get_tree().physics_frame
@@ -150,9 +153,19 @@ func _on_poison_timer_timeout():
 
 func _on_spawn_timer_timeout():
 	if player != null:
-		var aaa = fridgePATH.instantiate()
-		aaa.position = Vector2(position.x + 80*cos(randf_range(0,100)),80 * sin(randf_range(0,100)) + position.y)
-		get_parent().add_child(aaa)
-		aaa.health = 50
-		aaa.max_health = 100
-		aaa.speed = 100 
+		for i in range(5):
+			if numFridges > maxFridges:
+				break
+			var aaa = fridgePATH.instantiate()
+			numFridges += 1
+			aaa.position = Vector2(position.x + 80*cos(randf_range(0,100)),80 * sin(randf_range(0,100)) + position.y)
+			get_parent().add_child(aaa)
+			aaa.health = 50
+			aaa.max_health = 100
+			aaa.speed = 100 
+
+
+func _on_fridge_died():
+	numFridges -= 1
+	if numFridges < 0: 
+		numFridges = 0

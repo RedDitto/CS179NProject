@@ -63,6 +63,7 @@ func _physics_process(delta):
 		var currency = currency_drop.instantiate()
 		get_parent().add_child(currency)
 		currency.position = self.position
+		emit_signal("fridgeDied")
 		self.queue_free()
 
 
