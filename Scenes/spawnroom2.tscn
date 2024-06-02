@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://cm0bqtg0tnk1w" path="res://Scenes/upgrades_vending_machine.tscn" id="3_ms6qi"]
 [ext_resource type="PackedScene" uid="uid://dx0i224w6knwl" path="res://Scenes/teleporter.tscn" id="4_ibef3"]
 [ext_resource type="PackedScene" uid="uid://c6s838vl1c53p" path="res://Scenes/RangedEnemy.tscn" id="5_ni3tl"]
-[ext_resource type="PackedScene" uid="uid://dmvfnuipx1qf3" path="res://Scenes/fridge2.tscn" id="6_yqdbj"]
+[ext_resource type="PackedScene" uid="uid://bp8jh8mvbdj43" path="res://Scenes/fridge2.tscn" id="6_yqdbj"]
 [ext_resource type="PackedScene" uid="uid://c4sai2ke34owo" path="res://Scenes/bananaAbility.tscn" id="7_kvl4r"]
 [ext_resource type="PackedScene" uid="uid://7845ed8xsgt" path="res://Scenes/poisonousBanana.tscn" id="8_sss0d"]
 

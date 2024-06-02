@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://xvo8q2ctv7bt" path="res://Scenes/door.tscn" id="2_mvhyk"]
 [ext_resource type="PackedScene" uid="uid://c6s838vl1c53p" path="res://Scenes/RangedEnemy.tscn" id="3_6ebls"]
 [ext_resource type="PackedScene" uid="uid://dx0i224w6knwl" path="res://Scenes/teleporter.tscn" id="3_cyp5b"]
-[ext_resource type="PackedScene" uid="uid://dmvfnuipx1qf3" path="res://Scenes/fridge2.tscn" id="5_lf1g4"]
+[ext_resource type="PackedScene" uid="uid://bp8jh8mvbdj43" path="res://Scenes/fridge2.tscn" id="5_lf1g4"]
 [ext_resource type="PackedScene" uid="uid://c4sai2ke34owo" path="res://Scenes/bananaAbility.tscn" id="6_wti4x"]
 [ext_resource type="PackedScene" uid="uid://7845ed8xsgt" path="res://Scenes/poisonousBanana.tscn" id="7_lad1o"]
 
