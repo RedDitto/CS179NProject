@@ -19,6 +19,7 @@ var in_knockback = false
 @onready var hit_animation_player = $Hit_AnimationPlayer
 
 var health = 100
+var isPoisoned = false
 
 @onready var health_bar = $Health_Bar
 
@@ -115,6 +116,12 @@ func enemy():
 	pass
 
 
+func poison() :
+	isPoisoned = true
+	$poison_timer.wait_time = .5
+	$poison_timer.start()
+
+
 
 func _on_timer_timeout():
 	if player != null:
@@ -128,3 +135,7 @@ func _on_navigation_agent_2d_velocity_computed(safe_velocity):
 
 func _on_knockback_timer_timeout():
 	in_knockback = false
+
+
+func _on_poison_timer_timeout():
+	deal_with_damage(30)

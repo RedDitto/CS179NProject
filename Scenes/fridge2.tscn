@@ -1,19 +1,11 @@
-[gd_scene load_steps=25 format=3 uid="uid://dmvfnuipx1qf3"]
+[gd_scene load_steps=23 format=3 uid="uid://dmvfnuipx1qf3"]
 
-[ext_resource type="Script" path="res://scripts/fridge.gd" id="1_4jrwt"]
-[ext_resource type="Script" path="res://scripts/Enemy_Stats.gd" id="2_en70o"]
+[ext_resource type="Script" path="res://scripts/fridge2.gd" id="1_nmruw"]
 [ext_resource type="Shader" uid="uid://wbegqqaqwpc" path="res://scripts/hit_flash_shader.tres" id="3_sy3ec"]
 [ext_resource type="Texture2D" uid="uid://bkphj4ydai2l2" path="res://Art/Animated_Objects/!$Kitchen_fridge.png" id="4_fqd48"]
 [ext_resource type="Texture2D" uid="uid://ghxw7s5a3p5d" path="res://Art/health_bar_progress.png" id="5_eiwym"]
+[ext_resource type="Script" path="res://scripts/healthbar.gd" id="6_7q35i"]
 [ext_resource type="Texture2D" uid="uid://d1d2agyuvluuh" path="res://Art/health_bar_over.png" id="6_50otm"]
-[ext_resource type="Script" path="res://scripts/enemy_health_bar.gd" id="7_76vof"]
-
-[sub_resource type="Resource" id="Resource_qfqm3"]
-script = ExtResource("2_en70o")
-max_health = 100
-health = 100
-attack = 10
-speed = 40
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_s8282"]
 resource_local_to_scene = true
@@ -165,9 +157,7 @@ collision_layer = 2
 collision_mask = 7
 motion_mode = 1
 wall_min_slide_angle = 0.0
-script = ExtResource("1_4jrwt")
-knockback_modifier = 50.0
-_enemy_stats = SubResource("Resource_qfqm3")
+script = ExtResource("1_nmruw")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_s8282")
@@ -203,10 +193,20 @@ autostart = true
 [node name="take_damage_cooldown" type="Timer" parent="."]
 wait_time = 0.5
 
+[node name="Hit_AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_mc6ux")
+}
+
+[node name="Knockback_timer" type="Timer" parent="."]
+wait_time = 0.25
+
+[node name="poison_timer" type="Timer" parent="."]
+
 [node name="Health_Bar" type="TextureProgressBar" parent="."]
-offset_left = -10.0
+offset_left = -9.0
 offset_top = -42.0
-offset_right = 10.0
+offset_right = 9.0
 offset_bottom = -36.0
 nine_patch_stretch = true
 stretch_margin_left = 2
@@ -219,20 +219,12 @@ texture_progress = ExtResource("5_eiwym")
 tint_under = Color(0.164706, 0.164706, 0.164706, 1)
 tint_over = Color(0.121569, 0.121569, 0.121569, 1)
 tint_progress = Color(0.666667, 0, 0, 1)
-script = ExtResource("7_76vof")
+script = ExtResource("6_7q35i")
 
-[node name="Hit_AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_mc6ux")
-}
-
-[node name="Knockback_timer" type="Timer" parent="."]
-wait_time = 0.25
-
-[connection signal="health_loss" from="." to="Health_Bar" method="_on_fridge_health_loss"]
 [connection signal="body_entered" from="detection_area" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="detection_area" to="." method="_on_detection_area_body_exited"]
 [connection signal="velocity_computed" from="Navigation/NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]
 [connection signal="timeout" from="Navigation/Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="take_damage_cooldown" to="." method="_on_take_damage_cooldown_timeout"]
 [connection signal="timeout" from="Knockback_timer" to="." method="_on_knockback_timer_timeout"]
+[connection signal="timeout" from="poison_timer" to="." method="_on_poison_timer_timeout"]

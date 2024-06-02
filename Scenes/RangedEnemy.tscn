@@ -45,6 +45,8 @@ shape = SubResource("CircleShape2D_r6651")
 position = Vector2(0.5, -2.5)
 shape = SubResource("RectangleShape2D_bb1bs")
 
+[node name="poison_timer" type="Timer" parent="."]
+
 [node name="Health_Bar" type="TextureProgressBar" parent="."]
 offset_left = -12.0
 offset_top = -14.0
@@ -65,3 +67,4 @@ script = ExtResource("5_cfjso")
 
 [connection signal="body_entered" from="detection_area" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="detection_area" to="." method="_on_detection_area_body_exited"]
+[connection signal="timeout" from="poison_timer" to="." method="_on_poison_timer_timeout"]

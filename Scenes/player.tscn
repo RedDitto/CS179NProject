@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=3 uid="uid://8nccul0njthp"]
+[gd_scene load_steps=66 format=3 uid="uid://8nccul0njthp"]
 
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_7vfew"]
 [ext_resource type="Texture2D" uid="uid://dlbr8ocq67w0n" path="res://Art/mystic_woods_free_2.1/sprites/characters/player.png" id="2_4gu8u"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bocgji2ksdvi7" path="res://Art/arrow3.png" id="4_ggp2n"]
 [ext_resource type="AudioStream" uid="uid://df1hbj2ixauoy" path="res://sounds/mixkit-air-whistle-punch-2048.wav" id="5_8k2gg"]
 [ext_resource type="AudioStream" uid="uid://clqw0lbu1yjq" path="res://sounds/mixkit-game-gun-shot-1662.mp3" id="6_goojn"]
+[ext_resource type="Texture2D" uid="uid://6xrrhscf1t0n" path="res://Art/banana.png" id="7_c0n8p"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wu43k"]
 atlas = ExtResource("2_4gu8u")
@@ -420,6 +421,9 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_855eh"]
 radius = 5.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_pywir"]
+radius = 95.0
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_4x7yq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eawrm"]
@@ -446,6 +450,16 @@ offset = Vector2(0, -15)
 visible = false
 position = Vector2(0, -2)
 shape = SubResource("CircleShape2D_855eh")
+
+[node name="Big_Attack" type="Area2D" parent="." groups=["hitbox"]]
+position = Vector2(0, -4)
+collision_mask = 3
+
+[node name="Radius_Collision" type="CollisionShape2D" parent="Big_Attack" groups=["hitbox"]]
+position = Vector2(0, 4)
+scale = Vector2(1, 1.01475)
+shape = SubResource("CircleShape2D_pywir")
+debug_color = Color(0, 0.6, 0.701961, 0.627451)
 
 [node name="player_hitbox" type="Area2D" parent="."]
 visible = false
@@ -509,6 +523,8 @@ position = Vector2(0, -6)
 [node name="dash_timer" type="Timer" parent="."]
 wait_time = 0.1
 
+[node name="poison_timer" type="Timer" parent="."]
+
 [node name="dash_again_timer" type="Timer" parent="."]
 wait_time = 3.0
 
@@ -520,7 +536,36 @@ volume_db = -5.0
 stream = ExtResource("6_goojn")
 volume_db = -10.0
 
+[node name="AbilityTimer" type="Timer" parent="."]
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+visible = false
+texture_filter = 3
+position = Vector2(-1, 0)
+emitting = false
+amount = 100
+lifetime = 5.0
+speed_scale = 0.1
+explosiveness = 0.8
+randomness = 1.0
+local_coords = true
+texture = ExtResource("7_c0n8p")
+emission_shape = 1
+emission_sphere_radius = 70.0
+gravity = Vector2(0, 0)
+initial_velocity_max = 1.5
+angular_velocity_min = -40.0
+angular_velocity_max = 40.0
+orbit_velocity_min = 10.0
+orbit_velocity_max = 13.0
+tangential_accel_max = 4.25
+scale_amount_min = 0.1
+scale_amount_max = 0.1
+color = Color(0.91, 0.849333, 0, 1)
+
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="body_entered" from="Big_Attack" to="." method="_on_big_attack_body_entered"]
+[connection signal="body_exited" from="Big_Attack" to="." method="_on_melee_attack_body_exited"]
 [connection signal="body_entered" from="player_hitbox" to="." method="_on_player_hitbox_body_entered"]
 [connection signal="body_exited" from="player_hitbox" to="." method="_on_player_hitbox_body_exited"]
 [connection signal="body_entered" from="Melee_Attack" to="." method="_on_melee_attack_body_entered"]
@@ -532,4 +577,6 @@ volume_db = -10.0
 [connection signal="body_entered" from="Enemy_Attack" to="." method="_on_enemy_attack_body_entered"]
 [connection signal="body_exited" from="Enemy_Attack" to="." method="_on_enemy_attack_body_exited"]
 [connection signal="timeout" from="dash_timer" to="." method="_on_dash_timer_timeout"]
+[connection signal="timeout" from="poison_timer" to="." method="_on_poison_timer_timeout"]
 [connection signal="timeout" from="dash_again_timer" to="." method="_on_dash_again_timer_timeout"]
+[connection signal="timeout" from="AbilityTimer" to="." method="_on_ability_timer_timeout"]

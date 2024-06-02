@@ -34,20 +34,44 @@ var hasRangedWeapon = false
 var hasMeleeWeapon = false
 var hastp = false
 var collision = true
+var isPoisoned = false
+@onready var particles = $CPUParticles2D
+var particlesOn = false
+@onready var abilityTimer = $AbilityTimer
+var can_bigattack = false
 
+func resetHealth():
+	_player_stats.health = 100
 
 func _input(event):
 	if event.is_action_pressed("print"):
 		print(position)
 		collision = !collision
+		#particlesOn = !particlesOn
+		#can_bigattack = true
+		setBigAttack(true)
+		particles.emitting = particlesOn
+		particles.visible = particlesOn
 		_player_stats.health = 1000
 		_player_stats.max_health = 1000
+		unpoison()
 		self.set_collision_layer_value(3,collision)
 		self.set_collision_mask_value(1,collision)
 		self.set_collision_mask_value(2,collision)
 	if event.is_action_pressed("tp"):
 		if hastp:
 			position = position - (global_position - get_global_mouse_position())
+			
+func setBigAttack(val):
+		can_bigattack = val
+		particlesOn = val
+		particles.emitting = val
+		particles.visible = val
+		if val:
+			abilityTimer.wait_time = 10
+			abilityTimer.start()
+		else:
+			abilityTimer.stop()
 			
 			
 func _ready():
@@ -185,6 +209,16 @@ func _on_attack_cooldown_timeout():
 
 func player():
 	pass
+	
+func poison() :
+	isPoisoned = true
+	$poison_timer.start()
+	$poison_timer.wait_time = .5
+
+func unpoison():
+	isPoisoned = false
+	$poison_timer.stop()
+	
 	
 func attack():
 	var dir = current_direction
@@ -344,3 +378,19 @@ func _on_picked_up_weapon_melee(sprite):
 
 
 
+
+
+func _on_poison_timer_timeout():
+	_player_stats.health = _player_stats.health - 1
+	
+
+
+func _on_ability_timer_timeout():
+	setBigAttack(false)
+
+
+func _on_big_attack_body_entered(body):
+	if body.has_method("poison") && can_bigattack:
+		body.poison()
+	#pass
+		
