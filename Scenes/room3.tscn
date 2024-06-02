@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://d0pywvo5d1rrm"]
+[gd_scene load_steps=5 format=3 uid="uid://d0pywvo5d1rrm"]
 
 [ext_resource type="PackedScene" uid="uid://dh7r45oh824ur" path="res://Scenes/room.tscn" id="1_wxm3g"]
 [ext_resource type="PackedScene" uid="uid://xvo8q2ctv7bt" path="res://Scenes/door.tscn" id="2_xn0rf"]
+[ext_resource type="PackedScene" uid="uid://c4sai2ke34owo" path="res://Scenes/bananaAbility.tscn" id="3_4phaq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l1wof"]
 size = Vector2(16.75, 16.75)
@@ -42,5 +43,8 @@ collision_mask = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector" index="0"]
 position = Vector2(551, 182)
 shape = SubResource("RectangleShape2D_l1wof")
+
+[node name="Node2D" parent="." index="6" instance=ExtResource("3_4phaq")]
+position = Vector2(151, 110)
 
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_player_detector_body_entered"]

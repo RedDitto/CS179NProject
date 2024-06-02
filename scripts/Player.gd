@@ -77,6 +77,7 @@ func setBigAttack(val):
 func _ready():
 	$AnimatedSprite2D.play("front_idle")
 	$Melee_Attack/Melee_Collision.disabled = true
+	$PoisonEffect.visible = false
 
 func _physics_process(delta):
 	player_movement(delta)
@@ -214,10 +215,16 @@ func poison() :
 	isPoisoned = true
 	$poison_timer.start()
 	$poison_timer.wait_time = .5
+	$PoisonEffect.visible = true
+	$PoisonDoneTimer.wait_time = 10
+	$PoisonDoneTimer.start()
+	
 
 func unpoison():
 	isPoisoned = false
 	$poison_timer.stop()
+	$PoisonEffect.visible = false
+	$PoisonDoneTimer.stop()
 	
 	
 func attack():
@@ -394,3 +401,7 @@ func _on_big_attack_body_entered(body):
 		body.poison()
 	#pass
 		
+
+
+func _on_poison_done_timer_timeout():
+	unpoison()

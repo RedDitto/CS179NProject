@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://c2eombehxctxx"]
+[gd_scene load_steps=9 format=3 uid="uid://c2eombehxctxx"]
 
 [ext_resource type="PackedScene" uid="uid://dh7r45oh824ur" path="res://Scenes/room.tscn" id="1_itoi3"]
 [ext_resource type="PackedScene" uid="uid://xvo8q2ctv7bt" path="res://Scenes/door.tscn" id="2_mvhyk"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dx0i224w6knwl" path="res://Scenes/teleporter.tscn" id="3_cyp5b"]
 [ext_resource type="PackedScene" uid="uid://dmvfnuipx1qf3" path="res://Scenes/fridge2.tscn" id="5_lf1g4"]
 [ext_resource type="PackedScene" uid="uid://c4sai2ke34owo" path="res://Scenes/bananaAbility.tscn" id="6_wti4x"]
+[ext_resource type="PackedScene" uid="uid://7845ed8xsgt" path="res://Scenes/poisonousBanana.tscn" id="7_lad1o"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ek85a"]
 size = Vector2(16.75, 16.5)
@@ -47,6 +48,9 @@ position = Vector2(237, 203)
 position = Vector2(288, 319)
 
 [node name="Node2D2" parent="." index="13" instance=ExtResource("6_wti4x")]
-position = Vector2(339, 233)
+position = Vector2(264, 94)
+
+[node name="Node2D4" parent="." index="14" instance=ExtResource("7_lad1o")]
+position = Vector2(345, 221)
 
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_player_detector_body_entered"]
