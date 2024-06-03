@@ -21,6 +21,7 @@ var can_dash = true
 var DashSpeed = 10
 var attack_in_progress = false
 var cheat_death_used = false
+var canShoot = true
 
 var speed_boost = 0
 var current_direction = "none"
@@ -285,11 +286,16 @@ func _on_enemy_attack_body_exited(body):
 		
 
 func shoot():
+	if !canShoot:
+		return
+	canShoot = false
+	$ShootTimer.start()
 	var projectile = PROJECTILE_PATH.instantiate()
 	
 	get_parent().add_child(projectile)
 	projectile.position = $ProjectileDirection/Marker2D.global_position
 	projectile.vel = get_global_mouse_position() - projectile.position
+	projectile.rotation = projectile.vel.angle()
 	$gunshot.play()
 
 
@@ -408,3 +414,8 @@ func _on_big_attack_body_entered(body):
 
 func _on_poison_done_timer_timeout():
 	unpoison()
+
+
+func _on_shoot_timer_timeout():
+	canShoot = true
+	$ShootTimer.stop()
