@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 var currency_drop = preload("res://Scenes/currency.tscn")
-
+var defaultSpeed = 30
 var speed = 30
 var acceleration = 7
 var player_chase = false
@@ -22,7 +22,9 @@ var health = 1000
 var max_health = 1000
 var rd = RandomNumberGenerator.new()
 var numFridges = 0
-var maxFridges = 25
+var maxFridges = 12
+var isAngry = false
+var hasBeenAngry = false
 
 
 
@@ -43,9 +45,21 @@ func seeker_setup():
 	await get_tree().physics_frame
 	if target:
 		navigation_agent.target_position = target.global_position
-
-func _physics_process(delta):
+func startAngry():
+	speed = 110
+	hasBeenAngry = true
+	isAngry = true
+	$AngryTimer.wait_time = 10
+	$AngryTimer.start()
 	
+func _physics_process(delta):
+	#if isAngry:
+		#speed = 100
+	#else:
+		#speed = defaultSpeed
+	if !hasBeenAngry && health < 1000:
+		startAngry()
+
 	if alive:
 		if player_chase:
 			if target:
@@ -84,11 +98,14 @@ func _on_detection_area_body_entered(body):
 		#body.poison()
 		
 
-func poison() :
-	isPoisoned = true
-	$poison_timer.wait_time = 1
-	$poison_timer.start()
-		
+#func poison() :
+	#isPoisoned = true
+	#$poison_timer.wait_time = 1
+	#$poison_timer.start()
+	#
+#func unpoison():
+	#isPoisoned = false
+	#$poison_timer.stop()
 
 
 func _on_detection_area_body_exited(body):
@@ -146,7 +163,7 @@ func _on_knockback_timer_timeout():
 
 
 func _on_poison_timer_timeout():
-	deal_with_damage(max_health/10)
+	deal_with_damage(1)
 
 
 func _on_spawn_timer_timeout():
@@ -169,3 +186,9 @@ func fridgeDied():
 	print(numFridges)
 	if numFridges < 0: 
 		numFridges = 0
+
+
+func _on_angry_timer_timeout():
+	#pass
+	isAngry = false
+	speed = defaultSpeed
