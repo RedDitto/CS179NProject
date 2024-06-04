@@ -6,6 +6,11 @@ var _player_upgrades = preload("res://scripts/Player_Upgrades.tres")
 var _player_permanent_upgrades = preload("res://scripts/Player_Permanent_Upgrades.tres")
 var _menu_open = false
 
+var numruns = 0
+var currentrun = 0
+var displaycurrentrun = "n/a"
+var bestrun = 100000000
+var displaybestrun = "n/a"
 func _ready():
 	load_data()
 	_player_stats.health = _player_stats.max_health

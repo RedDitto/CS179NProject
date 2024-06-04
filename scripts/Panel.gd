@@ -6,7 +6,7 @@ var mseconds = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	set_process(true)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -18,6 +18,10 @@ func _process(delta):
 	$Minutes.text = "%02d:" % minutes
 	$Seconds.text = "%02d:" % seconds
 	$Milliseconds.text = "%02d" % mseconds
-
+	Global.currentrun = time
+	Global.displaycurrentrun = str("%02d:" % minutes) + " " + str("%02d:" % seconds) + " " + str("%02d" % mseconds)
 func _stop():
 	set_process(false)
+	if Global.currentrun < Global.bestrun:
+		Global.displaybestrun = Global.displaycurrentrun
+	

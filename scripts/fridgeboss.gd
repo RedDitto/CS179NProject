@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+var timescript = preload("res://scripts/Panel.gd")
+var time = timescript.new()
 var currency_drop = preload("res://Scenes/currency.tscn")
 var defaultSpeed = 30
 var speed = 30
@@ -18,7 +20,7 @@ var in_knockback = false
 @export var _enemy_stats : Enemy_Stats
 @onready var hit_animation_player = $Hit_AnimationPlayer
 const fridgePATH = preload('res://Scenes/fridge2.tscn')
-var health = 1000
+var health = 5
 var max_health = 1000
 var rd = RandomNumberGenerator.new()
 var numFridges = 0
@@ -86,6 +88,8 @@ func _physics_process(delta):
 		else:
 			$AnimatedSprite2D.play("fridge_idle")
 	else:
+		time._stop()
+		
 		var currency = currency_drop.instantiate()
 		get_parent().add_child(currency)
 		currency.position = self.position
