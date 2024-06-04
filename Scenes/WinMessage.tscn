@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://pr1wo35owpks"]
 
 [ext_resource type="Script" path="res://scripts/diednode.gd" id="1_50d8y"]
-[ext_resource type="Texture2D" path="res://Art/WonMessage.png" id="2_iiq8h"]
+[ext_resource type="Texture2D" uid="uid://bv7s34a553ppy" path="res://Art/WonMessage.png" id="2_iiq8h"]
 [ext_resource type="Script" path="res://scripts/diedScript.gd" id="3_fip5d"]
 [ext_resource type="Texture2D" uid="uid://3vqvbplqppqj" path="res://Art/clickanywhere.png" id="4_6pr1x"]
 
