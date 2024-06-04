@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://dverwdkt6fsey"]
+
+[ext_resource type="Script" path="res://scripts/Enemy_projectile.gd" id="1_r4v1p"]
+[ext_resource type="Texture2D" uid="uid://bp8wvl78qnns4" path="res://Art/bullet.png" id="2_idnne"]
+[ext_resource type="AudioStream" uid="uid://df1hbj2ixauoy" path="res://sounds/mixkit-air-whistle-punch-2048.wav" id="3_2ck0v"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_i3jw3"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pyn5c"]
+
+[node name="EnemyProjectile" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_r4v1p")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.333019, 0.537533, 1, 1)
+self_modulate = Color(0, 1, 1, 1)
+scale = Vector2(0.08, 0.08)
+texture = ExtResource("2_idnne")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(0.2, 0.2)
+shape = SubResource("CircleShape2D_i3jw3")
+
+[node name="Area2D" type="Area2D" parent="."]
+scale = Vector2(0.08, 0.08)
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+scale = Vector2(2.5, 2.5)
+shape = SubResource("CircleShape2D_pyn5c")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_2ck0v")
+volume_db = -5.0
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

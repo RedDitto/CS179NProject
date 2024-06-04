@@ -1,53 +1,132 @@
-[gd_scene load_steps=10 format=3 uid="uid://c6s838vl1c53p"]
+[gd_scene load_steps=21 format=3 uid="uid://c6s838vl1c53p"]
 
 [ext_resource type="Script" path="res://scripts/RangedEnemy.gd" id="1_4hyu1"]
-[ext_resource type="Texture2D" uid="uid://22chh13e4h0i" path="res://Art/mystic_woods_free_2.1/sprites/characters/slime.png" id="2_skpn8"]
+[ext_resource type="Texture2D" uid="uid://dwxw8tcpij02c" path="res://Art/Animated_Objects/!$Bathtub.png" id="2_jejm7"]
 [ext_resource type="Texture2D" uid="uid://ghxw7s5a3p5d" path="res://Art/health_bar_progress.png" id="3_fd8ci"]
 [ext_resource type="Texture2D" uid="uid://d1d2agyuvluuh" path="res://Art/health_bar_over.png" id="4_sy5sf"]
 [ext_resource type="Script" path="res://scripts/healthbar.gd" id="5_cfjso"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_qndnr"]
-atlas = ExtResource("2_skpn8")
-region = Rect2(0, 0, 32, 40)
+[sub_resource type="AtlasTexture" id="AtlasTexture_xmqxk"]
+atlas = ExtResource("2_jejm7")
+region = Rect2(0, 0, 96, 144)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_ikw7c"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_7oj5d"]
+atlas = ExtResource("2_jejm7")
+region = Rect2(96, 0, 96, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pkov5"]
+atlas = ExtResource("2_jejm7")
+region = Rect2(192, 0, 96, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nfvo7"]
+atlas = ExtResource("2_jejm7")
+region = Rect2(0, 144, 96, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6r07b"]
+atlas = ExtResource("2_jejm7")
+region = Rect2(96, 144, 96, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rs6ct"]
+atlas = ExtResource("2_jejm7")
+region = Rect2(192, 144, 96, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dsjsn"]
+atlas = ExtResource("2_jejm7")
+region = Rect2(0, 288, 96, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8fjjy"]
+atlas = ExtResource("2_jejm7")
+region = Rect2(96, 288, 96, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fh34o"]
+atlas = ExtResource("2_jejm7")
+region = Rect2(192, 288, 96, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_84xd4"]
+atlas = ExtResource("2_jejm7")
+region = Rect2(0, 432, 96, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ld0l0"]
+atlas = ExtResource("2_jejm7")
+region = Rect2(96, 432, 96, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_70ov3"]
+atlas = ExtResource("2_jejm7")
+region = Rect2(192, 432, 96, 144)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_miso7"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_qndnr")
+"texture": SubResource("AtlasTexture_xmqxk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7oj5d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pkov5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nfvo7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6r07b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rs6ct")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dsjsn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8fjjy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fh34o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_84xd4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ld0l0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_70ov3")
 }],
 "loop": true,
 "name": &"default",
-"speed": 5.0
+"speed": 25.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_r6651"]
 radius = 86.209
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bb1bs"]
-size = Vector2(15, 11)
+size = Vector2(12, 15)
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
+[node name="CharacterBody2D" type="CharacterBody2D" groups=["ranged_enemy"]]
+collision_layer = 2
 collision_mask = 7
 script = ExtResource("1_4hyu1")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_ikw7c")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." groups=["ranged_enemy"]]
+scale = Vector2(0.15, 0.15)
+sprite_frames = SubResource("SpriteFrames_miso7")
+frame_progress = 0.339822
 
-[node name="detection_area" type="Area2D" parent="."]
+[node name="detection_area" type="Area2D" parent="." groups=["ranged_enemy"]]
 collision_mask = 7
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="detection_area"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="detection_area" groups=["ranged_enemy"]]
 position = Vector2(0, -2)
 shape = SubResource("CircleShape2D_r6651")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.5, -2.5)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["ranged_enemy"]]
 shape = SubResource("RectangleShape2D_bb1bs")
 
-[node name="poison_timer" type="Timer" parent="."]
+[node name="poison_timer" type="Timer" parent="." groups=["ranged_enemy"]]
 
-[node name="Health_Bar" type="TextureProgressBar" parent="."]
+[node name="Health_Bar" type="TextureProgressBar" parent="." groups=["ranged_enemy"]]
 offset_left = -12.0
 offset_top = -14.0
 offset_right = 12.0
@@ -65,6 +144,10 @@ tint_over = Color(0.121569, 0.121569, 0.121569, 1)
 tint_progress = Color(0.666667, 0, 0, 1)
 script = ExtResource("5_cfjso")
 
+[node name="shoot_timer" type="Timer" parent="." groups=["ranged_enemy"]]
+autostart = true
+
 [connection signal="body_entered" from="detection_area" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="detection_area" to="." method="_on_detection_area_body_exited"]
 [connection signal="timeout" from="poison_timer" to="." method="_on_poison_timer_timeout"]
+[connection signal="timeout" from="shoot_timer" to="." method="_on_shoot_timer_timeout"]

@@ -16,4 +16,4 @@ func _on_area_2d_body_entered(body):
 		queue_free()
 	if body.has_method("enemy"):
 		body.deal_with_damage(20)
-		print("Hit Ranged!!!")
+
