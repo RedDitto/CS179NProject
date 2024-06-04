@@ -20,7 +20,7 @@ var in_knockback = false
 @export var _enemy_stats : Enemy_Stats
 @onready var hit_animation_player = $Hit_AnimationPlayer
 const fridgePATH = preload('res://Scenes/fridge2.tscn')
-var health = 5
+var health = 1000
 var max_health = 1000
 var rd = RandomNumberGenerator.new()
 var numFridges = 0
