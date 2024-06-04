@@ -128,8 +128,7 @@ func _physics_process(delta):
 			
 func restartGame():
 	#get_tree().reload_current_scene()
-	_player_stats.health = 100
-	_player_stats.max_health = 100
+	_player_stats.health = _player_stats.max_health
 	#self.queue_free()
 	get_tree().change_scene_to_file("res://Scenes/menu.tscn");
 			
