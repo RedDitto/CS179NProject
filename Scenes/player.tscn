@@ -420,12 +420,13 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_855eh"]
-radius = 5.0
+radius = 4.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pywir"]
 radius = 95.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4x7yq"]
+radius = 16.3205
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eawrm"]
 size = Vector2(15.3125, 21.2454)
@@ -449,9 +450,11 @@ offset = Vector2(0, -15)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -2)
+scale = Vector2(0.455, 0.455)
 shape = SubResource("CircleShape2D_855eh")
 
 [node name="Big_Attack" type="Area2D" parent="." groups=["hitbox"]]
+visible = false
 position = Vector2(0, -4)
 collision_mask = 3
 
@@ -462,12 +465,12 @@ shape = SubResource("CircleShape2D_pywir")
 debug_color = Color(0, 0.6, 0.701961, 0.627451)
 
 [node name="player_hitbox" type="Area2D" parent="."]
-visible = false
 collision_layer = 4
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player_hitbox"]
-position = Vector2(0, -6)
+position = Vector2(-1.19209e-07, -2)
+scale = Vector2(0.86, 0.86)
 shape = SubResource("CircleShape2D_4x7yq")
 
 [node name="Melee_Attack" type="Area2D" parent="." groups=["hitbox"]]

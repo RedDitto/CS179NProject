@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://ral76o0hrtc3"]
+[gd_scene load_steps=22 format=3 uid="uid://ral76o0hrtc3"]
 
 [ext_resource type="Script" path="res://scripts/menuscript.gd" id="1_uwvqp"]
 [ext_resource type="FontFile" uid="uid://cor31q1nk837p" path="res://fonts/xolonium/xolonium-fonts-4.1/ttf/Xolonium-Bold.ttf" id="1_ynf6p"]
@@ -6,54 +6,80 @@
 [ext_resource type="Texture2D" uid="uid://dlbr8ocq67w0n" path="res://Art/mystic_woods_free_2.1/sprites/characters/player.png" id="3_uui84"]
 [ext_resource type="Texture2D" uid="uid://bkphj4ydai2l2" path="res://Art/Animated_Objects/!$Kitchen_fridge.png" id="5_x3rpm"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_hw5ra"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_2qovi"]
 atlas = ExtResource("3_uui84")
-region = Rect2(0, 204, 48, 39)
+region = Rect2(0, 200, 48, 40)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_dvurm"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_q67h7"]
 atlas = ExtResource("3_uui84")
-region = Rect2(48, 204, 48, 39)
+region = Rect2(48, 200, 48, 40)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_cehhj"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_2e116"]
 atlas = ExtResource("3_uui84")
-region = Rect2(96, 204, 48, 39)
+region = Rect2(96, 200, 48, 40)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_jlal0"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_h4qaa"]
 atlas = ExtResource("3_uui84")
-region = Rect2(144, 204, 48, 39)
+region = Rect2(144, 200, 48, 40)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_lbrne"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_7cfy2"]
 atlas = ExtResource("3_uui84")
-region = Rect2(192, 204, 48, 39)
+region = Rect2(192, 200, 48, 40)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_fa81l"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_d7ygy"]
 atlas = ExtResource("3_uui84")
-region = Rect2(240, 204, 48, 39)
+region = Rect2(240, 200, 48, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0lsxa"]
+atlas = ExtResource("3_uui84")
+region = Rect2(0, 433, 48, 47)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_amm3b"]
+atlas = ExtResource("3_uui84")
+region = Rect2(48, 433, 48, 47)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_up6ms"]
+atlas = ExtResource("3_uui84")
+region = Rect2(96, 433, 48, 47)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ocnwb"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_hw5ra")
+"texture": SubResource("AtlasTexture_2qovi")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_dvurm")
+"texture": SubResource("AtlasTexture_q67h7")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_cehhj")
+"texture": SubResource("AtlasTexture_2e116")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_jlal0")
+"texture": SubResource("AtlasTexture_h4qaa")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_lbrne")
+"texture": SubResource("AtlasTexture_7cfy2")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_fa81l")
+"texture": SubResource("AtlasTexture_d7ygy")
 }],
 "loop": true,
 "name": &"run",
 "speed": 11.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0lsxa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_amm3b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_up6ms")
+}],
+"loop": true,
+"name": &"splat",
+"speed": 5.0
 }]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_id25j"]
@@ -92,7 +118,8 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_rtcxu"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mgwry"]
+size = Vector2(27, 66)
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_uwvqp")
@@ -137,22 +164,35 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("1_ynf6p")
 text = "Quit"
 
-[node name="PlayerSprite" type="AnimatedSprite2D" parent="."]
+[node name="p" type="CharacterBody2D" parent="."]
+
+[node name="PlayerSprite" type="AnimatedSprite2D" parent="p"]
 position = Vector2(147, 244)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_ocnwb")
 animation = &"run"
-frame_progress = 0.864046
+frame_progress = 0.712413
 
-[node name="FridgeSprite" type="AnimatedSprite2D" parent="."]
+[node name="Timer" type="Timer" parent="p/PlayerSprite"]
+wait_time = 5.0
+
+[node name="s" type="CharacterBody2D" parent="."]
+z_index = 1
+position = Vector2(0, -1)
+collision_layer = 7
+collision_mask = 7
+input_pickable = true
+
+[node name="FridgeSprite" type="AnimatedSprite2D" parent="s"]
 position = Vector2(63, 240)
 scale = Vector2(0.597222, 0.625)
 sprite_frames = SubResource("SpriteFrames_jl1me")
 animation = &"run"
-frame_progress = 0.496491
+frame_progress = 0.0229726
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_rtcxu")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="s"]
+position = Vector2(56, 242)
+shape = SubResource("RectangleShape2D_mgwry")
 
 [connection signal="pressed" from="TextureRect/VBoxContainer/Button" to="TextureRect/VBoxContainer/Button" method="_on_pressed"]
 [connection signal="pressed" from="TextureRect/VBoxContainer/Button2" to="TextureRect/VBoxContainer/Button" method="_on_button_2_pressed"]

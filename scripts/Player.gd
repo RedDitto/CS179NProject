@@ -60,12 +60,13 @@ func _input(event):
 		print(position)
 		collision = !collision
 		hastp = true
-		extraBonusDamage = 100
+		_player_stats.health = 100
+		extraBonusDamage = 500
 		#particlesOn = !particlesOn
 		#can_bigattack = true
-		setBigAttack(true)
-		particles.emitting = particlesOn
-		particles.visible = particlesOn
+		#setBigAttack(true)
+		#particles.emitting = particlesOn
+		#particles.visible = particlesOn
 		#_player_stats.health = 1000
 		#_player_stats.max_health = 1000
 		unpoison()
@@ -127,8 +128,7 @@ func _physics_process(delta):
 			
 func restartGame():
 	#get_tree().reload_current_scene()
-	_player_stats.health = 100
-	_player_stats.max_health = 100
+	_player_stats.health = _player_stats.max_health
 	#self.queue_free()
 	get_tree().change_scene_to_file("res://Scenes/menu.tscn");
 			
@@ -141,7 +141,7 @@ func endPlayer():
 	died.position = position
 	get_parent().add_child(died)
 	diedNode = died
-	Global.numruns += 1
+	#Global.numruns += 1
 	Global.save_data()
 	
 
