@@ -12,7 +12,7 @@ var is_max = [false, false]
 
 func _upgrade_increase(choice, _player_stats):
 	if upgrades[choice][0] == "Starting Health":
-		if upgrades[choice][1] < 10:
+		if upgrades[choice][1] < 20:
 			upgrades[choice][1] += 1
 			_player_stats.max_health += 10
 			_player_stats.health = _player_stats.max_health
