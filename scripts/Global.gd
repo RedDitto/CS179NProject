@@ -38,4 +38,5 @@ func load_data():
 		_player_stats.cheat_death = data["cheat_death"]
 		_player_stats.bank = data["bank"]
 		_player_permanent_upgrades.upgrades = data["upgrades"]
+		numruns = data["numruns"]
 	file.close()
