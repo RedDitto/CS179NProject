@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
-var health = 100
-var max_health = 100
+var health = 100/Global.mode
+var max_health = 100/Global.mode
 var speed = 40
 var range = 70
 var player_chase = false
