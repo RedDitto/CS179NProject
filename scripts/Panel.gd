@@ -24,4 +24,5 @@ func _stop():
 	set_process(false)
 	if Global.currentrun < Global.bestrun:
 		Global.displaybestrun = Global.displaycurrentrun
+		Global.bestrun = Global.currentrun
 	
