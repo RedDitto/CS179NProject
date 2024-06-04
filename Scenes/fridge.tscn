@@ -485,7 +485,6 @@ libraries = {
 [node name="Knockback_timer" type="Timer" parent="."]
 wait_time = 0.25
 
-
 [node name="Attack" type="Node2D" parent="."]
 
 [node name="Attack_range" type="Area2D" parent="Attack"]
@@ -527,7 +526,6 @@ disabled = true
 
 [node name="poison_timer" type="Timer" parent="."]
 
-
 [connection signal="health_loss" from="." to="Health_Bar" method="_on_fridge_health_loss"]
 [connection signal="body_entered" from="detection_area" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="detection_area" to="." method="_on_detection_area_body_exited"]
@@ -541,4 +539,3 @@ disabled = true
 [connection signal="timeout" from="Attack/pound_animation_cooldown" to="." method="_on_pound_animation_cooldown_timeout"]
 [connection signal="body_entered" from="Attack/ground_pound_hurtbox" to="." method="_on_ground_pound_hurtbox_body_entered"]
 [connection signal="timeout" from="poison_timer" to="." method="_on_poison_timer_timeout"]
-
