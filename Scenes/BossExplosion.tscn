@@ -1,24 +1,25 @@
-[gd_scene load_steps=4 format=3 uid="uid://bid2wexcrdm05"]
+[gd_scene load_steps=5 format=3 uid="uid://jmwt5iddxnyb"]
 
-[ext_resource type="Script" path="res://scripts/Explode.gd" id="1_rap8a"]
+[ext_resource type="Script" path="res://scripts/Explode.gd" id="1_0cn8p"]
 
 [sub_resource type="Curve" id="Curve_1jmdl"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Gradient" id="Gradient_wfsgo"]
-offsets = PackedFloat32Array(0.569647, 0.993763)
+offsets = PackedFloat32Array(0.434599, 0.993763)
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="Curve" id="Curve_hsibb"]
+min_value = -1.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1e-05, -1), 0.0, 0.0, 0, 0, Vector2(0.360558, -0.471154), 0.0, 0.0, 0, 0, Vector2(0.818725, -1), 0.0, 0.0, 0, 0, Vector2(0.966136, 1), 0.0, 0.0, 0, 0]
+point_count = 5
 
 [node name="Explosion" type="Node2D"]
 
 [node name="Explode" type="CPUParticles2D" parent="."]
-self_modulate = Color(2, 0, 0, 1)
-emitting = false
-amount = 100
-lifetime = 2.0
-one_shot = true
-explosiveness = 1.0
+self_modulate = Color(0.874701, 0.559288, 1, 1)
+amount = 200
 spread = 180.0
 gravity = Vector2(0, 0)
 initial_velocity_min = 250.0
@@ -27,7 +28,10 @@ scale_amount_min = 10.0
 scale_amount_max = 10.0
 scale_amount_curve = SubResource("Curve_1jmdl")
 color_ramp = SubResource("Gradient_wfsgo")
-script = ExtResource("1_rap8a")
+hue_variation_min = -1.0
+hue_variation_max = 1.0
+hue_variation_curve = SubResource("Curve_hsibb")
+script = ExtResource("1_0cn8p")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 5.0

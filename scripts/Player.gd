@@ -55,6 +55,7 @@ func _input(event):
 	if blockInput: 
 		return
 	if event.is_action_pressed("print"):
+		_player_stats.currency += 1000
 		print(position)
 		collision = !collision
 		#particlesOn = !particlesOn
@@ -62,8 +63,8 @@ func _input(event):
 		setBigAttack(true)
 		particles.emitting = particlesOn
 		particles.visible = particlesOn
-		_player_stats.health = 1000
-		_player_stats.max_health = 1000
+		#_player_stats.health = 1000
+		#_player_stats.max_health = 1000
 		unpoison()
 		self.set_collision_layer_value(3,collision)
 		self.set_collision_mask_value(1,collision)
@@ -107,6 +108,9 @@ func _physics_process(delta):
 	if _player_stats.health <= 0:
 		if _player_stats.cheat_death == 1 and !cheat_death_used:
 				_player_stats.health = 0.5 * _player_stats.max_health
+				_player_stats.cheat_death = 0
+				Global._player_permanent_upgrades.upgrades[1][1] -= 1
+				Global._player_permanent_upgrades.is_max[1] = false
 				cheat_death_used = true
 		else:
 			player_alive = false #where you would add go back to menu / respawn
@@ -119,18 +123,22 @@ func _physics_process(delta):
 			#self.queue_free()
 			
 func restartGame():
-	get_tree().reload_current_scene()
+	#get_tree().reload_current_scene()
 	_player_stats.health = 100
 	_player_stats.max_health = 100
-	self.queue_free()
+	#self.queue_free()
+	get_tree().change_scene_to_file("res://Scenes/menu.tscn");
 			
 func endPlayer():
+	_player_stats.bank += _player_stats.currency
+	_player_stats.currency = 0
 	visible = false
 	blockInput = true
 	var died = diedPATH.instantiate()
 	died.position = position
 	get_parent().add_child(died)
 	diedNode = died
+	Global.save_data()
 	
 
 func player_movement(delta):
