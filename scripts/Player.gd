@@ -47,7 +47,7 @@ var can_bigattack = false
 var blockInput = false
 
 func resetHealth():
-	_player_stats.health = 100
+	_player_stats.health = _player_stats.max_health
 
 func _input(event):
 	if event.is_action_pressed("lbutton"):
