@@ -91,7 +91,9 @@ func _physics_process(delta):
 	else:
 		Global.numruns += 1
 		Global.numwins += 1
-		time._stop()
+		#time.paused = true
+		#time.bananad = true
+		Global.pauseTimer = true
 		var currency = currency_drop.instantiate()
 		get_parent().add_child(currency)
 		currency.position = self.position

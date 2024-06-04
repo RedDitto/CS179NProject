@@ -93,6 +93,7 @@ func _ready():
 	$AnimatedSprite2D.play("front_idle")
 	$Melee_Attack/Melee_Collision.disabled = true
 	$PoisonEffect.visible = false
+	Global.pauseTimer = false
 
 func _physics_process(delta):
 	if blockInput: 
@@ -141,7 +142,7 @@ func endPlayer():
 	died.position = position
 	get_parent().add_child(died)
 	diedNode = died
-	#Global.numruns += 1
+	Global.numruns += 1
 	Global.save_data()
 	
 
