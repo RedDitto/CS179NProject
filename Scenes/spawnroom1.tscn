@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://c2eombehxctxx"]
+[gd_scene load_steps=5 format=3 uid="uid://c2eombehxctxx"]
 
 [ext_resource type="PackedScene" uid="uid://dh7r45oh824ur" path="res://Scenes/room.tscn" id="1_itoi3"]
 [ext_resource type="PackedScene" uid="uid://xvo8q2ctv7bt" path="res://Scenes/door.tscn" id="2_mvhyk"]
+[ext_resource type="PackedScene" uid="uid://cm0bqtg0tnk1w" path="res://Scenes/upgrades_vending_machine.tscn" id="3_f4tbp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ek85a"]
 size = Vector2(16.75, 16.5)
@@ -29,5 +30,8 @@ position = Vector2(251, 203)
 
 [node name="RangedWeaponSpawn" type="Marker2D" parent="." index="8"]
 position = Vector2(320, 203)
+
+[node name="Upgrades_Vending_Machine" parent="." index="9" instance=ExtResource("3_f4tbp")]
+position = Vector2(343, 175)
 
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_player_detector_body_entered"]
