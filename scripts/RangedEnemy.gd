@@ -12,6 +12,9 @@ var in_range = false
 
 var projectile = preload("res://Scenes/Enemy_projectile.tscn")
 
+func _ready():
+	var __ = connect("tree_exited", Callable(get_parent(), "_on_enemy_killed"))
+
 func _physics_process(delta):
 	if player_chase:
 		var dist = (player.position - self.position).length()
