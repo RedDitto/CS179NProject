@@ -20,6 +20,7 @@ config/icon="res://Art/icon.svg"
 
 Global="*res://scripts/Global.gd"
 GlobalAudioStreamPlayer="*res://Scenes/audio_stream_player.tscn"
+MenuVars="*res://scripts/MenuVars.gd"
 
 [display]
 
