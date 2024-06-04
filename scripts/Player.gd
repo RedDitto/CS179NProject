@@ -60,7 +60,8 @@ func _input(event):
 		print(position)
 		collision = !collision
 		hastp = true
-		extraBonusDamage = 100
+		_player_stats.health = 100
+		extraBonusDamage = 500
 		#particlesOn = !particlesOn
 		#can_bigattack = true
 		setBigAttack(true)
@@ -141,7 +142,7 @@ func endPlayer():
 	died.position = position
 	get_parent().add_child(died)
 	diedNode = died
-	Global.numruns += 1
+	#Global.numruns += 1
 	Global.save_data()
 	
 
