@@ -23,8 +23,25 @@ layout_mode = 2
 [node name="numruns" type="Label" parent="TextureRect/VBoxContainer"]
 layout_mode = 2
 
+[node name="fridgeskilled" type="Label" parent="TextureRect/VBoxContainer"]
+layout_mode = 2
+
+[node name="rangedkilled" type="Label" parent="TextureRect/VBoxContainer"]
+layout_mode = 2
+
+[node name="fanskilled" type="Label" parent="TextureRect/VBoxContainer"]
+layout_mode = 2
+
+[node name="microwaveskilled" type="Label" parent="TextureRect/VBoxContainer"]
+layout_mode = 2
+
 [node name="Button2" type="Button" parent="TextureRect/VBoxContainer"]
 layout_mode = 2
 text = "Back"
 
+[node name="Button" type="Button" parent="TextureRect/VBoxContainer"]
+layout_mode = 2
+text = "Reset"
+
 [connection signal="pressed" from="TextureRect/VBoxContainer/Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="TextureRect/VBoxContainer/Button" to="." method="_on_button_pressed"]

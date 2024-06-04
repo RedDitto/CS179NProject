@@ -12,9 +12,22 @@ var displaycurrentrun = "n/a"
 var bestrun = 100000000
 var displaybestrun = "n/a"
 var numwins = 0
+var fridgesKilled = 0
+var microwavesKilled = 0
+var fansKilled = 0
+var rangedGuysKilled = 0
+var pauseTimer = false
 func _ready():
 	load_data()
 	_player_stats.health = _player_stats.max_health
+	
+
+func reset():
+	var file = FileAccess.open("res://save_file.json", FileAccess.WRITE)
+	var json_string = JSON.stringify({"bank":0,"bestrun":9999999999,"cheat_death":0,"displaybestrun":"n/a","fansKilled":0,"fridgesKilled":0,"max_health":100,"microwavesKilled":0,"numruns":0,"numwins":0,"rangedGuysKilled":0,"upgrades":[["Starting Health",0,10,20],["Cheat Death",0,1,50]]})
+	file.store_string(json_string)
+	file.close()
+	load_data()
 	
 func save_data():
 	var file = FileAccess.open("res://save_file.json", FileAccess.WRITE)
@@ -26,7 +39,11 @@ func save_data():
 		"numruns": numruns,
 		"numwins": numwins,
 		"displaybestrun": displaybestrun,
-		"bestrun": bestrun
+		"bestrun": bestrun,
+		"fridgesKilled": fridgesKilled,
+		"microwavesKilled": microwavesKilled,
+		"fansKilled": fansKilled,
+		"rangedGuysKilled": rangedGuysKilled
 	}
 	var json_string = JSON.stringify(save_data)
 	file.store_string(json_string)
@@ -46,4 +63,8 @@ func load_data():
 		displaybestrun = data["displaybestrun"]
 		bestrun = data["bestrun"]
 		numwins = data["numwins"]
+		fridgesKilled = data["fridgesKilled"]
+		microwavesKilled = data["microwavesKilled"]
+		fansKilled = data["fansKilled"]
+		rangedGuysKilled = data["rangedGuysKilled"]
 	file.close()

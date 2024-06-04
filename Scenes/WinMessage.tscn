@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://pr1wo35owpks"]
+
+[ext_resource type="Script" path="res://scripts/diednode.gd" id="1_50d8y"]
+[ext_resource type="Texture2D" uid="uid://bv7s34a553ppy" path="res://Art/WonMessage.png" id="2_iiq8h"]
+[ext_resource type="Script" path="res://scripts/diedScript.gd" id="3_fip5d"]
+[ext_resource type="Texture2D" uid="uid://3vqvbplqppqj" path="res://Art/clickanywhere.png" id="4_6pr1x"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_50d8y")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-1, 1)
+scale = Vector2(0.498179, 0.420588)
+texture = ExtResource("2_iiq8h")
+script = ExtResource("3_fip5d")
+
+[node name="eee" type="Sprite2D" parent="Sprite2D"]
+visible = false
+position = Vector2(4.01462, 52.3077)
+scale = Vector2(1.03024, 1.18881)
+texture = ExtResource("4_6pr1x")

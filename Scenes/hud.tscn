@@ -9,6 +9,7 @@
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_jnqk4")
+metadata/_edit_vertical_guides_ = [-391.0]
 
 [node name="Currency_Label" type="Label" parent="."]
 offset_left = 4.0

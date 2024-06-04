@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://u52mda0bn3r1"]
+
+[ext_resource type="Texture2D" uid="uid://c4la3tw4onko" path="res://Art/currency.png" id="1_87g28"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_fogb8"]
+bounce = 14.85
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5pyl7"]
+radius = 16.0312
+
+[node name="RigidBody2D" type="RigidBody2D"]
+physics_material_override = SubResource("PhysicsMaterial_fogb8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+self_modulate = Color(0.156863, 0.14902, 1, 1)
+position = Vector2(1, -1)
+shape = SubResource("CircleShape2D_5pyl7")
+one_way_collision_margin = 0.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-0.750006, -3.33786e-06)
+scale = Vector2(3.03125, 3.09375)
+texture = ExtResource("1_87g28")

@@ -91,6 +91,9 @@ func _physics_process(delta):
 	else:
 		Global.numruns += 1
 		Global.numwins += 1
+		#time.paused = true
+		#time.bananad = true
+		Global.pauseTimer = true
 		time._stop()
 		var currency = currency_drop.instantiate()
 		get_parent().add_child(currency)
@@ -99,6 +102,7 @@ func _physics_process(delta):
 		var exp = bossexplosion.instantiate()
 		exp.position = position
 		get_parent().add_child(exp)
+		Global.fridgesKilled += 1
 		self.queue_free()
 
 
