@@ -63,9 +63,9 @@ func shoot_bullet(player):
 	var proj = projectile.instantiate()
 	get_tree().get_root().add_child(proj)
 	proj.global_position = global_position
-	var dir = (player.global_position - global_position).normalized()
-	proj.global_rotation = dir.angle() + PI / 2.0
-	proj.direction = dir
+	proj.direction = (player.global_position - global_position).normalized()
+	proj.global_rotation =proj.direction.angle() + PI / 2.0
+
 
 
 func _on_shoot_timer_timeout():
