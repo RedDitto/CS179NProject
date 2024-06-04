@@ -448,7 +448,6 @@ animation = &"death"
 offset = Vector2(0, -15)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(0, -2)
 shape = SubResource("CircleShape2D_855eh")
 
@@ -519,12 +518,11 @@ position = Vector2(0, -6)
 [node name="Marker2D" type="Marker2D" parent="ProjectileDirection"]
 
 [node name="dash_timer" type="Timer" parent="."]
-wait_time = 0.1
+wait_time = 0.25
 
 [node name="poison_timer" type="Timer" parent="."]
 
 [node name="dash_again_timer" type="Timer" parent="."]
-wait_time = 3.0
 
 [node name="hit" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_8k2gg")

@@ -19,12 +19,13 @@ var melee_range = false
 var _is_mouse_movement = false
 var dashing = false
 var can_dash = true
-var DashSpeed = 10
+var DashSpeed = 2.3
 var attack_in_progress = false
 var cheat_death_used = false
 var canShoot = true
 var diedNode = null
 
+var i_frames = false
 var speed_boost = 0
 var current_direction = "none"
 var move_direction = "none"
@@ -137,6 +138,7 @@ func player_movement(delta):
 		dashing = true
 		can_dash = false
 		$dash_timer.start()
+		set_collision_mask_value(2, false)
 		$dash_again_timer.start()
 	var directionX := Input.get_axis("ui_left", "ui_right")
 	var directionY := Input.get_axis("ui_up", "ui_down")
@@ -225,7 +227,7 @@ func _on_player_hitbox_body_exited(body):
 		enemy_in_attack_range = false
 
 func enemy_attack():
-	if enemy_in_attack_range and enemy_attack_cooldown == true:
+	if enemy_in_attack_range and enemy_attack_cooldown == true and !dashing:
 		_player_stats.health = _player_stats.health - 20
 		enemy_attack_cooldown = false
 		$attack_cooldown.start()
@@ -399,7 +401,7 @@ func _on_currency_gain_currency(amount):
 
 func _on_dash_timer_timeout():
 	dashing = false
-
+	set_collision_mask_value(2, true)
 
 func _on_dash_again_timer_timeout():
 	can_dash = true
@@ -417,7 +419,16 @@ func _on_picked_up_weapon_ranged(sprite):
 func _on_picked_up_weapon_melee(sprite):
 	hasMeleeWeapon = true
 
-
+func deal_with_damage(damage):
+	#print('PLAYER TAKES GROUND POUND DAMAGE')
+	if enemy_attack_cooldown and !dashing:
+		_player_stats.health = _player_stats.health - damage
+		enemy_attack_cooldown = false
+		$attack_cooldown.start()
+		emit_signal("health_loss")
+		print('ground pound hit! player health = ',_player_stats.health)
+		$hit.play()
+	pass
 
 
 
