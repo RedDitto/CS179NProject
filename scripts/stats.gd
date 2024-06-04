@@ -9,8 +9,9 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	$TextureRect/VBoxContainer/pb.text = "Fastest Run: " + Global.displaybestrun
-	$TextureRect/VBoxContainer/numwins.text = "Number of Wins: " + str(Global.numwins)
-	$TextureRect/VBoxContainer/numruns.text = "Number of Runs: " + str(Global.numruns)
+	$TextureRect/VBoxContainer/numwins.text = "Wins: " + str(Global.numwins)
+	$TextureRect/VBoxContainer/numruns.text = "Runs: " + str(Global.numruns)
+	$TextureRect/VBoxContainer/fridgeskilled.text = "Fridges Killed: " + str(Global.fridgesKilled)
 
 
 func _on_button_2_pressed():

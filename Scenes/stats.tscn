@@ -23,6 +23,9 @@ layout_mode = 2
 [node name="numruns" type="Label" parent="TextureRect/VBoxContainer"]
 layout_mode = 2
 
+[node name="fridgeskilled" type="Label" parent="TextureRect/VBoxContainer"]
+layout_mode = 2
+
 [node name="Button2" type="Button" parent="TextureRect/VBoxContainer"]
 layout_mode = 2
 text = "Back"

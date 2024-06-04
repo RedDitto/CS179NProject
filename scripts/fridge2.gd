@@ -77,6 +77,7 @@ func _physics_process(delta):
 		var exp = explosion.instantiate()
 		exp.position = position
 		get_parent().add_child(exp)
+		Global.fridgesKilled += 1
 		self.queue_free()
 
 func fridge2():

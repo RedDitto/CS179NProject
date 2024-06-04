@@ -426,7 +426,7 @@ radius = 4.0
 radius = 95.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4x7yq"]
-radius = 16.3205
+radius = 11.6859
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eawrm"]
 size = Vector2(15.3125, 21.2454)
