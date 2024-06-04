@@ -39,4 +39,9 @@ layout_mode = 2
 layout_mode = 2
 text = "Back"
 
+[node name="Button" type="Button" parent="TextureRect/VBoxContainer"]
+layout_mode = 2
+text = "Reset"
+
 [connection signal="pressed" from="TextureRect/VBoxContainer/Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="TextureRect/VBoxContainer/Button" to="." method="_on_button_pressed"]
