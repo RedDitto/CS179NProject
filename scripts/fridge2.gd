@@ -19,6 +19,8 @@ var in_knockback = false
 @onready var hit_animation_player = $Hit_AnimationPlayer
 var health = 200
 var max_health = 200
+var random = RandomNumberGenerator.new()
+var aimAhead = false
 
 
 @onready var health_bar = $Health_Bar
@@ -31,18 +33,25 @@ func _ready():
 	var __ = connect("tree_exited", Callable(get_parent(), "_on_enemy_killed"))
 	call_deferred("seeker_setup")
 	health_bar.visible = false
+	random.randomize()
+	aimAhead = (random.randi() % 10) == 1
 	
 func seeker_setup():
 	await get_tree().physics_frame
-	if target:
-		navigation_agent.target_position = target.global_position
+	#if target:
+		#navigation_agent.target_position = target.global_position
 
 func _physics_process(delta):
 	if alive:
 		if player_chase:
 			if target:
+				pass
 				#print(target.global_position)
-				navigation_agent.target_position = target.global_position
+				#var dist = (player.position - self.position).length()
+				#if aimAhead:
+					#navigation_agent.target_position = (target.global_position*44)
+				#else:
+					#navigation_agent.target_position = target.global_position*44
 			if navigation_agent.is_navigation_finished():
 				return
 			if !in_knockback:
@@ -133,7 +142,17 @@ func enemy():
 
 func _on_timer_timeout():
 	if player != null:
-		navigation_agent.target_position = player.global_position
+		var dist = abs((player.global_position - self.global_position).length())
+		#print(dist)
+		#print("player")
+		#print(player.global_position)
+		#print("fridge")
+		#print(self.global_position)
+		if dist > 60 && aimAhead:
+			navigation_agent.target_position = player.global_position + player.velocity.normalized() * 50
+		else:
+			navigation_agent.target_position = player.global_position
+			
 	
 
 

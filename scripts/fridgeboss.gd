@@ -52,6 +52,9 @@ func startAngry():
 	$AngryTimer.wait_time = 10
 	$AngryTimer.start()
 	
+
+	
+	
 func _physics_process(delta):
 	#if isAngry:
 		#speed = 100
@@ -178,6 +181,11 @@ func _on_spawn_timer_timeout():
 			aaa.health = 50
 			aaa.max_health = 100
 			aaa.speed = 100 
+			if isAngry:
+				aaa.speed = 200
+			if health < 500:
+				aaa.health = 200
+				aaa.max_health = 200
 
 
 func fridgeDied():
