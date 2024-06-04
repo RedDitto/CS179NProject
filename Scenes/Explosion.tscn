@@ -30,6 +30,6 @@ color_ramp = SubResource("Gradient_wfsgo")
 script = ExtResource("1_rap8a")
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 10.0
 
 [connection signal="timeout" from="Timer" to="Explode" method="_on_timer_timeout"]

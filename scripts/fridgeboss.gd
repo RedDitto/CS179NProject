@@ -3,6 +3,7 @@ extends CharacterBody2D
 var timescript = preload("res://scripts/Panel.gd")
 var time = timescript.new()
 var currency_drop = preload("res://Scenes/currency.tscn")
+var bossexplosion = preload("res://Scenes/BossExplosion.tscn")
 var defaultSpeed = 30
 var speed = 30
 var acceleration = 7
@@ -93,6 +94,10 @@ func _physics_process(delta):
 		var currency = currency_drop.instantiate()
 		get_parent().add_child(currency)
 		currency.position = self.position
+		
+		var exp = bossexplosion.instantiate()
+		exp.position = position
+		get_parent().add_child(exp)
 		self.queue_free()
 
 
