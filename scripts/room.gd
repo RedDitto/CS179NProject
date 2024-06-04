@@ -12,7 +12,9 @@ const UPGRADES: Dictionary = {"upgrade" : preload("res://Scenes/upgrade.tscn")}
 
 const ENEMY_SCENES: Dictionary = {
 	"fan": preload("res://Scenes/oscillating_fan.tscn"),
-	"fridge": preload("res://Scenes/fridge.tscn"), "microwave": preload("res://Scenes/Microwave.tscn")
+	"fridge": preload("res://Scenes/fridge.tscn"), 
+	"microwave": preload("res://Scenes/Microwave.tscn"),
+	"bathtub": preload("res://Scenes/RangedEnemy.tscn")
 }
 
 # Called when the node enters the scene tree for the first time.
@@ -37,13 +39,15 @@ func _close_entrance():
 func _spawn_enemies():
 	for enemy_position in enemy_positions_container.get_children():
 		var enemy: CharacterBody2D
-		var rannum = randi() % 3
+		var rannum = randi() % 4
 		if rannum == 0:
 			enemy = ENEMY_SCENES.fan.instantiate()
 		if rannum == 1:
 			enemy = ENEMY_SCENES.fridge.instantiate()
 		if rannum == 2:
 			enemy = ENEMY_SCENES.microwave.instantiate()
+		if rannum == 3:
+			enemy = ENEMY_SCENES.bathtub.instantiate()
 		enemy.position = enemy_position.position
 		call_deferred("add_child", enemy)
 
