@@ -13,6 +13,8 @@ func _process(delta):
 	$TextureRect/VBoxContainer/numruns.text = "Runs: " + str(Global.numruns)
 	$TextureRect/VBoxContainer/fridgeskilled.text = "Fridges Killed: " + str(Global.fridgesKilled)
 	$TextureRect/VBoxContainer/rangedkilled.text = "Ranged Guys Killed: " + str(Global.rangedGuysKilled)
+	$TextureRect/VBoxContainer/fanskilled.text = "Fans Killed: " + str(Global.fansKilled)
+	$TextureRect/VBoxContainer/microwaveskilled.text = "Microwaves Killed: " + str(Global.microwavesKilled)
 
 
 func _on_button_2_pressed():
