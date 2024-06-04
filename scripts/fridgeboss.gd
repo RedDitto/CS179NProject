@@ -99,6 +99,7 @@ func _physics_process(delta):
 		var exp = bossexplosion.instantiate()
 		exp.position = position
 		get_parent().add_child(exp)
+		Global.fridgesKilled += 1
 		self.queue_free()
 
 

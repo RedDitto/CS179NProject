@@ -67,7 +67,9 @@ func _physics_process(delta):
 		var currency = currency_drop.instantiate()
 		get_parent().add_child(currency)
 		currency.position = self.position
+		Global.microwavesKilled += 1
 		self.queue_free()
+		
 
 	
 func deal_with_damage(damage):
