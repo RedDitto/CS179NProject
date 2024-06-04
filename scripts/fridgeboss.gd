@@ -90,6 +90,7 @@ func _physics_process(delta):
 			$AnimatedSprite2D.play("fridge_idle")
 	else:
 		Global.numruns += 1
+		Global.numwins += 1
 		time._stop()
 		var currency = currency_drop.instantiate()
 		get_parent().add_child(currency)

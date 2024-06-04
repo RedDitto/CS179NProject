@@ -11,6 +11,7 @@ var currentrun = 0
 var displaycurrentrun = "n/a"
 var bestrun = 100000000
 var displaybestrun = "n/a"
+var numwins = 0
 func _ready():
 	load_data()
 	_player_stats.health = _player_stats.max_health
@@ -23,6 +24,7 @@ func save_data():
 		"bank": _player_stats.bank,
 		"upgrades": _player_permanent_upgrades.upgrades,
 		"numruns": numruns,
+		"numwins": numwins,
 		"displaybestrun": displaybestrun,
 		"bestrun": bestrun
 	}
@@ -43,4 +45,5 @@ func load_data():
 		numruns = data["numruns"]
 		displaybestrun = data["displaybestrun"]
 		bestrun = data["bestrun"]
+		numwins = data["numwins"]
 	file.close()
