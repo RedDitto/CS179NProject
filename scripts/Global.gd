@@ -16,6 +16,7 @@ var fridgesKilled = 0
 var microwavesKilled = 0
 var fansKilled = 0
 var rangedGuysKilled = 0
+var pauseTimer = false
 func _ready():
 	load_data()
 	_player_stats.health = _player_stats.max_health
