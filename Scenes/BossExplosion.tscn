@@ -15,7 +15,7 @@ min_value = -1.0
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1e-05, -1), 0.0, 0.0, 0, 0, Vector2(0.360558, -0.471154), 0.0, 0.0, 0, 0, Vector2(0.818725, -1), 0.0, 0.0, 0, 0, Vector2(0.966136, 1), 0.0, 0.0, 0, 0]
 point_count = 5
 
-[node name="Explosion" type="Node2D"]
+[node name="BossExplosion" type="Node2D"]
 
 [node name="Explode" type="CPUParticles2D" parent="."]
 self_modulate = Color(0.874701, 0.559288, 1, 1)
