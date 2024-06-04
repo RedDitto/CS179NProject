@@ -25,5 +25,6 @@ func _stop():
 	if Global.currentrun < Global.bestrun:
 		Global.displaybestrun = Global.displaycurrentrun
 		Global.bestrun = Global.currentrun
-		print(Global.displaybestrun)
+	Global.numruns += 1
+	Global.save_data()
 	

@@ -21,7 +21,10 @@ func save_data():
 		"max_health": _player_stats.max_health,
 		"cheat_death": _player_stats.cheat_death,
 		"bank": _player_stats.bank,
-		"upgrades": _player_permanent_upgrades.upgrades
+		"upgrades": _player_permanent_upgrades.upgrades,
+		"numruns": numruns,
+		"displaybestrun": displaybestrun,
+		"bestrun": bestrun
 	}
 	var json_string = JSON.stringify(save_data)
 	file.store_string(json_string)
@@ -37,4 +40,7 @@ func load_data():
 		_player_stats.cheat_death = data["cheat_death"]
 		_player_stats.bank = data["bank"]
 		_player_permanent_upgrades.upgrades = data["upgrades"]
+		numruns = data["numruns"]
+		displaybestrun = data["displaybestrun"]
+		bestrun = data["bestrun"]
 	file.close()
