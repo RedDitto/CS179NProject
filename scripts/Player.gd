@@ -10,6 +10,7 @@ var _player_upgrades = Global._player_upgrades
 
 const PROJECTILE_PATH = preload('res://Scenes/Projectile.tscn')
 const fridgePATH = preload('res://Scenes/fridge.tscn')
+const diedPATH = preload('res://Scenes/DiedMessage.tscn')
 var DashDirection = Vector2.ZERO
 var enemy_in_attack_range = false
 var enemy_attack_cooldown = true
@@ -22,6 +23,7 @@ var DashSpeed = 10
 var attack_in_progress = false
 var cheat_death_used = false
 var canShoot = true
+var diedNode = null
 
 var speed_boost = 0
 var current_direction = "none"
@@ -40,11 +42,17 @@ var isPoisoned = false
 var particlesOn = false
 @onready var abilityTimer = $AbilityTimer
 var can_bigattack = false
+var blockInput = false
 
 func resetHealth():
 	_player_stats.health = 100
 
 func _input(event):
+	if event.is_action_pressed("lbutton"):
+		if diedNode != null && diedNode.restartGame:
+			restartGame()
+	if blockInput: 
+		return
 	if event.is_action_pressed("print"):
 		print(position)
 		collision = !collision
@@ -81,6 +89,8 @@ func _ready():
 	$PoisonEffect.visible = false
 
 func _physics_process(delta):
+	if blockInput: 
+		return
 	player_movement(delta)
 	enemy_attack()
 	_mouse_direction()
@@ -100,12 +110,27 @@ func _physics_process(delta):
 		else:
 			player_alive = false #where you would add go back to menu / respawn
 			_player_stats.health = 0
-			#get_tree().quit()
-			get_tree().reload_current_scene()
-			_player_stats.health = 100
-			_player_stats.max_health = 100
-			print("Y O U   D I E D")
-			self.queue_free()
+			endPlayer()
+			#get_tree().reload_current_scene()
+			#_player_stats.health = 100
+			#_player_stats.max_health = 100
+			#print("Y O U   D I E D")
+			#self.queue_free()
+			
+func restartGame():
+	get_tree().reload_current_scene()
+	_player_stats.health = 100
+	_player_stats.max_health = 100
+	self.queue_free()
+			
+func endPlayer():
+	visible = false
+	blockInput = true
+	var died = diedPATH.instantiate()
+	died.position = position
+	get_parent().add_child(died)
+	diedNode = died
+	
 
 func player_movement(delta):
 	if Input.is_action_just_pressed("dash") and can_dash:
