@@ -67,3 +67,8 @@ func upd(delta, t):
 func _on_player_sprite_frame_changed():
 	if splat && p.frame == 2:
 		p.pause()
+
+
+func _on_button_5_pressed():
+	Global.mode = 2
+	get_tree().change_scene_to_file("res://Scenes/game.tscn");

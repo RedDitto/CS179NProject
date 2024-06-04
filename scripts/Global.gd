@@ -5,7 +5,7 @@ var _player_stats = preload("res://scripts/Player_Stats.tres")
 var _player_upgrades = preload("res://scripts/Player_Upgrades.tres")
 var _player_permanent_upgrades = preload("res://scripts/Player_Permanent_Upgrades.tres")
 var _menu_open = false
-
+var mode
 var numruns = 0
 var currentrun = 0
 var displaycurrentrun = "n/a"

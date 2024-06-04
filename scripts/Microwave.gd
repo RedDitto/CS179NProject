@@ -24,7 +24,7 @@ signal health_loss
 
 @export var _enemy_stats : Enemy_Stats
 
-var health = 100
+var health = 100/Global.mode
 
 @export var target: Node2D = null
 

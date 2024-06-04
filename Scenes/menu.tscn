@@ -146,8 +146,13 @@ offset_bottom = 107.0
 [node name="Button" type="Button" parent="TextureRect/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_ynf6p")
-text = "Play"
+text = "Hard"
 script = ExtResource("2_lel2s")
+
+[node name="Button5" type="Button" parent="TextureRect/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_ynf6p")
+text = "Easy"
 
 [node name="Button2" type="Button" parent="TextureRect/VBoxContainer"]
 layout_mode = 2
@@ -211,6 +216,7 @@ animation = &"run"
 frame_progress = 0.0229726
 
 [connection signal="pressed" from="TextureRect/VBoxContainer/Button" to="TextureRect/VBoxContainer/Button" method="_on_pressed"]
+[connection signal="pressed" from="TextureRect/VBoxContainer/Button5" to="." method="_on_button_5_pressed"]
 [connection signal="pressed" from="TextureRect/VBoxContainer/Button2" to="TextureRect/VBoxContainer/Button" method="_on_button_2_pressed"]
 [connection signal="pressed" from="TextureRect/VBoxContainer/Button4" to="TextureRect/VBoxContainer/Button" method="_on_button_4_pressed"]
 [connection signal="pressed" from="TextureRect/VBoxContainer/Button3" to="TextureRect/VBoxContainer/Button" method="_on_button_3_pressed"]

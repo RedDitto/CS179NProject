@@ -20,7 +20,7 @@ var in_knockback = false
 @export var _enemy_stats : Enemy_Stats
 @onready var hit_animation_player = $Hit_AnimationPlayer
 
-var health = 100
+var health = 100/Global.mode
 var isPoisoned = false
 
 @onready var health_bar = $Health_Bar
