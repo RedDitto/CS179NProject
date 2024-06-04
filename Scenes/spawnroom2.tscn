@@ -41,21 +41,21 @@ position = Vector2(466, 246)
 position = Vector2(542, 209)
 
 [node name="Node2D" parent="." index="10" instance=ExtResource("4_ibef3")]
-position = Vector2(403, 271)
+position = Vector2(390, 103)
 
 [node name="CharacterBody2D2" parent="." index="11" instance=ExtResource("5_ni3tl")]
 position = Vector2(531, 316)
 
 [node name="CharacterBody2D" parent="." index="12" instance=ExtResource("5_ni3tl")]
-position = Vector2(525, 265)
+position = Vector2(718, 270)
 
 [node name="Fridge" parent="." index="13" instance=ExtResource("6_yqdbj")]
-position = Vector2(343, 259)
+position = Vector2(772, 191)
 
 [node name="Node2D3" parent="." index="14" instance=ExtResource("8_sss0d")]
-position = Vector2(491, 218)
+position = Vector2(511, 93)
 
 [node name="Node2D2" parent="." index="15" instance=ExtResource("7_kvl4r")]
-position = Vector2(380, 323)
+position = Vector2(452, 101)
 
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_player_detector_body_entered"]

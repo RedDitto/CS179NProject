@@ -39,18 +39,18 @@ position = Vector2(320, 203)
 position = Vector2(279, 222)
 
 [node name="Node2D" parent="." index="10" instance=ExtResource("3_cyp5b")]
-position = Vector2(331, 175)
+position = Vector2(482, 169)
 
 [node name="Fridge" parent="." index="11" instance=ExtResource("5_lf1g4")]
-position = Vector2(237, 203)
+position = Vector2(-111, 159)
 
 [node name="CharacterBody2D2" parent="." index="12" instance=ExtResource("3_6ebls")]
-position = Vector2(288, 319)
+position = Vector2(-85, 286)
 
 [node name="Node2D2" parent="." index="13" instance=ExtResource("6_wti4x")]
-position = Vector2(264, 94)
+position = Vector2(486, 115)
 
 [node name="Node2D4" parent="." index="14" instance=ExtResource("7_lad1o")]
-position = Vector2(345, 221)
+position = Vector2(486, 236)
 
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_player_detector_body_entered"]
