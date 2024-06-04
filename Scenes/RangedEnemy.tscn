@@ -1,10 +1,17 @@
-[gd_scene load_steps=21 format=3 uid="uid://c6s838vl1c53p"]
+[gd_scene load_steps=28 format=3 uid="uid://c6s838vl1c53p"]
 
 [ext_resource type="Script" path="res://scripts/RangedEnemy.gd" id="1_4hyu1"]
+[ext_resource type="Shader" uid="uid://wbegqqaqwpc" path="res://scripts/hit_flash_shader.tres" id="2_566ab"]
 [ext_resource type="Texture2D" uid="uid://dwxw8tcpij02c" path="res://Art/Animated_Objects/!$Bathtub.png" id="2_jejm7"]
 [ext_resource type="Texture2D" uid="uid://ghxw7s5a3p5d" path="res://Art/health_bar_progress.png" id="3_fd8ci"]
 [ext_resource type="Texture2D" uid="uid://d1d2agyuvluuh" path="res://Art/health_bar_over.png" id="4_sy5sf"]
 [ext_resource type="Script" path="res://scripts/healthbar.gd" id="5_cfjso"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_n7si8"]
+resource_local_to_scene = true
+shader = ExtResource("2_566ab")
+shader_parameter/enabled = false
+shader_parameter/hit_color = Color(1, 1, 1, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xmqxk"]
 atlas = ExtResource("2_jejm7")
@@ -99,22 +106,69 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_r6651"]
-radius = 86.209
+radius = 170.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bb1bs"]
 size = Vector2(12, 15)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_l2lid"]
+radius = 90.0056
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_an4qk"]
+radius = 67.1193
+
+[sub_resource type="Animation" id="Animation_j2rlf"]
+resource_name = "hit"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:material:shader_parameter/enabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_onkvi"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:material:shader_parameter/enabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5usvd"]
+_data = {
+"RESET": SubResource("Animation_onkvi"),
+"hit": SubResource("Animation_j2rlf")
+}
+
 [node name="CharacterBody2D" type="CharacterBody2D" groups=["ranged_enemy"]]
 collision_layer = 2
 collision_mask = 7
+motion_mode = 1
+wall_min_slide_angle = 0.0
 script = ExtResource("1_4hyu1")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." groups=["ranged_enemy"]]
+material = SubResource("ShaderMaterial_n7si8")
 scale = Vector2(0.15, 0.15)
 sprite_frames = SubResource("SpriteFrames_miso7")
-frame_progress = 0.339822
+autoplay = "default"
+frame_progress = 0.201609
 
 [node name="detection_area" type="Area2D" parent="." groups=["ranged_enemy"]]
+visible = false
 collision_mask = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="detection_area" groups=["ranged_enemy"]]
@@ -122,6 +176,7 @@ position = Vector2(0, -2)
 shape = SubResource("CircleShape2D_r6651")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["ranged_enemy"]]
+position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_bb1bs")
 
 [node name="poison_timer" type="Timer" parent="." groups=["ranged_enemy"]]
@@ -147,7 +202,46 @@ script = ExtResource("5_cfjso")
 [node name="shoot_timer" type="Timer" parent="." groups=["ranged_enemy"]]
 autostart = true
 
+[node name="Navigation" type="Node2D" parent="."]
+position = Vector2(0, 1)
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="Navigation"]
+path_postprocessing = 1
+radius = 15.0
+debug_enabled = true
+
+[node name="Timer" type="Timer" parent="Navigation"]
+wait_time = 0.1
+autostart = true
+
+[node name="stop_distance" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="stop_distance"]
+shape = SubResource("CircleShape2D_l2lid")
+debug_color = Color(0.617579, 0.528728, 0.244429, 0.42)
+
+[node name="flee_distance" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="flee_distance"]
+shape = SubResource("CircleShape2D_an4qk")
+debug_color = Color(0.991764, 0, 0.261232, 0.42)
+
+[node name="Hit_AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_5usvd")
+}
+
 [connection signal="body_entered" from="detection_area" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="detection_area" to="." method="_on_detection_area_body_exited"]
 [connection signal="timeout" from="poison_timer" to="." method="_on_poison_timer_timeout"]
 [connection signal="timeout" from="shoot_timer" to="." method="_on_shoot_timer_timeout"]
+[connection signal="velocity_computed" from="Navigation/NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]
+[connection signal="timeout" from="Navigation/Timer" to="." method="_on_timer_timeout"]
+[connection signal="body_entered" from="stop_distance" to="." method="_on_stop_distance_body_entered"]
+[connection signal="body_exited" from="stop_distance" to="." method="_on_stop_distance_body_exited"]
+[connection signal="body_entered" from="flee_distance" to="." method="_on_flee_distance_body_entered"]
+[connection signal="body_exited" from="flee_distance" to="." method="_on_flee_distance_body_exited"]
