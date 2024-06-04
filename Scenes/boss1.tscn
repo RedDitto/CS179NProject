@@ -425,43 +425,9 @@ libraries = {
 
 [node name="Knockback_timer" type="Timer" parent="."]
 
-[node name="Attack" type="Node2D" parent="."]
 
-[node name="Attack_range" type="Area2D" parent="Attack"]
-collision_layer = 0
-collision_mask = 4
+[node name="poison_timer" type="Timer" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Attack/Attack_range"]
-position = Vector2(0, -13)
-shape = SubResource("CircleShape2D_5w4lk")
-debug_color = Color(0.897509, 0.87871, 0.992363, 0.42)
-
-[node name="attack_animation_cooldown" type="Timer" parent="Attack"]
-wait_time = 0.5
-
-[node name="pound_animation_cooldown" type="Timer" parent="Attack"]
-wait_time = 0.4
-
-[node name="ground_pound" type="AnimatedSprite2D" parent="Attack"]
-scale = Vector2(1.3, 1.3)
-sprite_frames = SubResource("SpriteFrames_peft0")
-
-[node name="ground_pound_hurtbox" type="Area2D" parent="Attack"]
-collision_layer = 0
-collision_mask = 4
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Attack/ground_pound_hurtbox"]
-visible = false
-position = Vector2(-1.25, -8)
-rotation = 1.5708
-shape = SubResource("RectangleShape2D_bheul")
-disabled = true
-
-[node name="aoe" type="CollisionShape2D" parent="Attack/ground_pound_hurtbox"]
-position = Vector2(0, -13)
-rotation = 1.5708
-shape = SubResource("CapsuleShape2D_nvo5j")
-disabled = true
 
 [connection signal="health_loss" from="." to="Health_Bar" method="_on_fridge_health_loss"]
 [connection signal="body_entered" from="detection_area" to="." method="_on_detection_area_body_entered"]
@@ -470,3 +436,4 @@ disabled = true
 [connection signal="timeout" from="Navigation/Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="take_damage_cooldown" to="." method="_on_take_damage_cooldown_timeout"]
 [connection signal="timeout" from="Knockback_timer" to="." method="_on_knockback_timer_timeout"]
+[connection signal="timeout" from="poison_timer" to="." method="_on_poison_timer_timeout"]

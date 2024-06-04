@@ -9,5 +9,6 @@ var bank : int
 var currency = 0
 var attack = 20
 var attack_speed = 1.0
-var speed = 100
+var speed = 70
+
 var speed_boost = 0

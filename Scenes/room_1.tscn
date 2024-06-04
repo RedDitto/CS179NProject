@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://dsqacigqofet" path="res://Scenes/ranged_weapon.tscn" id="9_ohvqi"]
 [ext_resource type="PackedScene" uid="uid://cvefens235g58" path="res://Scenes/upgrade.tscn" id="10_1itfp"]
 [ext_resource type="PackedScene" uid="uid://bjlx0hq4dy24v" path="res://Scenes/crosshair.tscn" id="11_culhw"]
-[ext_resource type="PackedScene" path="res://Scenes/upgrades_vending_machine.tscn" id="12_3u2xr"]
+[ext_resource type="PackedScene" uid="uid://cm0bqtg0tnk1w" path="res://Scenes/upgrades_vending_machine.tscn" id="12_3u2xr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o43sk"]
 size = Vector2(15.5, 15)

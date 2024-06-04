@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://b4vr0lkgej7km"]
+
+[sub_resource type="Curve" id="Curve_wu3sj"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.579568, 0.412964), -0.896627, -0.896627, 0, 0, Vector2(1, 0.199927), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[node name="Node2D" type="Node2D"]
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+amount = 11
+emission_shape = 3
+emission_rect_extents = Vector2(20, 20)
+gravity = Vector2(0, -80)
+scale_amount_min = 8.0
+scale_amount_max = 10.0
+scale_amount_curve = SubResource("Curve_wu3sj")
+color = Color(0.098, 0.98, 0, 0.443137)

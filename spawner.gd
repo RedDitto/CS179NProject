@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-const fridgePATH = preload('res://Scenes/fridge.tscn')
+const fridgePATH = preload('res://Scenes/fridge2.tscn')
 func spawn():
 	pass
 

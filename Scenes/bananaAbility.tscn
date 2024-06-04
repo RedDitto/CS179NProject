@@ -1,18 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://dx0i224w6knwl"]
+[gd_scene load_steps=4 format=3 uid="uid://c4sai2ke34owo"]
 
-[ext_resource type="Texture2D" uid="uid://hqbshj5c6ery" path="res://Art/tp.png" id="1_4rsl8"]
-[ext_resource type="Script" path="res://scripts/teleporter.gd" id="1_stk2x"]
+[ext_resource type="Script" path="res://scripts/bananaAbility.gd" id="1_d2hee"]
+[ext_resource type="Texture2D" uid="uid://6xrrhscf1t0n" path="res://Art/banana.png" id="2_pbm7q"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5dq4o"]
 radius = 18.0278
 
 [node name="Node2D" type="Node2D"]
-script = ExtResource("1_stk2x")
+script = ExtResource("1_d2hee")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-1.90735e-06, 0)
-scale = Vector2(0.483333, 0.466667)
-texture = ExtResource("1_4rsl8")
+position = Vector2(3.8147e-06, 1)
+scale = Vector2(0.156861, 0.145098)
+texture = ExtResource("2_pbm7q")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_mask = 4

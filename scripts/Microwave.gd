@@ -9,6 +9,7 @@ var player_in_attack_zone = false
 var can_take_damage = true
 var alive = true
 var death_finished = false
+var isPoisoned = false
 
 var in_knockback = false
 @export var knockback_modifier : float = 50.0
@@ -111,6 +112,11 @@ func _on_detection_area_body_exited(body):
 func _on_navigation_agent_2d_velocity_computed(safe_velocity):
 	velocity = safe_velocity
 
+func poison() :
+	isPoisoned = true
+	$poison_timer.wait_time = .5
+	$poison_timer.start()
+
 
 func _on_take_damage_cooldown_timeout():
 	can_take_damage = true
@@ -124,3 +130,7 @@ func _on_timer_timeout():
 func _on_knockback_timer_timeout():
 	print("no longer in knockback")
 	in_knockback = false
+
+
+func _on_poison_timer_timeout():
+	deal_with_damage(30)

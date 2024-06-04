@@ -1,8 +1,8 @@
 extends CharacterBody2D
 
 var currency_drop = preload("res://Scenes/currency.tscn")
-
-var speed = 60
+var defaultSpeed = 30
+var speed = 30
 var acceleration = 7
 var player_chase = false
 var player = null
@@ -10,18 +10,23 @@ var player_in_attack_zone = false
 var can_take_damage = true
 var alive = true
 var death_finished = false
-var attacking = false
-var ground_pound = false
-var in_range = false
+var isPoisoned = false
 signal health_loss
 var in_knockback = false
 @export var knockback_modifier : float
 @export var enabled_knockback : bool = true
 @export var _enemy_stats : Enemy_Stats
 @onready var hit_animation_player = $Hit_AnimationPlayer
+const fridgePATH = preload('res://Scenes/fridge2.tscn')
+var health = 1000
+var max_health = 1000
+var rd = RandomNumberGenerator.new()
+var numFridges = 0
+var maxFridges = 12
+var isAngry = false
+var hasBeenAngry = false
 
-var health = 100
-var isPoisoned = false
+
 
 @onready var health_bar = $Health_Bar
 
@@ -33,52 +38,53 @@ func _ready():
 	var __ = connect("tree_exited", Callable(get_parent(), "_on_enemy_killed"))
 	call_deferred("seeker_setup")
 	health_bar.visible = false
-	
+	rd.randomize()
+	$Spawn_Timer.wait_time = 5
+	$Spawn_Timer.start()
 func seeker_setup():
 	await get_tree().physics_frame
 	if target:
 		navigation_agent.target_position = target.global_position
+func startAngry():
+	speed = 110
+	hasBeenAngry = true
+	isAngry = true
+	$AngryTimer.wait_time = 10
+	$AngryTimer.start()
+	
 
+	
+	
 func _physics_process(delta):
+	#if isAngry:
+		#speed = 100
+	#else:
+		#speed = defaultSpeed
+	if !hasBeenAngry && health < 1000:
+		startAngry()
+
 	if alive:
-		#if attacking == false:
-			if player_chase:
-				if target:
-					#print(target.global_position)
-					navigation_agent.target_position = target.global_position
-				if navigation_agent.is_navigation_finished():
-					return
-				if !in_knockback:
-					var current_agent_position = global_position
-					var next_path_position = navigation_agent.get_next_path_position()
-					var new_velocity = current_agent_position.direction_to(next_path_position) * speed
-					
-					if navigation_agent.avoidance_enabled:
-						navigation_agent.set_velocity(new_velocity)
-					else:
-						_on_navigation_agent_2d_velocity_computed(new_velocity)
+		if player_chase:
+			if target:
+				#print(target.global_position)
+				navigation_agent.target_position = target.global_position
+			if navigation_agent.is_navigation_finished():
+				return
+			if !in_knockback:
+				var current_agent_position = global_position
+				var next_path_position = navigation_agent.get_next_path_position()
+				var new_velocity = current_agent_position.direction_to(next_path_position) * speed
 				
-				
-				if attacking:
-					$AnimatedSprite2D.play("ground_pound")
-					speed = 0
+				if navigation_agent.avoidance_enabled:
+					navigation_agent.set_velocity(new_velocity)
 				else:
-					#$AnimatedSprite2D.play("walk")
-					$AnimatedSprite2D.play('still_walk')	
-					speed = 60
-				
-				if ground_pound:
-					$Attack/ground_pound.play('slam1')
-				else:
-					$Attack/ground_pound.play('default')
-				
-				move_and_slide()
-				#move_and_collide(Vector2(0,0))
-			else:
-				$AnimatedSprite2D.play("fridge_idle")
-		#else:
-			#print("GROUND POUND")
-			#$AnimatedSprite2D.play("ground_pound")
+					_on_navigation_agent_2d_velocity_computed(new_velocity)
+			
+			move_and_slide()
+			$AnimatedSprite2D.play("walk")
+			#move_and_collide(Vector2(0,0))
+		else:
+			$AnimatedSprite2D.play("fridge_idle")
 	else:
 		var currency = currency_drop.instantiate()
 		get_parent().add_child(currency)
@@ -92,14 +98,22 @@ func _on_detection_area_body_entered(body):
 		player = body
 		player_chase = true
 		health_bar.visible = true
+		#body.poison()
 		
+
+#func poison() :
+	#isPoisoned = true
+	#$poison_timer.wait_time = 1
+	#$poison_timer.start()
+	#
+#func unpoison():
+	#isPoisoned = false
+	#$poison_timer.stop()
 
 
 func _on_detection_area_body_exited(body):
-	#if body.is_in_group("Player"):
-		#player = null
-		#player_chase = false
-	pass
+	if body.has_method("fridge2"):
+		fridgeDied() # or left detection zone
 	
 func deal_with_damage(damage):
 	if can_take_damage == true:
@@ -136,12 +150,6 @@ func enemy():
 	pass
 
 
-func poison() :
-	isPoisoned = true
-	$poison_timer.wait_time = .5
-	$poison_timer.start()
-
-
 
 func _on_timer_timeout():
 	if player != null:
@@ -157,34 +165,38 @@ func _on_knockback_timer_timeout():
 	in_knockback = false
 
 
-
-func _on_attack_range_body_entered(body):
-	if body.is_in_group("Player"):
-		attacking = true
-		$Attack/attack_animation_cooldown.start()
-		
-func _on_attack_range_body_exited(body):	
-	pass
-	
-func _on_attack_animation_cooldown_timeout():
-	if attacking:
-		attacking = false # Replace with function body.
-		ground_pound = true
-		print('START GROUND POUND')
-		$Attack/pound_animation_cooldown.start()
-		#$Attack/ground_pound_hurtbox/CollisionShape2D.disabled = false
-		$Attack/ground_pound_hurtbox/aoe.disabled = false
-func _on_pound_animation_cooldown_timeout():
-	print('END GROUND POUND')
-	ground_pound = false
-	#$Attack/ground_pound_hurtbox/CollisionShape2D.disabled = true
-	$Attack/ground_pound_hurtbox/aoe.disabled = true
-
-
-func _on_ground_pound_hurtbox_body_entered(body):
-	if body.is_in_group("Player"):
-		body.deal_with_damage(30)
-
 func _on_poison_timer_timeout():
-	deal_with_damage(30)
+	deal_with_damage(1)
 
+
+func _on_spawn_timer_timeout():
+	if player != null:
+		for i in range(5):
+			if numFridges > maxFridges:
+				break
+			var aaa = fridgePATH.instantiate()
+			numFridges += 1
+			aaa.position = Vector2(position.x + 80*cos(randf_range(0,100)),80 * sin(randf_range(0,100)) + position.y)
+			get_parent().add_child(aaa)
+			aaa.health = 50
+			aaa.max_health = 100
+			aaa.speed = 100 
+			if isAngry:
+				aaa.speed = 200
+			if health < 500:
+				aaa.health = 200
+				aaa.max_health = 200
+
+
+func fridgeDied():
+	numFridges -= 1
+	print("fridge died")
+	print(numFridges)
+	if numFridges < 0: 
+		numFridges = 0
+
+
+func _on_angry_timer_timeout():
+	#pass
+	isAngry = false
+	speed = defaultSpeed

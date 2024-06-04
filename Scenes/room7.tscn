@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://c4gdjwqa0eaas"]
+[gd_scene load_steps=5 format=3 uid="uid://cby33edw6vpfm"]
 
 [ext_resource type="PackedScene" uid="uid://dh7r45oh824ur" path="res://Scenes/room.tscn" id="1_mr0cf"]
 [ext_resource type="PackedScene" uid="uid://xvo8q2ctv7bt" path="res://Scenes/door.tscn" id="2_31i8h"]
+[ext_resource type="PackedScene" uid="uid://7845ed8xsgt" path="res://Scenes/poisonousBanana.tscn" id="3_8sa4r"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l1wof"]
 
@@ -51,5 +52,8 @@ collision_mask = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector" index="0"]
 position = Vector2(536, 344)
 shape = SubResource("RectangleShape2D_l1wof")
+
+[node name="Node2D" parent="." index="6" instance=ExtResource("3_8sa4r")]
+position = Vector2(331, 138)
 
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_player_detector_body_entered"]
