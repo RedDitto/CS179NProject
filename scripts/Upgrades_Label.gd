@@ -4,8 +4,7 @@ extends Label
 func _ready():
 	pass # Replace with function body.
 
-func _update():
-	print("Updating Upgrade UI")
+func _process(delta):
 	text = "Upgrades:"
 	for i in Global._player_upgrades.upgrades:
 		if i[1] > 0:

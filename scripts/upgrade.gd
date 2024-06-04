@@ -3,6 +3,7 @@ extends Node2D
 signal gain_upgrade
 
 var _player_upgrades = Global._player_upgrades
+var _player_stats = Global._player_stats
 var player_in_area = false
 var random_number1
 var random_number2
@@ -43,10 +44,18 @@ func _input(event):
 
 func _on_upgrade_button_upgrade_chosen(choice):
 	if choice == 1:
-		_player_upgrades.upgrades[random_number1][1] += 1
-		emit_signal("gain_upgrade", random_number1)
+		choice = random_number1
 	else:
-		_player_upgrades.upgrades[random_number2][1] += 1
-		emit_signal("gain_upgrade", random_number2)
+		choice = random_number2
+	
+	if (choice == 0 and _player_upgrades.upgrades[0][1] < 4): #Movement Speed
+		_player_stats.speed_boost += _player_upgrades.upgrades[0][2]
+		_player_upgrades.upgrades[choice][1] += 1
+	elif (choice == 1 and _player_upgrades.upgrades[1][1] < 4): #Ranged Damage
+		_player_stats.ranged_damage_bonus += _player_upgrades.upgrades[1][2]
+		_player_upgrades.upgrades[choice][1] += 1
+	elif (choice == 2 and _player_upgrades.upgrades[2][1] < 4): #Melee Damage
+		_player_stats.melee_damage_bonus += _player_upgrades.upgrades[2][2]
+		_player_upgrades.upgrades[choice][1] += 1
 	#Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	queue_free()

@@ -53,10 +53,10 @@ tint_over = Color(0.121569, 0.121569, 0.121569, 1)
 tint_progress = Color(0.666667, 0, 0, 1)
 
 [node name="FPS" type="Label" parent="."]
-offset_left = 538.0
-offset_top = 1.0
-offset_right = 579.0
-offset_bottom = 18.0
+offset_left = 533.0
+offset_top = 2.0
+offset_right = 574.0
+offset_bottom = 19.0
 theme_override_font_sizes/font_size = 10
 text = "FPS: 60"
 

@@ -15,5 +15,5 @@ func _on_area_2d_body_entered(body):
 	if not body.is_in_group("Player"):
 		queue_free()
 	if body.has_method("enemy"):
-		body.deal_with_damage(20)
+		body.deal_with_damage(Global._player_stats.ranged_attack * 1 + Global._player_stats.ranged_damage_bonus)
 
