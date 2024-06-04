@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bp8jh8mvbdj43"]
+[gd_scene load_steps=23 format=3 uid="uid://cjkp6qswhuclx"]
 
 [ext_resource type="Script" path="res://scripts/fridge2.gd" id="1_nmruw"]
 [ext_resource type="Shader" uid="uid://wbegqqaqwpc" path="res://scripts/hit_flash_shader.tres" id="3_sy3ec"]

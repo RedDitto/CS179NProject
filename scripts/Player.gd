@@ -64,9 +64,9 @@ func _input(event):
 		extraBonusDamage = 500
 		#particlesOn = !particlesOn
 		#can_bigattack = true
-		setBigAttack(true)
-		particles.emitting = particlesOn
-		particles.visible = particlesOn
+		#setBigAttack(true)
+		#particles.emitting = particlesOn
+		#particles.visible = particlesOn
 		#_player_stats.health = 1000
 		#_player_stats.max_health = 1000
 		unpoison()

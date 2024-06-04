@@ -2,6 +2,7 @@ extends Node2D
 
 var p1 = Vector2(147,244)
 var p2 = Vector2(63,240)
+var dir = 1
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
