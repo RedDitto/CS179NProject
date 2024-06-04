@@ -47,6 +47,7 @@ func _on_button1_pressed():
 		_update_upgrade1()
 
 func _on_button2_pressed():
+	print("button 2 pressed")
 	if !get_parent()._player_permanent_upgrades.is_max[1] and Global._player_stats.bank >= get_parent()._player_permanent_upgrades.upgrades[1][3]:
 		get_parent()._player_permanent_upgrades._upgrade_increase(1, Global._player_stats)
 		_update_upgrade2()

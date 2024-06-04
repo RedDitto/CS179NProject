@@ -1,10 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://csnpjpwa6v7n"]
 
 [ext_resource type="PackedScene" uid="uid://dh7r45oh824ur" path="res://Scenes/room.tscn" id="1_to223"]
-
 [ext_resource type="PackedScene" uid="uid://dp85p3dyt7hxx" path="res://Scenes/fridgeboss.tscn" id="2_m88cx"]
 [ext_resource type="PackedScene" uid="uid://bp8jh8mvbdj43" path="res://Scenes/fridge2.tscn" id="2_tptwx"]
-
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l1wof"]
 
