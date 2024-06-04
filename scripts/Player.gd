@@ -24,6 +24,7 @@ var attack_in_progress = false
 var cheat_death_used = false
 var canShoot = true
 var diedNode = null
+var extraBonusDamage = 0
 
 var i_frames = false
 var speed_boost = 0
@@ -58,6 +59,8 @@ func _input(event):
 		_player_stats.currency += 1000
 		print(position)
 		collision = !collision
+		hastp = true
+		extraBonusDamage = 100
 		#particlesOn = !particlesOn
 		#can_bigattack = true
 		setBigAttack(true)
@@ -380,7 +383,7 @@ func _mouse_direction(): # Gets player direction based on mouse when there is mo
 func _on_melee_attack_body_entered(body):
 	if body.has_method("enemy"):
 		melee_range = true
-		body.deal_with_damage(_player_stats.melee_attack * 1 + _player_stats.melee_damage_bonus)
+		body.deal_with_damage(_player_stats.melee_attack * 1 + _player_stats.melee_damage_bonus + extraBonusDamage)
 
 func _on_melee_attack_body_exited(body):
 	if body.has_method("enemy"):
