@@ -141,7 +141,7 @@ func endPlayer():
 	died.position = position
 	get_parent().add_child(died)
 	diedNode = died
-	#Global.numruns += 1
+	Global.numruns += 1
 	Global.save_data()
 	
 
