@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 
 var direction  = Vector2.LEFT 
-var speed  = 120 
+var speed  = 150
 var damage = 10
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
