@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://h6r0fqsb0jcs"]
 
 [ext_resource type="PackedScene" uid="uid://dh7r45oh824ur" path="res://Scenes/room.tscn" id="1_gsvq4"]
-[ext_resource type="PackedScene" uid="uid://cwai0pk8uh5y1" path="res://Scenes/fridge.tscn" id="2_atjof"]
+[ext_resource type="PackedScene" uid="uid://bropqibhxc8jm" path="res://Scenes/Microwave.tscn" id="3_7wmv6"]
 [ext_resource type="PackedScene" uid="uid://8nccul0njthp" path="res://Scenes/player.tscn" id="3_80p42"]
 
 [node name="Room" instance=ExtResource("1_gsvq4")]
@@ -12,14 +12,14 @@ layer_0/tile_data = PackedInt32Array(1048608, 131072, 20, 983072, 131072, 19, 91
 layer_1/name = "obstacles"
 layer_1/tile_data = PackedInt32Array()
 
-[node name="Fridge" parent="." index="6" instance=ExtResource("2_atjof")]
-position = Vector2(253, 251)
-
-[node name="Player" parent="." index="7" instance=ExtResource("3_80p42")]
+[node name="Player" parent="." index="6" instance=ExtResource("3_80p42")]
 position = Vector2(266, 57)
 
-[node name="MeleeWeaponSpawn" type="Marker2D" parent="." index="8"]
+[node name="MeleeWeaponSpawn" type="Marker2D" parent="." index="7"]
 position = Vector2(419, 202)
 
-[node name="RangedWeaponSpawn" type="Marker2D" parent="." index="9"]
+[node name="RangedWeaponSpawn" type="Marker2D" parent="." index="8"]
 position = Vector2(488, 202)
+
+[node name="Microwave" parent="." index="9" instance=ExtResource("3_7wmv6")]
+position = Vector2(190, 207)

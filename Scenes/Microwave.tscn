@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bropqibhxc8jm"]
+[gd_scene load_steps=36 format=3 uid="uid://bropqibhxc8jm"]
 
 [ext_resource type="Script" path="res://scripts/Microwave.gd" id="1_fe1up"]
 [ext_resource type="Script" path="res://scripts/Enemy_Stats.gd" id="2_g1656"]
@@ -7,6 +7,7 @@
 [ext_resource type="Shader" uid="uid://wbegqqaqwpc" path="res://scripts/hit_flash_shader.tres" id="3_j1syw"]
 [ext_resource type="Texture2D" uid="uid://d1d2agyuvluuh" path="res://Art/health_bar_over.png" id="4_30vef"]
 [ext_resource type="Script" path="res://scripts/enemy_health_bar.gd" id="5_hjbdg"]
+[ext_resource type="Texture2D" uid="uid://6e6eo0jkxxh6" path="res://Art/Yellow Effect Bullet Impact Explosion 32x32.png" id="8_ekali"]
 
 [sub_resource type="Resource" id="Resource_6ggqd"]
 script = ExtResource("2_g1656")
@@ -114,6 +115,114 @@ _data = {
 "hit": SubResource("Animation_10350")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_m0obb"]
+radius = 22.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wjwkv"]
+atlas = ExtResource("8_ekali")
+region = Rect2(352, 256, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i0wrg"]
+atlas = ExtResource("8_ekali")
+region = Rect2(384, 256, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x1c04"]
+atlas = ExtResource("8_ekali")
+region = Rect2(416, 256, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i0oyc"]
+atlas = ExtResource("8_ekali")
+region = Rect2(448, 256, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oviap"]
+atlas = ExtResource("8_ekali")
+region = Rect2(352, 288, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s1o3l"]
+atlas = ExtResource("8_ekali")
+region = Rect2(384, 288, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s0g6f"]
+atlas = ExtResource("8_ekali")
+region = Rect2(416, 288, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nm21o"]
+atlas = ExtResource("8_ekali")
+region = Rect2(448, 288, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hjh1g"]
+atlas = ExtResource("8_ekali")
+region = Rect2(0, 480, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gg1wm"]
+atlas = ExtResource("8_ekali")
+region = Rect2(64, 108, 32, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8o22w"]
+atlas = ExtResource("8_ekali")
+region = Rect2(96, 108, 32, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gnevn"]
+atlas = ExtResource("8_ekali")
+region = Rect2(128, 108, 32, 36)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0tiw7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wjwkv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i0wrg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x1c04")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i0oyc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oviap")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s1o3l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s0g6f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nm21o")
+}],
+"loop": false,
+"name": &"aoe_zap",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hjh1g")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gg1wm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8o22w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gnevn")
+}],
+"loop": true,
+"name": &"single_zap",
+"speed": 7.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0td8v"]
+radius = 32.249
+
 [node name="Microwave" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 7
@@ -132,6 +241,7 @@ animation = &"chase"
 frame_progress = 0.113785
 
 [node name="detection_area" type="Area2D" parent="."]
+visible = false
 collision_mask = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="detection_area"]
@@ -185,6 +295,37 @@ wait_time = 0.25
 
 [node name="poison_timer" type="Timer" parent="."]
 
+[node name="Attack" type="Node2D" parent="."]
+show_behind_parent = true
+
+[node name="Attack_range" type="Area2D" parent="Attack"]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Attack/Attack_range"]
+shape = SubResource("CircleShape2D_m0obb")
+debug_color = Color(0.191154, 0.499731, 0.692751, 0.42)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Attack"]
+show_behind_parent = true
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_0tiw7")
+animation = &"aoe_zap"
+
+[node name="zap_timer" type="Timer" parent="Attack"]
+wait_time = 0.5
+
+[node name="attack_animation_timer" type="Timer" parent="Attack"]
+
+[node name="zap_hurtbox" type="Area2D" parent="Attack"]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Attack/zap_hurtbox"]
+shape = SubResource("CircleShape2D_0td8v")
+disabled = true
+debug_color = Color(0.819585, 0.421152, 0.110017, 0.42)
+
 [connection signal="health_loss" from="." to="Health_Bar" method="_on_microwave_health_loss"]
 [connection signal="body_entered" from="detection_area" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="detection_area" to="." method="_on_detection_area_body_exited"]
@@ -193,3 +334,8 @@ wait_time = 0.25
 [connection signal="timeout" from="take_damage_cooldown" to="." method="_on_take_damage_cooldown_timeout"]
 [connection signal="timeout" from="Knockback_timer" to="." method="_on_knockback_timer_timeout"]
 [connection signal="timeout" from="poison_timer" to="." method="_on_poison_timer_timeout"]
+[connection signal="body_entered" from="Attack/Attack_range" to="." method="_on_attack_range_body_entered"]
+[connection signal="body_exited" from="Attack/Attack_range" to="." method="_on_attack_range_body_exited"]
+[connection signal="timeout" from="Attack/zap_timer" to="." method="_on_zap_timer_timeout"]
+[connection signal="timeout" from="Attack/attack_animation_timer" to="." method="_on_attack_animation_timer_timeout"]
+[connection signal="body_entered" from="Attack/zap_hurtbox" to="." method="_on_zap_hurtbox_body_entered"]
