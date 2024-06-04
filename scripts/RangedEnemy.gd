@@ -12,7 +12,7 @@ var in_range = false
 var alive = true
 var flee = false
 var in_knockback = false
-
+var poisonPATH = preload("res://Scenes/poisonousBanana.tscn")
 @onready var navigation_agent_2d = $Navigation/NavigationAgent2D
 @export var target: Node2D = null
 @onready var health_bar = $Health_Bar
@@ -64,6 +64,9 @@ func deal_with_damage(amt):
 	health = health - amt
 	if health <= 0:
 		alive = false
+		var poison = poisonPATH.instantiate()
+		get_parent().add_child(poison)
+		poison.position = self.position
 		Global.rangedGuysKilled += 1
 		self.queue_free()
 	hit_animation_player.play("hit")
