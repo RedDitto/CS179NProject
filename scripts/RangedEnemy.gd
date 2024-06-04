@@ -64,6 +64,7 @@ func deal_with_damage(amt):
 	health = health - amt
 	if health <= 0:
 		alive = false
+		Global.rangedGuysKilled += 1
 		self.queue_free()
 	hit_animation_player.play("hit")
 func enemy():
