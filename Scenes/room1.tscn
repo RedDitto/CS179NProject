@@ -31,10 +31,19 @@ position = Vector2(9, 9)
 [node name="Marker2D" type="Marker2D" parent="EnemyPositions" index="0"]
 position = Vector2(184, 110)
 
-[node name="Marker2D3" type="Marker2D" parent="EnemyPositions" index="1"]
+[node name="Marker2D4" type="Marker2D" parent="EnemyPositions" index="1"]
+position = Vector2(54, 105)
+
+[node name="Marker2D5" type="Marker2D" parent="EnemyPositions" index="2"]
+position = Vector2(111, 161)
+
+[node name="Marker2D6" type="Marker2D" parent="EnemyPositions" index="3"]
+position = Vector2(239, 267)
+
+[node name="Marker2D3" type="Marker2D" parent="EnemyPositions" index="4"]
 position = Vector2(321, 99)
 
-[node name="Marker2D2" type="Marker2D" parent="EnemyPositions" index="2"]
+[node name="Marker2D2" type="Marker2D" parent="EnemyPositions" index="5"]
 position = Vector2(69, 198)
 
 [node name="PlayerDetector" parent="." index="5"]

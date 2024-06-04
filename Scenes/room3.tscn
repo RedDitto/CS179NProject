@@ -36,6 +36,21 @@ position = Vector2(308, 115)
 [node name="Marker2D2" type="Marker2D" parent="EnemyPositions" index="1"]
 position = Vector2(-104, 169)
 
+[node name="Marker2D3" type="Marker2D" parent="EnemyPositions" index="2"]
+position = Vector2(-171, 100)
+
+[node name="Marker2D4" type="Marker2D" parent="EnemyPositions" index="3"]
+position = Vector2(-171, 125)
+
+[node name="Marker2D5" type="Marker2D" parent="EnemyPositions" index="4"]
+position = Vector2(-170, 150)
+
+[node name="Marker2D6" type="Marker2D" parent="EnemyPositions" index="5"]
+position = Vector2(-169, 178)
+
+[node name="Marker2D7" type="Marker2D" parent="EnemyPositions" index="6"]
+position = Vector2(-136, 102)
+
 [node name="PlayerDetector" parent="." index="5"]
 position = Vector2(-398, 16)
 collision_mask = 4

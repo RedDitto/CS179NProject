@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://csnpjpwa6v7n"]
+[gd_scene load_steps=6 format=3 uid="uid://csnpjpwa6v7n"]
 
 [ext_resource type="PackedScene" uid="uid://dh7r45oh824ur" path="res://Scenes/room.tscn" id="1_to223"]
 [ext_resource type="PackedScene" uid="uid://dp85p3dyt7hxx" path="res://Scenes/fridgeboss.tscn" id="2_m88cx"]
 [ext_resource type="PackedScene" uid="uid://cjkp6qswhuclx" path="res://Scenes/fridge2.tscn" id="2_tptwx"]
+[ext_resource type="PackedScene" uid="uid://c6s838vl1c53p" path="res://Scenes/RangedEnemy.tscn" id="4_jha6p"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l1wof"]
 
@@ -37,5 +38,29 @@ position = Vector2(243, 678)
 
 [node name="Fridge2" parent="." index="7" instance=ExtResource("2_tptwx")]
 position = Vector2(254, 484)
+
+[node name="rangedEnemy" parent="." index="8" instance=ExtResource("4_jha6p")]
+position = Vector2(101, 211)
+
+[node name="rangedEnemy2" parent="." index="9" instance=ExtResource("4_jha6p")]
+position = Vector2(396, 216)
+
+[node name="rangedEnemy3" parent="." index="10" instance=ExtResource("4_jha6p")]
+position = Vector2(544, 357)
+
+[node name="rangedEnemy4" parent="." index="11" instance=ExtResource("4_jha6p")]
+position = Vector2(-57, 372)
+
+[node name="rangedEnemy5" parent="." index="12" instance=ExtResource("4_jha6p")]
+position = Vector2(-68, 579)
+
+[node name="rangedEnemy6" parent="." index="13" instance=ExtResource("4_jha6p")]
+position = Vector2(594, 579)
+
+[node name="rangedEnemy7" parent="." index="14" instance=ExtResource("4_jha6p")]
+position = Vector2(516, 726)
+
+[node name="rangedEnemy8" parent="." index="15" instance=ExtResource("4_jha6p")]
+position = Vector2(16, 751)
 
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_player_detector_body_entered"]
