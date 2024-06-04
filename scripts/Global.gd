@@ -21,7 +21,8 @@ func save_data():
 		"max_health": _player_stats.max_health,
 		"cheat_death": _player_stats.cheat_death,
 		"bank": _player_stats.bank,
-		"upgrades": _player_permanent_upgrades.upgrades
+		"upgrades": _player_permanent_upgrades.upgrades,
+		"numruns": numruns
 	}
 	var json_string = JSON.stringify(save_data)
 	file.store_string(json_string)

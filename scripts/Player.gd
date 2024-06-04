@@ -130,7 +130,7 @@ func restartGame():
 	get_tree().change_scene_to_file("res://Scenes/menu.tscn");
 			
 func endPlayer():
-	_player_stats.bank += _player_stats.currency
+	_player_stats.bank += _player_stats.currency # transfer currency to bank when died
 	_player_stats.currency = 0
 	visible = false
 	blockInput = true
@@ -138,6 +138,7 @@ func endPlayer():
 	died.position = position
 	get_parent().add_child(died)
 	diedNode = died
+	Global.numruns += 1
 	Global.save_data()
 	
 
