@@ -1,0 +1,230 @@
+[gd_scene load_steps=23 format=3 uid="uid://cjkp6qswhuclx"]
+
+[ext_resource type="Script" path="res://scripts/fridge2.gd" id="1_nmruw"]
+[ext_resource type="Shader" uid="uid://wbegqqaqwpc" path="res://scripts/hit_flash_shader.tres" id="3_sy3ec"]
+[ext_resource type="Texture2D" uid="uid://bkphj4ydai2l2" path="res://Art/Animated_Objects/!$Kitchen_fridge.png" id="4_fqd48"]
+[ext_resource type="Texture2D" uid="uid://ghxw7s5a3p5d" path="res://Art/health_bar_progress.png" id="5_eiwym"]
+[ext_resource type="Script" path="res://scripts/healthbar.gd" id="6_7q35i"]
+[ext_resource type="Texture2D" uid="uid://d1d2agyuvluuh" path="res://Art/health_bar_over.png" id="6_50otm"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_s8282"]
+resource_local_to_scene = true
+shader = ExtResource("3_sy3ec")
+shader_parameter/enabled = false
+shader_parameter/hit_color = Color(1, 1, 1, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_efts2"]
+atlas = ExtResource("4_fqd48")
+region = Rect2(0, 0, 96, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m1fw2"]
+atlas = ExtResource("4_fqd48")
+region = Rect2(0, 0, 96, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fv7o3"]
+atlas = ExtResource("4_fqd48")
+region = Rect2(0, 144, 96, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vimg5"]
+atlas = ExtResource("4_fqd48")
+region = Rect2(0, 288, 96, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_17uk4"]
+atlas = ExtResource("4_fqd48")
+region = Rect2(0, 432, 96, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gn5ul"]
+atlas = ExtResource("4_fqd48")
+region = Rect2(0, 0, 96, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_le0cf"]
+atlas = ExtResource("4_fqd48")
+region = Rect2(0, 147, 96, 142)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_amuwp"]
+atlas = ExtResource("4_fqd48")
+region = Rect2(0, 295, 96, 140)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jgg1m"]
+atlas = ExtResource("4_fqd48")
+region = Rect2(0, 436, 96, 137)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bokfs"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_efts2")
+}],
+"loop": true,
+"name": &"fridge_idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m1fw2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fv7o3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vimg5")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_17uk4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vimg5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fv7o3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m1fw2")
+}],
+"loop": true,
+"name": &"fridge_open",
+"speed": 7.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gn5ul")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_le0cf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_amuwp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jgg1m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_amuwp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_le0cf")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 14.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rsj6p"]
+radius = 890.578
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6sr2l"]
+size = Vector2(14, 32)
+
+[sub_resource type="Animation" id="Animation_snvyx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:material:shader_parameter/enabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_ptf4w"]
+resource_name = "hit"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:material:shader_parameter/enabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mc6ux"]
+_data = {
+"RESET": SubResource("Animation_snvyx"),
+"hit": SubResource("Animation_ptf4w")
+}
+
+[node name="Fridge" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 7
+motion_mode = 1
+wall_min_slide_angle = 0.0
+script = ExtResource("1_nmruw")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_s8282")
+position = Vector2(8, -19)
+scale = Vector2(0.33, 0.33)
+sprite_frames = SubResource("SpriteFrames_bokfs")
+animation = &"fridge_open"
+frame_progress = 0.0617151
+
+[node name="detection_area" type="Area2D" parent="."]
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="detection_area"]
+position = Vector2(0, -18)
+shape = SubResource("CircleShape2D_rsj6p")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -16)
+shape = SubResource("RectangleShape2D_6sr2l")
+
+[node name="Navigation" type="Node2D" parent="."]
+position = Vector2(0, -12)
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="Navigation"]
+path_postprocessing = 1
+radius = 15.0
+debug_enabled = true
+
+[node name="Timer" type="Timer" parent="Navigation"]
+wait_time = 0.1
+autostart = true
+
+[node name="take_damage_cooldown" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="Hit_AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_mc6ux")
+}
+
+[node name="Knockback_timer" type="Timer" parent="."]
+wait_time = 0.25
+
+[node name="poison_timer" type="Timer" parent="."]
+
+[node name="Health_Bar" type="TextureProgressBar" parent="."]
+offset_left = -9.0
+offset_top = -42.0
+offset_right = 9.0
+offset_bottom = -36.0
+nine_patch_stretch = true
+stretch_margin_left = 2
+stretch_margin_top = 2
+stretch_margin_right = 2
+stretch_margin_bottom = 2
+texture_under = ExtResource("5_eiwym")
+texture_over = ExtResource("6_50otm")
+texture_progress = ExtResource("5_eiwym")
+tint_under = Color(0.164706, 0.164706, 0.164706, 1)
+tint_over = Color(0.121569, 0.121569, 0.121569, 1)
+tint_progress = Color(0.666667, 0, 0, 1)
+script = ExtResource("6_7q35i")
+
+[connection signal="body_entered" from="detection_area" to="." method="_on_detection_area_body_entered"]
+[connection signal="body_exited" from="detection_area" to="." method="_on_detection_area_body_exited"]
+[connection signal="velocity_computed" from="Navigation/NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]
+[connection signal="timeout" from="Navigation/Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="take_damage_cooldown" to="." method="_on_take_damage_cooldown_timeout"]
+[connection signal="timeout" from="Knockback_timer" to="." method="_on_knockback_timer_timeout"]
+[connection signal="timeout" from="poison_timer" to="." method="_on_poison_timer_timeout"]
