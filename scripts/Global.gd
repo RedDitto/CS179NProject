@@ -19,7 +19,7 @@ var rangedGuysKilled = 0
 var pauseTimer = false
 
 func _ready():
-	pass
+	load_data()
 
 func reset():
 	var file = FileAccess.open("res://save_file.json", FileAccess.WRITE)
