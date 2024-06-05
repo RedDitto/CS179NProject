@@ -291,6 +291,7 @@ func attack():
 		$AnimatedSprite2D.play("back_attack")
 		$deal_attack_timer.start()
 		
+	$Sword.play()
 	$Melee_Attack/Melee_Collision.disabled = false
 	
 	#if melee_range == true:
