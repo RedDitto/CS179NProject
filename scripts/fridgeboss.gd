@@ -202,6 +202,7 @@ func _on_spawn_timer_timeout():
 			if health < 500:
 				aaa.health = 200
 				aaa.max_health = 200
+				aaa.speed = 150
 
 
 func fridgeDied():
