@@ -56,12 +56,13 @@ func _input(event):
 	if blockInput: 
 		return
 	if event.is_action_pressed("print"):
-		_player_stats.currency += 1000
+		_player_stats.currency += 100
 		print(position)
 		collision = !collision
 		hastp = true
-		_player_stats.health = 100
-		extraBonusDamage = 500
+		_player_stats.health = _player_stats.max_health
+		_player_stats.melee_attack = 50
+		#extraBonusDamage = 500
 		#particlesOn = !particlesOn
 		#can_bigattack = true
 		#setBigAttack(true)
