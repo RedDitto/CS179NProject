@@ -62,6 +62,7 @@ func _input(event):
 		hastp = true
 		_player_stats.health = _player_stats.max_health
 		_player_stats.melee_attack = 50
+		_player_stats.ranged_attack = 50
 		#extraBonusDamage = 500
 		#particlesOn = !particlesOn
 		#can_bigattack = true
