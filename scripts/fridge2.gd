@@ -17,8 +17,8 @@ var in_knockback = false
 @export var enabled_knockback : bool = true
 @export var _enemy_stats : Enemy_Stats
 @onready var hit_animation_player = $Hit_AnimationPlayer
-var health = 200/Global.mode
-var max_health = 200/Global.mode
+var health = 200
+var max_health = 200
 var random = RandomNumberGenerator.new()
 var aimAhead = false
 
