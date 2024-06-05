@@ -94,7 +94,8 @@ func _ready():
 	$Melee_Attack/Melee_Collision.disabled = true
 	$PoisonEffect.visible = false
 	Global.pauseTimer = false
-
+	Global._player_upgrades.resetUpgrades()
+	
 func _physics_process(delta):
 	if blockInput: 
 		return
