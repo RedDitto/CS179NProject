@@ -130,6 +130,8 @@ func _on_detection_area_body_exited(body):
 		fridgeDied() # or left detection zone
 	
 func deal_with_damage(damage):
+	if player == null: 
+		return # immortal until player in its vision so can't kill from outside room
 	if can_take_damage == true:
 		if health - damage < 0:
 			health = 0
