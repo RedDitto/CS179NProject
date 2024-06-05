@@ -10,11 +10,16 @@ var can_take_damage = true
 var alive = true
 var death_finished = false
 var in_knockback = false
+var attacking = false
+
 @export var knockback_modifier : float
 @export var enabled_knockback : bool = true
 @onready var health_bar = $Health_Bar
 @onready var hit_animation_player = $Hit_AnimationPlayer
 
+var tornado = preload('res://Scenes/tornado.tscn')
+
+var can_attack = true
 
 signal health_loss
 
@@ -44,6 +49,10 @@ func _physics_process(delta):
 			if navigation_agent_2d.is_navigation_finished():
 				#print("navigation finished")
 				return
+			
+			if attacking and can_attack:
+				tornado_attack()
+				
 			if !in_knockback:
 				var current_agent_position = global_position
 				var next_path_position = navigation_agent_2d.get_next_path_position()
@@ -53,6 +62,10 @@ func _physics_process(delta):
 					navigation_agent_2d.set_velocity(new_velocity)
 				else:
 					_on_navigation_agent_2d_velocity_computed(new_velocity)
+			
+			
+				
+						
 			
 			move_and_slide()
 			
@@ -121,3 +134,31 @@ func _on_timer_timeout():
 
 func _on_knockback_timer_timeout():
 	in_knockback = false
+
+func tornado_attack():
+	var new_tornado = tornado.instantiate()
+	get_tree().get_root().add_child(new_tornado)
+	new_tornado.global_position = global_position
+	new_tornado.direction = (player.global_position - global_position).normalized()
+	#new_tornado.global_rotation = new_tornado.direction.angle() + PI / 2.0
+	can_attack = false
+	$Attack/attack_cooldown.start()
+	
+	
+func _on_attack_range_body_entered(body):
+	if body.is_in_group("Player"):
+		attacking = true
+
+
+func _on_tornado_hurtbox_body_entered(body):
+	if body.is_in_group("Player"):
+		print('tornado hit player')
+
+
+func _on_attack_cooldown_timeout():
+	can_attack = true
+	
+
+func _on_attack_range_body_exited(body):
+	if body.is_in_group("Player"):
+		attacking = false
