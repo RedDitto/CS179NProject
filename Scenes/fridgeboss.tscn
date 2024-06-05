@@ -184,6 +184,7 @@ position = Vector2(0, -12)
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="Navigation"]
 path_postprocessing = 1
 radius = 15.0
+debug_enabled = true
 
 [node name="Timer" type="Timer" parent="Navigation"]
 wait_time = 0.1

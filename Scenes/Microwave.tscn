@@ -257,6 +257,7 @@ position = Vector2(0, 1)
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="Navigation"]
 path_postprocessing = 1
 radius = 15.0
+debug_enabled = true
 
 [node name="Timer" type="Timer" parent="Navigation"]
 wait_time = 0.1
@@ -309,6 +310,7 @@ debug_color = Color(0.191154, 0.499731, 0.692751, 0.42)
 show_behind_parent = true
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_0tiw7")
+animation = &"aoe_zap"
 
 [node name="zap_timer" type="Timer" parent="Attack"]
 wait_time = 0.5
