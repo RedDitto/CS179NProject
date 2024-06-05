@@ -10,7 +10,7 @@ var can_take_damage = true
 var alive = true
 var death_finished = false
 var isPoisoned = false
-
+var attacking = false
 var in_knockback = false
 @export var knockback_modifier : float = 50.0
 @export var enabled_knockback : bool = true
@@ -57,6 +57,14 @@ func _physics_process(delta):
 				else:
 					_on_navigation_agent_2d_velocity_computed(new_velocity)
 			
+			if attacking:
+				speed = 5
+				$Attack/AnimatedSprite2D.play("aoe_zap")
+			else:
+				speed = 60
+				$Attack/AnimatedSprite2D.play("default")
+				#print('playing default')
+				
 			move_and_slide()
 			
 			$AnimatedSprite2D.play("chase")
@@ -136,3 +144,31 @@ func _on_knockback_timer_timeout():
 
 func _on_poison_timer_timeout():
 	deal_with_damage(30)
+
+
+func _on_attack_range_body_entered(body):
+	if body.is_in_group("Player"):
+		attacking = true
+		#$Attack/AnimatedSprite2D.scale = Vector2(1, 1)
+		$Attack/attack_animation_timer.start()
+		$Attack/zap_timer.start()
+		
+func _on_attack_range_body_exited(body):
+	#if body.is_in_group("Player"):
+		#attacking = false
+	pass
+	
+func _on_attack_animation_timer_timeout():
+	attacking = false
+	$Attack/zap_hurtbox/CollisionShape2D.disabled = true
+func _on_zap_hurtbox_body_entered(body):
+	if body.is_in_group("Player"):
+		body.deal_with_damage(30)
+
+
+func _on_zap_timer_timeout():
+	if attacking:
+		$Attack/zap_hurtbox/CollisionShape2D.disabled = false
+		$Attack/AnimatedSprite2D.scale = Vector2(2,2)
+
+
