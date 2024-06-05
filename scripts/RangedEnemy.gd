@@ -65,7 +65,7 @@ func deal_with_damage(amt):
 	health = health - amt
 	if health <= 0:
 		alive = false
-		var poison = poisonPATH.instantiate() if ((randi() % 100) > 3) else tpPATH.instantiate()
+		var poison = poisonPATH.instantiate() if ((randi() % 1000) >=2) else tpPATH.instantiate()
 		
 		get_parent().add_child(poison)
 		poison.position = self.position
