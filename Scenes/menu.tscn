@@ -1,10 +1,23 @@
-[gd_scene load_steps=22 format=3 uid="uid://ral76o0hrtc3"]
+[gd_scene load_steps=29 format=3 uid="uid://ral76o0hrtc3"]
 
 [ext_resource type="Script" path="res://scripts/menuscript.gd" id="1_uwvqp"]
 [ext_resource type="FontFile" uid="uid://cor31q1nk837p" path="res://fonts/xolonium/xolonium-fonts-4.1/ttf/Xolonium-Bold.ttf" id="1_ynf6p"]
 [ext_resource type="Script" path="res://scripts/menu.gd" id="2_lel2s"]
 [ext_resource type="Texture2D" uid="uid://dlbr8ocq67w0n" path="res://Art/mystic_woods_free_2.1/sprites/characters/player.png" id="3_uui84"]
+[ext_resource type="Texture2D" uid="uid://dhc6i30fy5jni" path="res://Art/fridgefrenzy.png" id="4_07jdl"]
 [ext_resource type="Texture2D" uid="uid://bkphj4ydai2l2" path="res://Art/Animated_Objects/!$Kitchen_fridge.png" id="5_x3rpm"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_m44ue"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_10e7k"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_aughe"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yi0y0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kenid"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_86v8u"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2qovi"]
 atlas = ExtResource("3_uui84")
@@ -131,6 +144,22 @@ offset_right = 580.0
 offset_bottom = 329.0
 color = Color(0.258824, 0.227451, 0.2, 0.568627)
 
+[node name="CheckBox" type="CheckBox" parent="ColorRect"]
+layout_mode = 0
+offset_left = 274.0
+offset_top = 67.0
+offset_right = 555.0
+offset_bottom = 98.0
+scale = Vector2(0.635, 0.635)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_m44ue")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_10e7k")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_aughe")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_yi0y0")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_kenid")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_86v8u")
+text = "cheats enabled (press p in game)"
+flat = true
+
 [node name="TextureRect" type="TextureRect" parent="."]
 offset_left = 257.0
 offset_top = 111.0
@@ -140,8 +169,9 @@ offset_bottom = 205.0
 [node name="VBoxContainer" type="VBoxContainer" parent="TextureRect"]
 layout_mode = 1
 anchors_preset = -1
+offset_top = -9.0
 offset_right = 84.0
-offset_bottom = 107.0
+offset_bottom = 147.0
 
 [node name="Button" type="Button" parent="TextureRect/VBoxContainer"]
 layout_mode = 2
@@ -170,6 +200,11 @@ text = "Stats
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_ynf6p")
 text = "Quit"
+
+[node name="Sprite2D" type="Sprite2D" parent="TextureRect"]
+position = Vector2(33, -60)
+scale = Vector2(0.824, 0.819149)
+texture = ExtResource("4_07jdl")
 
 [node name="p" type="CharacterBody2D" parent="."]
 
@@ -215,6 +250,8 @@ sprite_frames = SubResource("SpriteFrames_jl1me")
 animation = &"run"
 frame_progress = 0.0229726
 
+[connection signal="toggled" from="ColorRect/CheckBox" to="." method="_on_check_box_toggled"]
+[connection signal="visibility_changed" from="ColorRect/CheckBox" to="." method="_on_check_box_visibility_changed"]
 [connection signal="pressed" from="TextureRect/VBoxContainer/Button" to="TextureRect/VBoxContainer/Button" method="_on_pressed"]
 [connection signal="pressed" from="TextureRect/VBoxContainer/Button5" to="." method="_on_button_5_pressed"]
 [connection signal="pressed" from="TextureRect/VBoxContainer/Button2" to="TextureRect/VBoxContainer/Button" method="_on_button_2_pressed"]

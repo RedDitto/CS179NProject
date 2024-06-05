@@ -17,6 +17,8 @@ var microwavesKilled = 0
 var fansKilled = 0
 var rangedGuysKilled = 0
 var pauseTimer = false
+var cheatsEnabled = false
+var cheatsOptionVisible = false
 
 func _ready():
 	load_data()

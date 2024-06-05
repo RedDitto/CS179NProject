@@ -19,6 +19,8 @@ func _input(ev):
 				pass
 				p.frame = 1
 				p.play("splat")
+				Global.cheatsOptionVisible = true
+				$ColorRect/CheckBox.visible = true
 			else:
 				p.play("splat")
 				splat = true
@@ -29,6 +31,7 @@ func _ready():
 	$FridgeSprite2.play("run")
 	$FridgeSprite3.play("run")
 	$FridgeSprite3.flip_h = true
+	$ColorRect/CheckBox.visible = false
 	p.play("run")
 	s.play("run")
 	p.position = vars.p1
@@ -72,3 +75,14 @@ func _on_player_sprite_frame_changed():
 func _on_button_5_pressed():
 	Global.mode = 2
 	get_tree().change_scene_to_file("res://Scenes/game.tscn");
+
+
+func _on_check_box_toggled(toggled_on):
+	Global.cheatsEnabled = toggled_on
+	print(toggled_on)
+
+
+func _on_check_box_visibility_changed():
+	if Global.cheatsEnabled:
+		$ColorRect/CheckBox.set_pressed_no_signal(Global.cheatsEnabled)
+	$ColorRect/CheckBox.visible = Global.cheatsOptionVisible

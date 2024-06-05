@@ -55,10 +55,10 @@ func _input(event):
 			restartGame()
 	if blockInput: 
 		return
-	if event.is_action_pressed("print"):
+	if event.is_action_pressed("print") && Global.cheatsEnabled:
 		_player_stats.currency += 100
-		print(position)
-		collision = !collision
+		#print(position)
+		#collision = !collision
 		hastp = true
 		_player_stats.health = _player_stats.max_health
 		_player_stats.melee_attack = 50
@@ -72,9 +72,9 @@ func _input(event):
 		#_player_stats.health = 1000
 		#_player_stats.max_health = 1000
 		unpoison()
-		self.set_collision_layer_value(3,collision)
-		self.set_collision_mask_value(1,collision)
-		self.set_collision_mask_value(2,collision)
+		#self.set_collision_layer_value(3,collision)
+		#self.set_collision_mask_value(1,collision)
+		#self.set_collision_mask_value(2,collision)
 	if event.is_action_pressed("tp"):
 		if hastp:
 			position = position - (global_position - get_global_mouse_position())
