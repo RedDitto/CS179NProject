@@ -1,0 +1,75 @@
+[gd_scene load_steps=10 format=3 uid="uid://cmyo2bn4hwi1y"]
+
+[ext_resource type="Script" path="res://scripts/tornado.gd" id="1_owqga"]
+[ext_resource type="Texture2D" uid="uid://bthbpfnlhdisy" path="res://Art/Blue Effect Bullet Impact Explosion 32x32.png" id="1_y2hk0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pqlun"]
+atlas = ExtResource("1_y2hk0")
+region = Rect2(320, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eg0ag"]
+atlas = ExtResource("1_y2hk0")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_djxy5"]
+atlas = ExtResource("1_y2hk0")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vi6fn"]
+atlas = ExtResource("1_y2hk0")
+region = Rect2(256, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_miqpq"]
+atlas = ExtResource("1_y2hk0")
+region = Rect2(288, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_q3x8l"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pqlun")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eg0ag")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_djxy5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vi6fn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_miqpq")
+}],
+"loop": true,
+"name": &"tornado",
+"speed": 8.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gbe4e"]
+radius = 5.0
+height = 18.0
+
+[node name="Tornado" type="CharacterBody2D"]
+script = ExtResource("1_owqga")
+
+[node name="fan_attack_animation" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -7)
+scale = Vector2(0.7, 0.7)
+sprite_frames = SubResource("SpriteFrames_q3x8l")
+animation = &"tornado"
+autoplay = "tornado"
+
+[node name="tornado_hurtbox" type="Area2D" parent="."]
+collision_mask = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="tornado_hurtbox"]
+position = Vector2(0, -8)
+shape = SubResource("CapsuleShape2D_gbe4e")
+
+[connection signal="body_entered" from="tornado_hurtbox" to="." method="_on_tornado_hurtbox_body_entered"]

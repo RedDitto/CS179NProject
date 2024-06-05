@@ -116,7 +116,7 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_m0obb"]
-radius = 22.0
+radius = 26.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wjwkv"]
 atlas = ExtResource("8_ekali")

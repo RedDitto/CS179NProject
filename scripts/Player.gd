@@ -425,7 +425,7 @@ func deal_with_damage(damage):
 		enemy_attack_cooldown = false
 		$attack_cooldown.start()
 		emit_signal("health_loss")
-		print('ground pound hit! player health = ',_player_stats.health)
+		#print('ground pound hit! player health = ',_player_stats.health)
 		$hit.play()
 	pass
 
