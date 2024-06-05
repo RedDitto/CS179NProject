@@ -17,10 +17,9 @@ var microwavesKilled = 0
 var fansKilled = 0
 var rangedGuysKilled = 0
 var pauseTimer = false
+
 func _ready():
-	load_data()
-	_player_stats.health = _player_stats.max_health
-	
+	pass
 
 func reset():
 	var file = FileAccess.open("res://save_file.json", FileAccess.WRITE)
@@ -68,3 +67,12 @@ func load_data():
 		fansKilled = data["fansKilled"]
 		rangedGuysKilled = data["rangedGuysKilled"]
 	file.close()
+
+func new_player():
+	_player_stats.health = _player_stats.max_health
+	_player_upgrades.upgrades[0][1] = 0
+	_player_upgrades.upgrades[1][1] = 0
+	_player_upgrades.upgrades[2][1] = 0
+	_player_stats.melee_damage_bonus = 0
+	_player_stats.ranged_damage_bonus = 0
+	_player_stats.speed_boost = 0

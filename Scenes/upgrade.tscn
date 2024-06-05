@@ -70,7 +70,7 @@ offset_left = 20.099
 offset_top = 62.5679
 offset_right = 92.099
 offset_bottom = 110.568
-theme_override_font_sizes/normal_font_size = 20
+theme_override_font_sizes/normal_font_size = 18
 text = "Movement Speed is increased by 10%"
 metadata/_edit_use_anchors_ = true
 
@@ -114,7 +114,7 @@ offset_left = 21.099
 offset_top = 56.5679
 offset_right = 93.099
 offset_bottom = 104.568
-theme_override_font_sizes/normal_font_size = 20
+theme_override_font_sizes/normal_font_size = 18
 text = "Movement Speed is increased by 10%"
 metadata/_edit_use_anchors_ = true
 

@@ -5,6 +5,7 @@ signal gain_upgrade
 var _player_upgrades = Global._player_upgrades
 var _player_stats = Global._player_stats
 var player_in_area = false
+var button_pressed = false
 var random_number1
 var random_number2
 
@@ -23,7 +24,8 @@ func _on_area_2d_body_exited(body):
 func _input(event):
 	if player_in_area == true:
 		if event is InputEventKey:
-			if event.pressed and event.keycode == KEY_E:
+			if event.pressed and event.keycode == KEY_E and !button_pressed:
+				button_pressed = true
 				var count = 0
 				for i in Global._player_upgrades.upgrades:
 					if i[1] < 4:

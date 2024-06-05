@@ -13,4 +13,3 @@ var descriptions = [
 	"Player ranged damage is increased by " + str((upgrades[2][1] + 1) * upgrades[1][2]) + "%.",
 	"Player melee damage is increased by " + str((upgrades[2][1] + 1) * upgrades[2][2]) + "%."
 ]
-
