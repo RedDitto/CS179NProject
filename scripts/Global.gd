@@ -25,6 +25,7 @@ func reset():
 	var file = FileAccess.open("res://save_file.json", FileAccess.WRITE)
 	var json_string = JSON.stringify({"bank":0,"bestrun":9999999999,"cheat_death":0,"displaybestrun":"n/a","fansKilled":0,"fridgesKilled":0,"max_health":100,"microwavesKilled":0,"numruns":0,"numwins":0,"rangedGuysKilled":0,"upgrades":[["Starting Health",0,10,20],["Cheat Death",0,1,50]]})
 	file.store_string(json_string)
+	_player_permanent_upgrades.is_max = [false, false]
 	file.close()
 	load_data()
 	
