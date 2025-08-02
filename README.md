@@ -6,4 +6,6 @@
 
 ![gameplay](gameplay.png)
 
+![menu](menu.png)
+
 ![upgrades](upgrades.png)
